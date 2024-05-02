@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+
 
 namespace Tubes_KPL_Kelompok1
 {
@@ -16,12 +18,18 @@ namespace Tubes_KPL_Kelompok1
 
         Dictionary<namaBarang, int> stock = new Dictionary<namaBarang, int>()
     {
-        { namaBarang.SodaGembira, 10 },
-        { namaBarang.SemurJengkol, 11 },
-        { namaBarang.Kikil, 10},
-        { namaBarang.SotoAyam, 11},
-        { namaBarang.MieGacoan, 10}
+        
     };
+        public void TambahBarang()
+        {
+            int idx = Enum.GetValues(typeof(namaBarang)).Length - 1;
+            String nama;
+            int stok;
+            nama = Console.ReadLine();
+            stok = Convert.ToInt32(Console.ReadLine());
+            // add EnumValue
+            stock.Add((namaBarang)idx, stok);
+        }
         public void GetBarang()
         {
             Console.WriteLine("Nama UMKM"+"\t:"+this.nama);
@@ -34,5 +42,12 @@ namespace Tubes_KPL_Kelompok1
                 Console.WriteLine();
             }
         }
+        /*
+        static void AddEnumValue<T>(string enumValue, int stok) where T : Enum
+        {
+            Enum.TryParse(enumValue, out T result);
+            stock.Add(result, stok);
+        }
+        */
     }
 }
