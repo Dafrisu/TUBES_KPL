@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\obj\Debug\net8.0\Tubes_KPL_Kelompok1.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\obj\Debug\net8.0\Tubes_KPL_Kelompok1.AssemblyInfoInputs.cache
 C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\obj\Debug\net8.0\Tubes_KPL_Kelompok1.AssemblyInfo.cs
@@ -13,3 +14,20 @@ C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tub
 C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\obj\Debug\net8.0\Tubes_KPL_Kelompok1.pdb
 C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\obj\Debug\net8.0\Tubes_KPL_Kelompok1.genruntimeconfig.cache
 C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\obj\Debug\net8.0\ref\Tubes_KPL_Kelompok1.dll
+=======
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\obj\Debug\net8.0\Tubes_KPL_Kelompok1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\obj\Debug\net8.0\Tubes_KPL_Kelompok1.AssemblyInfoInputs.cache
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\obj\Debug\net8.0\Tubes_KPL_Kelompok1.AssemblyInfo.cs
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\obj\Debug\net8.0\Tubes_KPL_Kelompok1.csproj.CoreCompileInputs.cache
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\obj\Debug\net8.0\Tubes_KPL_Kelompok1.sourcelink.json
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\bin\Debug\net8.0\Tubes_KPL_Kelompok1.exe
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\bin\Debug\net8.0\Tubes_KPL_Kelompok1.deps.json
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\bin\Debug\net8.0\Tubes_KPL_Kelompok1.runtimeconfig.json
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\bin\Debug\net8.0\Tubes_KPL_Kelompok1.dll
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\bin\Debug\net8.0\Tubes_KPL_Kelompok1.pdb
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\obj\Debug\net8.0\Tubes_KPL_Kelompok1.dll
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\obj\Debug\net8.0\refint\Tubes_KPL_Kelompok1.dll
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\obj\Debug\net8.0\Tubes_KPL_Kelompok1.pdb
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\obj\Debug\net8.0\Tubes_KPL_Kelompok1.genruntimeconfig.cache
+C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1\obj\Debug\net8.0\ref\Tubes_KPL_Kelompok1.dll
+>>>>>>> 50bce984b7559380e6d9be0599fa85609b2b4bcf

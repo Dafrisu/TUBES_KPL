@@ -8,9 +8,17 @@ namespace Tubes_KPL_Kelompok1
 {
     public class Pembeli
     {
-        public int a {  get; set; }
-        public Pembeli(int a) {
-            this.a = a;
-        }
+        public enum Buyer { Haikal, Dafa, Darryl, Fersya, Raphael, Mahesa };
+
+        Dictionary<Buyer, int> id = new Dictionary<Buyer, int>()
+        {
+            {Buyer.Haikal, 101 },
+            {Buyer.Dafa, 102 },
+            {Buyer.Darryl, 103 },
+            {Buyer.Fersya, 104 },
+            {Buyer.Raphael, 105 },
+            {Buyer.Mahesa, 106 }
+        };
+
     }
 }

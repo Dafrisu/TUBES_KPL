@@ -1,12 +1,16 @@
-﻿// See https://aka.ms/new-console-template for more information
 
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using Tubes_KPL_Kelompok1;
+using static Tubes_KPL_Kelompok1.UMKM;
 
-class Program
+class program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
-        Pembeli z = new Pembeli(10);
-        Console.WriteLine(z.a);
+    UMKM namabarang = new UMKM("Warteg Bang kal");
+    namabarang.GetBarang();
+        
     }
 }
