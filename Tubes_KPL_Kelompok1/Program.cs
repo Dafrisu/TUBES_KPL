@@ -9,6 +9,7 @@ class program
 {
     static void Main(string[] args)
     {
+        
         UMKM namabarang = new UMKM("Warteg Bang kal");
         namabarang.TambahStockBarang();
         namabarang.GetBarang();
@@ -16,8 +17,10 @@ class program
         Pembeli a = new Pembeli();
         a.tambahqty();
         a.Printkeranjang();
-
         
-
+        BuyerReadConfig b = new BuyerReadConfig();
+        b.readjson();
+        b.UpdateQuantity("Haikal", "SotoAyam", 10);
+        b.readjson();
     }
 }
