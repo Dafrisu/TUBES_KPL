@@ -14,7 +14,7 @@ namespace Tubes_KPL_Kelompok1
     {
         public Dictionary<string, Dictionary<string, int>> Keranjang { get; set; }
     }
-    public class BuyerReadConfig
+    public class BuyerConfig
     {
 
         public void UpdateQuantity(string buyerName, string itemName, int newQuantity)
@@ -53,7 +53,7 @@ namespace Tubes_KPL_Kelompok1
                 Console.WriteLine($"Error: Pembeli '{buyerName}' tidak ditemukan dalam konfigurasi.");
             }
         }
-            public void readjson()
+        public void readjson()
         {
             String json = File.ReadAllText(@"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json");
             Console.WriteLine(json);
