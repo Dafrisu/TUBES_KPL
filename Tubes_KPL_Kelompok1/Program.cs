@@ -56,7 +56,7 @@ class program
                 }
 
 
-                Console.WriteLine("Fitur Untuk UMKM: ");
+                Console.WriteLine("Fitur Untuk UMKM ");
                 Console.WriteLine("1. Tambah Stok Barang: ");
                 Console.WriteLine("2. Print Barang UMKM");
                 Console.WriteLine("3. Ganti Tipe User");
