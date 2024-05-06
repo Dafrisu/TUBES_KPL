@@ -10,9 +10,14 @@ class program
     static void Main(string[] args)
     {
         UMKM namabarang = new UMKM("Warteg Bang kal");
+        namabarang.TambahStockBarang();
         namabarang.GetBarang();
+
         Pembeli a = new Pembeli();
         a.tambahqty();
         a.Printkeranjang();
+
+        
+
     }
 }

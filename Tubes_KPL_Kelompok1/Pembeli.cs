@@ -23,16 +23,16 @@ namespace Tubes_KPL_Kelompok1
             {Buyer.Raphael, 105 },
             {Buyer.Mahesa, 106 }
         };
-        Dictionary<Buyer, UMKM.namaBarang> keranjang = new Dictionary<Buyer, UMKM.namaBarang>()
+        Dictionary<Buyer, UMKM.NamaBarang> keranjang = new Dictionary<Buyer, UMKM.NamaBarang>()
         {
-            {Buyer.Haikal, UMKM.namaBarang.SodaGembira }
+            {Buyer.Haikal, UMKM.NamaBarang.SodaGembira }
         };
 
-        Dictionary<Buyer, Dictionary<UMKM.namaBarang, int>> qty = new Dictionary<Buyer, Dictionary<UMKM.namaBarang, int>>()
+        Dictionary<Buyer, Dictionary<UMKM.NamaBarang, int>> qty = new Dictionary<Buyer, Dictionary<UMKM.NamaBarang, int>>()
         {
-            {Buyer.Haikal, new Dictionary<UMKM.namaBarang, int>
+            {Buyer.Haikal, new Dictionary<UMKM.NamaBarang, int>
             {
-                {UMKM.namaBarang.SodaGembira, 10 }
+                {UMKM.NamaBarang.SodaGembira, 10 }
             } }
         };
 
@@ -45,7 +45,7 @@ namespace Tubes_KPL_Kelompok1
 
                 if (qty.ContainsKey(pembeli))
                 {
-                    foreach (UMKM.namaBarang barang in Enum.GetValues(typeof(UMKM.namaBarang)))
+                    foreach (UMKM.NamaBarang barang in Enum.GetValues(typeof(UMKM.NamaBarang)))
                     {
                         int qtyBarang = qty[pembeli].ContainsKey(barang) ? qty[pembeli][barang] : 0;
                         if (qtyBarang != 0)
@@ -66,7 +66,7 @@ namespace Tubes_KPL_Kelompok1
     public void tambahqty()
     {
         Buyer buyer;
-        UMKM.namaBarang barang;
+        UMKM.NamaBarang barang;
         Console.Write("Masukan Nama Buyer: ");
         String input = Console.ReadLine();
             
