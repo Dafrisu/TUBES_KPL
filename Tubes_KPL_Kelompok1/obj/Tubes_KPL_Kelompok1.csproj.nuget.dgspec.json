@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\daffa\\Documents\\File semester 4\\TP KPL\\Tubes_KPL_Kelompok1\\Tubes_KPL_Kelompok1\\Tubes_KPL_Kelompok1.csproj": {}
+    "C:\\Users\\daffa\\Documents\\File semester 4\\TP KPL\\Tubes_KPL_Kelompok1\\TUBES_KPL\\Tubes_KPL_Kelompok1\\Tubes_KPL_Kelompok1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\daffa\\Documents\\File semester 4\\TP KPL\\Tubes_KPL_Kelompok1\\Tubes_KPL_Kelompok1\\Tubes_KPL_Kelompok1.csproj": {
+    "C:\\Users\\daffa\\Documents\\File semester 4\\TP KPL\\Tubes_KPL_Kelompok1\\TUBES_KPL\\Tubes_KPL_Kelompok1\\Tubes_KPL_Kelompok1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\daffa\\Documents\\File semester 4\\TP KPL\\Tubes_KPL_Kelompok1\\Tubes_KPL_Kelompok1\\Tubes_KPL_Kelompok1.csproj",
+        "projectUniqueName": "C:\\Users\\daffa\\Documents\\File semester 4\\TP KPL\\Tubes_KPL_Kelompok1\\TUBES_KPL\\Tubes_KPL_Kelompok1\\Tubes_KPL_Kelompok1.csproj",
         "projectName": "Tubes_KPL_Kelompok1",
-        "projectPath": "C:\\Users\\daffa\\Documents\\File semester 4\\TP KPL\\Tubes_KPL_Kelompok1\\Tubes_KPL_Kelompok1\\Tubes_KPL_Kelompok1.csproj",
+        "projectPath": "C:\\Users\\daffa\\Documents\\File semester 4\\TP KPL\\Tubes_KPL_Kelompok1\\TUBES_KPL\\Tubes_KPL_Kelompok1\\Tubes_KPL_Kelompok1.csproj",
         "packagesPath": "C:\\Users\\daffa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\daffa\\Documents\\File semester 4\\TP KPL\\Tubes_KPL_Kelompok1\\Tubes_KPL_Kelompok1\\obj\\",
+        "outputPath": "C:\\Users\\daffa\\Documents\\File semester 4\\TP KPL\\Tubes_KPL_Kelompok1\\TUBES_KPL\\Tubes_KPL_Kelompok1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\daffa\\AppData\\Roaming\\NuGet\\NuGet.Config",
