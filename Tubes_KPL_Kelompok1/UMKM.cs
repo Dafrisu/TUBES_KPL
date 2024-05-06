@@ -4,43 +4,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-
-
-namespace Tubes_KPL_Kelompok1
+namespace Tubes_KPL_Kelompok1;
+public class UMKM
 {
-    public class UMKM
-    {
-        public string nama;
-        public UMKM(string nama) { 
-            this.nama = nama;
-        }
-        public enum namaBarang { SodaGembira, SemurJengkol, Kikil, SotoAyam, MieGacoan };
+    public string nama;
 
-        Dictionary<namaBarang, int> stock = new Dictionary<namaBarang, int>()
+    public enum NamaBarang
     {
-        
+        SodaGembira,
+        SemurJengkol,
+        Kikil,
+        SotoAyam,
+        MieGacoan
     };
-        public void TambahBarang()
+
+    Dictionary<NamaBarang, int> stock = new Dictionary<NamaBarang, int>();
+
+    public UMKM(string nama)
+    {
+        this.nama = nama;
+    }
+
+    public void TambahStockBarang()
+    {
+        Console.WriteLine("Masukkan nama barang:");
+        string nama = Console.ReadLine();
+
+        Console.WriteLine("Masukkan stok barang:");
+        int stok = Convert.ToInt32(Console.ReadLine());
+
+        NamaBarang namaBarang;
+
+        if (Enum.TryParse(nama, out namaBarang))
         {
-            int idx = Enum.GetValues(typeof(namaBarang)).Length - 1;
-            String nama;
-            int stok;
-            nama = Console.ReadLine();
-            stok = Convert.ToInt32(Console.ReadLine());
-            // add EnumValue
-            stock.Add((namaBarang)idx, stok);
-        }
-        public void GetBarang()
-        {
-            Console.WriteLine("Nama UMKM"+"\t:"+this.nama);
-            Console.WriteLine("Nama Barang"+"\t"+"Stok barang");
-            for (int i = 0; i < Enum.GetNames(typeof(namaBarang)).Length; i++)
+            if (stock.ContainsKey(namaBarang))
             {
-                namaBarang currentBarang = (namaBarang)i;
-                string output = currentBarang.ToString().PadRight(15);
-                Console.WriteLine(output + "\t:" + stock[currentBarang].ToString());
-                Console.WriteLine();
+                stock[namaBarang] += stok; // Update stok jika barang sudah ada
             }
+            else
+            {
+                stock.Add(namaBarang, stok  ); // Tambahkan barang baru
+            }
+
+        }
+        else
+        {
+            Console.WriteLine("Barang tidak valid.");
+        }
+    }
+
+    public void GetBarang()
+    {
+        Console.WriteLine("Nama UMKM: " + this.nama);
+        Console.WriteLine("Nama Barang\tStok barang");
+
+        foreach (NamaBarang barang in Enum.GetValues(typeof(NamaBarang)))
+        {
+            Console.WriteLine(barang.ToString() + "\t\t" + (stock.ContainsKey(barang) ? stock[barang].ToString() : "0"));
         }
     }
 }
