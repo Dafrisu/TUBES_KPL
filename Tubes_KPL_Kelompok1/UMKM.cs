@@ -42,12 +42,5 @@ namespace Tubes_KPL_Kelompok1
                 Console.WriteLine();
             }
         }
-        /*
-        static void AddEnumValue<T>(string enumValue, int stok) where T : Enum
-        {
-            Enum.TryParse(enumValue, out T result);
-            stock.Add(result, stok);
-        }
-        */
     }
 }
