@@ -45,6 +45,7 @@ public class UMKM
             {
                 stock.Add(namaBarang, stok); // Tambahkan barang baru
             }
+
         }
         else
         {
