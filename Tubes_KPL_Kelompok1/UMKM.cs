@@ -18,7 +18,11 @@ namespace Tubes_KPL_Kelompok1
 
         Dictionary<namaBarang, int> stock = new Dictionary<namaBarang, int>()
     {
-        
+            {namaBarang.SodaGembira, 0},
+            {namaBarang.SemurJengkol, 0 },
+            {namaBarang.Kikil, 0 },
+            {namaBarang.SotoAyam, 0 },
+            {namaBarang.MieGacoan, 0 }
     };
         public void TambahBarang()
         {
@@ -41,6 +45,7 @@ namespace Tubes_KPL_Kelompok1
                 Console.WriteLine(output + "\t:" + stock[currentBarang].ToString());
                 Console.WriteLine();
             }
+
         }
         /*
         static void AddEnumValue<T>(string enumValue, int stok) where T : Enum

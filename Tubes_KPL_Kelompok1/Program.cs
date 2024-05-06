@@ -9,8 +9,10 @@ class program
 {
     static void Main(string[] args)
     {
-    UMKM namabarang = new UMKM("Warteg Bang kal");
-    namabarang.GetBarang();
-        
+        UMKM namabarang = new UMKM("Warteg Bang kal");
+        namabarang.GetBarang();
+        Pembeli a = new Pembeli();
+        a.tambahqty();
+        a.Printkeranjang();
     }
 }
