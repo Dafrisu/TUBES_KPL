@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Tubes_KPL_Kelompok1.Pembeli;
+// using static Tubes_KPL_Kelompok1.Pembeli;
 using static Tubes_KPL_Kelompok1.UMKM;
 
+/*
 namespace Tubes_KPL_Kelompok1
 {
     public class Pembeli
@@ -23,7 +24,7 @@ namespace Tubes_KPL_Kelompok1
             {Buyer.Raphael, 105 },
             {Buyer.Mahesa, 106 }
         };
-        Dictionary<Buyer, UMKM.NamaBarang> keranjang = new Dictionary<Buyer, UMKM.NamaBarang>()
+        Dictionary<Buyer, UMKM.KategoriBarang.Misc> keranjang = new Dictionary<Buyer, UMKM.NamaBarang>()
         {
             {Buyer.Haikal, UMKM.NamaBarang.SodaGembira }
         };
@@ -62,8 +63,41 @@ namespace Tubes_KPL_Kelompok1
                 Console.WriteLine();
             }
         }
-    
-    public void tambahqty()
+        public void searchKeranjang()
+        {
+            Console.WriteLine("Masukan nama barang: ");
+            String input = Console.ReadLine();
+            bool search = false;
+
+            try
+            {
+                NamaBarang inputBarang = (NamaBarang)Enum.Parse(typeof(NamaBarang), input);
+                foreach (var pair in keranjang)
+                {
+                    if (pair.Value == inputBarang)
+                    {
+                        search = true;
+                    }
+                }
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Input Invalid");
+            }
+            finally
+            {
+                if (search)
+                {
+                    Console.WriteLine("Berikut barangnya");
+                }
+                else
+                {
+                    Console.WriteLine("Barang tidak ditemukan");
+                }
+            }  
+        }
+
+        public void tambahqty()
     {
         Buyer buyer;
         UMKM.NamaBarang barang;
@@ -91,5 +125,7 @@ namespace Tubes_KPL_Kelompok1
                 }
             }
         }
+
     }
 }
+*/
