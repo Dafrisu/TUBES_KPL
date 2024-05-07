@@ -43,7 +43,7 @@ public class UMKM
             }
             else
             {
-                stock.Add(namaBarang, stok); // Tambahkan barang baru
+                stock.Add(namaBarang, stok  ); // Tambahkan barang baru
             }
 
         }
