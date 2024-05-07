@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Tubes_KPL_Kelompok1.UMKM;
 
 
 
@@ -59,5 +60,46 @@ namespace Tubes_KPL_Kelompok1
             }
         }
 
+        public void searchKeranjang()
+        {
+            Console.WriteLine("Masukan nama barang: ");
+            String input = Console.ReadLine();
+            bool search = false;
+
+            try
+            {
+                foreach (var pair in keranjang)
+                {
+                    if (keranjang.ContainsKey(input))
+                    {
+                        search = true;
+
+                    }
+                }
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Input Invalid");
+            }
+            finally
+            {
+                if (search)
+                {
+                    Console.WriteLine("Barang ditemukan");
+                    foreach (KeyValuePair<string, int> barang in keranjang)
+                    {
+                        if (barang.Key == input)
+                        {
+                            Console.WriteLine(barang.Key + "\t\t" + barang.Value);
+                        }
+                    }
+                    //Console.WriteLine(input.Key + "\t\t" + input.Value);
+                }
+                else
+                {
+                    Console.WriteLine("Barang tidak ditemukan");
+                }
+            }
+        }
     }
 }
