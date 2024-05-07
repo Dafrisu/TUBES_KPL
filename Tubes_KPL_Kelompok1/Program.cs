@@ -22,9 +22,9 @@ class program
             if (stringCek.Equals("Pembeli"))
             {
                 cek.Pembeli();
-                //Pembeli a = new Pembeli();
+                Pembeli a = new Pembeli("Haikal");
                 Console.WriteLine("Fitur Untuk Pembeli ");
-                Console.WriteLine("1. Tambah Banyak barang yang dipesan ");
+                Console.WriteLine("1. Tambah barang yang dipesan ");
                 Console.WriteLine("2. Print Keranjang");
                 Console.WriteLine("3. Login sebagai User yang lain");
                 Console.WriteLine("4. Search barang");
@@ -34,10 +34,11 @@ class program
                 {
                     //Tolong input
                     //a.tambahqty(UMKM[] input);
+                    a.tambahBarang(b);
                 }
                 else if (intCek == 2)
                 {
-                    //a.Printkeranjang();
+                    a.Printkeranjang();
                 }
                 else if (intCek == 3)
                 {
@@ -45,7 +46,7 @@ class program
                     stringCek = Console.ReadLine();
                 } else if (intCek == 4)
                 {
-                    a.searchKeranjang();
+                   // a.searchKeranjang();
                 }
 
             }
