@@ -4,53 +4,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+//using static Tubes_KPL_Kelompok1.Pembeli;
 namespace Tubes_KPL_Kelompok1;
 public class UMKM
 {
     public string nama;
-
-    public enum NamaBarang
+    //public KategoriBarang a;
+    public enum KategoriBarang
     {
-        SodaGembira,
-        SemurJengkol,
-        Kikil,
-        SotoAyam,
-        MieGacoan
+        Makanan,
+        Minuman,
+        Misc
     };
 
-    Dictionary<NamaBarang, int> stock = new Dictionary<NamaBarang, int>();
+    public Dictionary<KategoriBarang, Dictionary<String, int>> InsertBarang = new Dictionary<KategoriBarang, Dictionary<String, int>>();
 
-    public UMKM(string nama)
+    public UMKM(string nama)//, KategoriBarang a)
     {
         this.nama = nama;
+
+        //this.a = a;
     }
 
-    public void TambahStockBarang()
+    public void TambahBarang()
     {
         Console.WriteLine("Masukkan nama barang:");
-        string nama = Console.ReadLine();
+        string namaBarang = Console.ReadLine();
 
         Console.WriteLine("Masukkan stok barang:");
-        int stok = Convert.ToInt32(Console.ReadLine());
+        int stokBarang = Convert.ToInt32(Console.ReadLine());
 
-        NamaBarang namaBarang;
+        Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
+        string kategoriString = Console.ReadLine();
 
-        if (Enum.TryParse(nama, out namaBarang))
+        // Ubah input kategori menjadi enum
+        KategoriBarang kategori;
+        if (!Enum.TryParse(kategoriString, out kategori))
         {
-            if (stock.ContainsKey(namaBarang))
-            {
-                stock[namaBarang] += stok; // Update stok jika barang sudah ada
-            }
-            else
-            {
-                stock.Add(namaBarang, stok  ); // Tambahkan barang baru
-            }
+            Console.WriteLine("Kategori barang tidak valid.");
+            return;
+        }
 
-        }
-        else
+        // Periksa apakah kategori barang sudah ada di dictionary
+        if (!InsertBarang.ContainsKey(kategori))
         {
-            Console.WriteLine("Barang tidak valid.");
+            // Jika belum, tambahkan kategori baru
+            InsertBarang[kategori] = new Dictionary<string, int>();
         }
+
+        // Tambahkan barang baru
+        InsertBarang[kategori][namaBarang] = stokBarang;
     }
 
     public void GetBarang()
@@ -58,9 +61,15 @@ public class UMKM
         Console.WriteLine("Nama UMKM: " + this.nama);
         Console.WriteLine("Nama Barang\tStok barang");
 
-        foreach (NamaBarang barang in Enum.GetValues(typeof(NamaBarang)))
+        foreach (KategoriBarang kategori in Enum.GetValues(typeof(KategoriBarang)))
         {
-            Console.WriteLine(barang.ToString() + "\t\t" + (stock.ContainsKey(barang) ? stock[barang].ToString() : "0"));
+            if (InsertBarang.ContainsKey(kategori))
+            {
+                foreach (KeyValuePair<string, int> barang in InsertBarang[kategori])
+                {
+                    Console.WriteLine(barang.Key + "\t\t" + barang.Value);
+                }
+            }
         }
     }
 }
