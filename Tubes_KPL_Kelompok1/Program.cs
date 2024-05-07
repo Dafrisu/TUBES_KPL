@@ -22,7 +22,7 @@ class program
             if (stringCek.Equals("Pembeli"))
             {
                 cek.Pembeli();
-                Pembeli a = new Pembeli();
+                //Pembeli a = new Pembeli();
                 Console.WriteLine("Fitur Untuk Pembeli ");
                 Console.WriteLine("1. Tambah Banyak barang yang dipesan ");
                 Console.WriteLine("2. Print Keranjang");
@@ -32,11 +32,12 @@ class program
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
                 {
-                    a.tambahqty();
+                    //Tolong input
+                    //a.tambahqty(UMKM[] input);
                 }
                 else if (intCek == 2)
                 {
-                    a.Printkeranjang();
+                    //a.Printkeranjang();
                 }
                 else if (intCek == 3)
                 {
@@ -68,7 +69,7 @@ class program
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
                 {
-                    b.TambahStockBarang();
+                    b.TambahBarang();
                 }
                 else if (intCek == 2)
                 {

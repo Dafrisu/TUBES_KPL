@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Tubes_KPL_Kelompok1.Pembeli;
+// using static Tubes_KPL_Kelompok1.Pembeli;
 using static Tubes_KPL_Kelompok1.UMKM;
 
+/*
 namespace Tubes_KPL_Kelompok1
 {
     public class Pembeli
@@ -23,7 +24,7 @@ namespace Tubes_KPL_Kelompok1
             {Buyer.Raphael, 105 },
             {Buyer.Mahesa, 106 }
         };
-        Dictionary<Buyer, UMKM.NamaBarang> keranjang = new Dictionary<Buyer, UMKM.NamaBarang>()
+        Dictionary<Buyer, UMKM.KategoriBarang.Misc> keranjang = new Dictionary<Buyer, UMKM.NamaBarang>()
         {
             {Buyer.Haikal, UMKM.NamaBarang.SodaGembira }
         };
@@ -127,3 +128,4 @@ namespace Tubes_KPL_Kelompok1
 
     }
 }
+*/
