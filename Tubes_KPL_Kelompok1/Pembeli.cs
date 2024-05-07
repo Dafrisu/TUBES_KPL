@@ -63,8 +63,41 @@ namespace Tubes_KPL_Kelompok1
                 Console.WriteLine();
             }
         }
-    
-    public void tambahqty()
+        public void searchKeranjang()
+        {
+            Console.WriteLine("Masukan nama barang: ");
+            String input = Console.ReadLine();
+            bool search = false;
+
+            try
+            {
+                NamaBarang inputBarang = (NamaBarang)Enum.Parse(typeof(NamaBarang), input);
+                foreach (var pair in keranjang)
+                {
+                    if (pair.Value == inputBarang)
+                    {
+                        search = true;
+                    }
+                }
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Input Invalid");
+            }
+            finally
+            {
+                if (search)
+                {
+                    Console.WriteLine("Berikut barangnya");
+                }
+                else
+                {
+                    Console.WriteLine("Barang tidak ditemukan");
+                }
+            }  
+        }
+
+        public void tambahqty()
     {
         Buyer buyer;
         UMKM.NamaBarang barang;
@@ -92,6 +125,7 @@ namespace Tubes_KPL_Kelompok1
                 }
             }
         }
+
     }
 }
 */
