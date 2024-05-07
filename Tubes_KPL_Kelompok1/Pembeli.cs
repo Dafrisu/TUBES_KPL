@@ -4,128 +4,60 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-// using static Tubes_KPL_Kelompok1.Pembeli;
-using static Tubes_KPL_Kelompok1.UMKM;
 
-/*
+
+
 namespace Tubes_KPL_Kelompok1
 {
     public class Pembeli
     {
-        
-        public enum Buyer { Haikal, Dafa, Darryl, Fersya, Raphael, Mahesa };
-
-        Dictionary<Buyer, int> id = new Dictionary<Buyer, int>()
+        public string nama;
+        public Pembeli(String nama) 
         {
-            {Buyer.Haikal, 101 },
-            {Buyer.Dafa, 102 },
-            {Buyer.Darryl, 103 },
-            {Buyer.Fersya, 104 },
-            {Buyer.Raphael, 105 },
-            {Buyer.Mahesa, 106 }
-        };
-        Dictionary<Buyer, UMKM.KategoriBarang.Misc> keranjang = new Dictionary<Buyer, UMKM.NamaBarang>()
-        {
-            {Buyer.Haikal, UMKM.NamaBarang.SodaGembira }
-        };
-
-        Dictionary<Buyer, Dictionary<UMKM.NamaBarang, int>> qty = new Dictionary<Buyer, Dictionary<UMKM.NamaBarang, int>>()
-        {
-            {Buyer.Haikal, new Dictionary<UMKM.NamaBarang, int>
-            {
-                {UMKM.NamaBarang.SodaGembira, 10 }
-            } }
-        };
+            this.nama = nama;
+        }
+        public static Dictionary<String, int> keranjang = new Dictionary<String, int>();
 
         public void Printkeranjang()
         {
 
-            foreach (Buyer pembeli in Enum.GetValues(typeof(Buyer)))
+            foreach (KeyValuePair<string, int> barang in keranjang)
             {
-                Console.Write(pembeli.ToString());
-
-                if (qty.ContainsKey(pembeli))
-                {
-                    foreach (UMKM.NamaBarang barang in Enum.GetValues(typeof(UMKM.NamaBarang)))
-                    {
-                        int qtyBarang = qty[pembeli].ContainsKey(barang) ? qty[pembeli][barang] : 0;
-                        if (qtyBarang != 0)
-                        {
-                            Console.Write($" {barang.ToString()}: {qtyBarang},");
-                        }
-                    }
-                }
-                else
-                {
-                    Console.Write(" -,");
-                }
-
-                Console.WriteLine();
+                Console.WriteLine(barang.Key + "\t\t" + barang.Value);
             }
         }
-        public void searchKeranjang()
+
+        public void tambahBarang(UMKM umkm)
         {
-            Console.WriteLine("Masukan nama barang: ");
-            String input = Console.ReadLine();
-            bool search = false;
+            Dictionary<String, int> data;
+            Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
+            string kategoriString = Console.ReadLine();
 
-            try
-            {
-                NamaBarang inputBarang = (NamaBarang)Enum.Parse(typeof(NamaBarang), input);
-                foreach (var pair in keranjang)
-                {
-                    if (pair.Value == inputBarang)
-                    {
-                        search = true;
-                    }
-                }
-            }
-            catch (ArgumentException)
-            {
-                Console.WriteLine("Input Invalid");
-            }
-            finally
-            {
-                if (search)
-                {
-                    Console.WriteLine("Berikut barangnya");
-                }
-                else
-                {
-                    Console.WriteLine("Barang tidak ditemukan");
-                }
-            }  
-        }
+            Console.WriteLine("Masukan Nama Barang: ");
+            String namabarang = Console.ReadLine();
 
-        public void tambahqty()
+            Console.WriteLine("Masukan Jumlah Barang: ");
+            int qty = Convert.ToInt32(Console.ReadLine());
+
+            UMKM.KategoriBarang kategori;
+            if (!Enum.TryParse(kategoriString, out kategori))
+            {
+                Console.WriteLine("Kategori barang tidak valid.");
+                return;
+            }
+
+            if(!keranjang.ContainsKey(namabarang))
     {
-        Buyer buyer;
-        UMKM.NamaBarang barang;
-        Console.Write("Masukan Nama Buyer: ");
-        String input = Console.ReadLine();
-            
-            if (Enum.TryParse(input, out buyer))
+                // Jika barang belum ada dalam keranjang, tambahkan ke keranjang
+                keranjang.Add(namabarang, qty);
+                
+            }
+            else
             {
-                if (qty.ContainsKey(buyer))
-                {
-                    Console.WriteLine("Masukan nama Barang: ");
-                    input = Console.ReadLine();
-                    if (Enum.TryParse(input, out barang))
-                    {
-                        if (qty[buyer].ContainsKey(barang))
-                        {
-                            Console.WriteLine("Masukan Kuantitas: ");
-                            int masuk = Convert.ToInt32(Console.ReadLine());
-                            qty[buyer][barang] = masuk;
-                            Console.WriteLine(buyer.ToString() +" " + barang.ToString() + " QTY: " + (qty.ContainsKey(buyer) ? qty[buyer][barang].ToString() : "0"));
-                            
-                        }
-                    }
-                    
-                }
+                // Jika barang tidak tersedia, tampilkan pesan kesalahan
+                Console.WriteLine($"Barang {namabarang} tidak tersedia dalam kategori {kategori}");
             }
         }
 
     }
 }
-*/

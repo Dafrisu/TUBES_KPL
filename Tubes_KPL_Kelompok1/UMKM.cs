@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-//using static Tubes_KPL_Kelompok1.Pembeli;
 namespace Tubes_KPL_Kelompok1;
 public class UMKM
 {
