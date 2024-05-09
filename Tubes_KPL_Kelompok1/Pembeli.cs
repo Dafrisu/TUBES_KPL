@@ -26,6 +26,7 @@ namespace Tubes_KPL_Kelompok1
                 Console.WriteLine(barang.Key + "\t\t" + barang.Value);
             }
         }
+
    
         public void tambahBarang(UMKM umkm)
         {
@@ -58,5 +59,6 @@ namespace Tubes_KPL_Kelompok1
                 Console.WriteLine($"Barang {namabarang} tidak tersedia dalam kategori {kategori}");
             }
         }
+
     }
 }
