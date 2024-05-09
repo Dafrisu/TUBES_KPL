@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using Tubes_KPL_Kelompok1;
 using static Tubes_KPL_Kelompok1.UMKM;
+using static Tubes_KPL_Kelompok1.Keranjang;
 using static Tubes_KPL_Kelompok1.IdentifyUser;
+using System.Diagnostics;
+using System.Xml.Linq;
 
 class program
 {
@@ -16,6 +19,9 @@ class program
         stringCek = Console.ReadLine();
         bool umkmInstanceExists = false;
         UMKM b = new UMKM("Warteg Bang kal");
+        Keranjang ker = new Keranjang();
+        Keranjang.Manage manage = new Keranjang.Manage();
+        string inputan;
 
         while (intCek != 10)
         {
@@ -28,6 +34,8 @@ class program
                 Console.WriteLine("2. Print Keranjang");
                 Console.WriteLine("3. Login sebagai User yang lain");
                 Console.WriteLine("4. Search barang");
+                Console.WriteLine("5. Tambah barang v2");
+                Console.WriteLine("6. Kurangi barang UMKM terkait");
                 Console.WriteLine("10. Keluar dari program");
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
@@ -47,6 +55,15 @@ class program
                 } else if (intCek == 4)
                 {
                     a.searchKeranjang();
+                } else if (intCek == 5)
+                {
+                    manage.AddProduct();
+
+                } else if (intCek == 6)
+                {
+                    Console.WriteLine("Masukan nama UMKM");
+                    inputan = Console.ReadLine();
+                    //manage.check(arrUMKM, inputan);
                 }
 
             }
@@ -93,5 +110,10 @@ class program
                 }
             }
         }
+        /*UMKM[] arrUMKM = { new UMKM("Haikal"), new UMKM("Dafa") };
+        arrUMKM[1].TambahBarang();
+        arrUMKM[1].TambahBarang();
+        arrUMKM[1].GetBarang();
+        */
     }
 }
