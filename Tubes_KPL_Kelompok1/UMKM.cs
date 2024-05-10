@@ -105,7 +105,7 @@ public class UMKM
         Console.WriteLine("Masukkan nama barang:");
         string namaBarang = Console.ReadLine();
 
-        Console.WriteLine("Masukkan stok barang:");
+        Console.WriteLine("Masukkan jumlah stok yang akan dikurangkan barang:");
         int stokBarang = Convert.ToInt32(Console.ReadLine());
 
         KategoriBarang kategori;

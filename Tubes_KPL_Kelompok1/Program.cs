@@ -16,6 +16,7 @@ class program
         stringCek = Console.ReadLine();
         bool umkmInstanceExists = false;
         UMKM b = new UMKM("Warteg Bang kal");
+        Console.WriteLine(b.getNama());
 
         while (intCek != 10)
         {
