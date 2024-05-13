@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Tubes_KPL_Kelompok1.UMKM;
 
 
 
@@ -27,9 +28,9 @@ namespace Tubes_KPL_Kelompok1
             }
         }
 
-   
         public void tambahBarang(UMKM umkm)
         {
+            
             Dictionary<String, int> data;
             Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
             string kategoriString = Console.ReadLine();
@@ -41,16 +42,29 @@ namespace Tubes_KPL_Kelompok1
             int qty = Convert.ToInt32(Console.ReadLine());
 
             UMKM.KategoriBarang kategori;
+            
             if (!Enum.TryParse(kategoriString, out kategori))
             {
                 Console.WriteLine("Kategori barang tidak valid.");
                 return;
             }
+            else
+            {
+                var stokkategori = umkm.InsertBarang[kategori];
+            }
 
             if(!keranjang.ContainsKey(namabarang))
-    {
-                // Jika barang belum ada dalam keranjang, tambahkan ke keranjang
-                keranjang.Add(namabarang, qty);
+            {
+                int stok = umkm.InsertBarang[kategori][namabarang];
+                if(stok > qty)
+                {
+                    // Jika barang belum ada dalam keranjang, tambahkan ke keranjang
+                    keranjang.Add(namabarang, qty);
+                }
+                else
+                {
+                    Console.WriteLine("Stok Barang Tidak mencukupi");
+                }
                 
             }
             else
@@ -60,5 +74,46 @@ namespace Tubes_KPL_Kelompok1
             }
         }
 
+        public void searchKeranjang()
+        {
+            Console.WriteLine("Masukan nama barang: ");
+            String input = Console.ReadLine();
+            bool search = false;
+
+            try
+            {
+                foreach (var pair in keranjang)
+                {
+                    if (keranjang.ContainsKey(input))
+                    {
+                        search = true;
+
+                    }
+                }
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Input Invalid");
+            }
+            finally
+            {
+                if (search)
+                {
+                    Console.WriteLine("Barang ditemukan");
+                    foreach (KeyValuePair<string, int> barang in keranjang)
+                    {
+                        if (barang.Key == input)
+                        {
+                            Console.WriteLine(barang.Key + "\t\t" + barang.Value);
+                        }
+                    }
+                    //Console.WriteLine(input.Key + "\t\t" + input.Value);
+                }
+                else
+                {
+                    Console.WriteLine("Barang tidak ditemukan");
+                }
+            }
+        }
     }
 }

@@ -11,13 +11,14 @@ class program
     static void Main(string[] args)
     {
         String stringCek;
+        UMKM[] arrUMKM = { new UMKM("Haikal"), new UMKM("Dafa") };
         int intCek = 0;
         IdentifyUser cek = new IdentifyUser();
         stringCek = Console.ReadLine();
         bool umkmInstanceExists = false;
         UMKM b = new UMKM("Warteg Bang kal");
 
-        while (intCek != 5)
+        while (intCek != 10)
         {
             if (stringCek.Equals("Pembeli"))
             {
@@ -28,7 +29,7 @@ class program
                 Console.WriteLine("2. Print Keranjang");
                 Console.WriteLine("3. Login sebagai User yang lain");
                 Console.WriteLine("4. Search barang");
-                Console.WriteLine("5. Keluar dari program");
+                Console.WriteLine("10. Keluar dari program");
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
                 {
@@ -63,10 +64,12 @@ class program
 
 
                 Console.WriteLine("Fitur Untuk UMKM ");
-                Console.WriteLine("1. Tambah Stok Barang: ");
+                Console.WriteLine("1. Tambah Barang: ");
                 Console.WriteLine("2. Print Barang UMKM");
-                Console.WriteLine("3. Ganti Tipe User");
-                Console.WriteLine("4. Keluar dari program");
+                Console.WriteLine("3. Tambah Stok Barang");
+                Console.WriteLine("4. Kurang Stok Barang");
+                Console.WriteLine("5 Ganti Tipe User");
+                Console.WriteLine("10. Keluar dari program");
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
                 {
@@ -77,6 +80,14 @@ class program
                     b.GetBarang();
                 }
                 else if (intCek == 3)
+                {
+                    b.TambahStock();
+                }
+                else if (intCek == 4)
+                {
+                    b.KurangStock();
+                }
+                else if (intCek == 5)
                 {
                     Console.WriteLine("Masukkan input berupa Pembeli atau UMKM");
                     stringCek = Console.ReadLine();
