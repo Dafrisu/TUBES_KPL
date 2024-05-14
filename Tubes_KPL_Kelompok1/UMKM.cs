@@ -149,14 +149,24 @@ public class UMKM
     {
         int hitung = 0;
         int loop = 0;
-        foreach (UMKM m in input)
+        foreach (KategoriBarang kategori in Enum.GetValues(typeof(KategoriBarang)))
         {
-            Console.WriteLine("Nama UMKM: " + input.this.nama);
-            Console.WriteLine("Jumlah Barang: " + input.InsertBarang.Count);
+            if (InsertBarang.ContainsKey(kategori))
+            {
+                foreach (KeyValuePair<string, int> barang in InsertBarang[kategori])
+                {
+                    hitung++;
+                }
+            }
         }
-       /* while (loop <= input.Length)
+        foreach (var m in input)
         {
-            Console.WriteLine(input.this.nama);
-        } */ 
-    }   
+            if (m != null)
+            {
+                Console.WriteLine("Nama UMKM: " + m.nama);
+                Console.WriteLine("Jumlah Barang: " + hitung);
+            }
+        }
+    }
+
 }
