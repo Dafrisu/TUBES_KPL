@@ -23,8 +23,9 @@ class program
         int banyakUMKM = 0;
         string namaUMKM;
         int loopCounter = 0;
+        BuyerConfig buyer = new BuyerConfig();
 
-        while (intCek != 10)
+        while (intCek != 11)
         {
             if (stringCek.Equals("Pembeli"))
             {
@@ -88,9 +89,10 @@ class program
                 Console.WriteLine("5. Tambah Akun UMKM");
                 Console.WriteLine("6. Ganti login akun UMKM (Menggunakan Index)");
                 Console.WriteLine("7. Tampilkan Index dan nama sesuai dengan Index");
+                Console.WriteLine("9. Lihat Log");
+                Console.WriteLine("10. UMKM dan Jumlah Barang");
                 Console.WriteLine("8. Ganti Tipe User");
-                Console.WriteLine("9. UMKM dan Jumlah Barang");
-                Console.WriteLine("10. Keluar dari program");
+                Console.WriteLine("11. Keluar dari program");
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
                 {
@@ -152,15 +154,18 @@ class program
                     }
                     loopCounter = 0;
                 }
-
                 else if (intCek == 8)
+                {
+                    buyer.readjson();
+                }
+                else if (intCek == 9)
+                {
+                    arrUMKM[indexUMKM].jumlahproduk(arrUMKM);
+                }
+                else if (intCek == 10)
                 {
                     Console.WriteLine("Masukkan input berupa Pembeli atau UMKM");
                     stringCek = Console.ReadLine();
-                }
-                else if(intCek == 9)
-                {
-                    arrUMKM[indexUMKM].jumlahproduk(arrUMKM);
                 }
             }
         }
