@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text.Json;
+using System.Security.Cryptography.X509Certificates;
+
 namespace Tubes_KPL_Kelompok1;
 public class UMKM
 {
@@ -161,8 +163,9 @@ public class UMKM
                 }
             }
         }
+
     }
-    
+
     public void ReadLogs()
     {
         string logFilePath = @"E:\TELKOM UNIVERSITY\TUGAS KULIAH\KONSTRUKSI PERANGKAT LUNAK (KPL)\TUBES\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
@@ -178,6 +181,29 @@ public class UMKM
         else
         {
             Console.WriteLine("No log entries found.");
+        }
+    }
+    public void jumlahproduk(UMKM[] input)
+    {
+        int hitung = 0;
+        int loop = 0;
+        foreach (KategoriBarang kategori in Enum.GetValues(typeof(KategoriBarang)))
+        {
+            if (InsertBarang.ContainsKey(kategori))
+            {
+                foreach (KeyValuePair<string, int> barang in InsertBarang[kategori])
+                {
+                    hitung++;
+                }
+            }
+        }
+        foreach (var m in input)
+        {
+            if (m != null)
+            {
+                Console.WriteLine("Nama UMKM: " + m.nama);
+                Console.WriteLine("Jumlah Barang: " + hitung);
+            }
         }
     }
 
