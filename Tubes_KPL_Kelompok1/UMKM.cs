@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Security.Cryptography.X509Certificates;
 namespace Tubes_KPL_Kelompok1;
 public class UMKM
 {
@@ -142,5 +143,20 @@ public class UMKM
                 }
             }
         }
+
     }
+    public void jumlahproduk(UMKM[] input)
+    {
+        int hitung = 0;
+        int loop = 0;
+        foreach (UMKM m in input)
+        {
+            Console.WriteLine("Nama UMKM: " + input.this.nama);
+            Console.WriteLine("Jumlah Barang: " + input.InsertBarang.Count);
+        }
+       /* while (loop <= input.Length)
+        {
+            Console.WriteLine(input.this.nama);
+        } */ 
+    }   
 }
