@@ -14,12 +14,20 @@ namespace Tubes_KPL_Kelompok1
     {
         public Dictionary<string, Dictionary<string, int>> Keranjang { get; set; }
     }
+    public class LogEntry
+    {
+        public string BuyerName { get; set; }
+        public string ItemName { get; set; }
+        public int Quantity { get; set; }
+        public DateTime Timestamp { get; set; }
+    }
+
     public class BuyerConfig
     {
 
         public void UpdateQuantity(string buyerName, string itemName, int newQuantity)
         {
-            string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+            string jsonFilePath = @"E:\TELKOM UNIVERSITY\TUGAS KULIAH\KONSTRUKSI PERANGKAT LUNAK (KPL)\TUBES\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
 
             // Baca JSON dari file
             string json = File.ReadAllText(jsonFilePath);
@@ -55,7 +63,7 @@ namespace Tubes_KPL_Kelompok1
         }
         public void readjson()
         {
-            String json = File.ReadAllText(@"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json");
+            String json = File.ReadAllText(@"E:\TELKOM UNIVERSITY\TUGAS KULIAH\KONSTRUKSI PERANGKAT LUNAK (KPL)\TUBES\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json");
             Console.WriteLine(json);
             KeranjangConfig configkeranjang = JsonSerializer.Deserialize<KeranjangConfig>(json);
             if (configkeranjang != null && configkeranjang.Keranjang != null)
@@ -72,6 +80,24 @@ namespace Tubes_KPL_Kelompok1
             else
             {
                 Console.WriteLine("Gagal membaca konfigurasi pembeli.");
+            }
+        }
+
+        public void readLogs()
+        {
+            string logFilePath = @"E:\TELKOM UNIVERSITY\TUGAS KULIAH\KONSTRUKSI PERANGKAT LUNAK (KPL)\TUBES\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+            if (File.Exists(logFilePath))
+            {
+                string logJson = File.ReadAllText(logFilePath);
+                List<LogEntry> logs = JsonSerializer.Deserialize<List<LogEntry>>(logJson);
+                foreach (var log in logs)
+                {
+                    Console.WriteLine($"{log.Timestamp}: {log.BuyerName} updated {log.ItemName} to {log.Quantity}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No log entries found.");
             }
         }
     }
