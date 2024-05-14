@@ -53,6 +53,7 @@ namespace Tubes_KPL_Kelompok1
 
             if(!keranjang.ContainsKey(namabarang))
             {
+<<<<<<< HEAD
                 int stok = umkm.InsertBarang[kategori][namabarang];
                 if(stok > qty)
                 {
@@ -63,6 +64,10 @@ namespace Tubes_KPL_Kelompok1
                 {
                     Console.WriteLine("Stok Barang Tidak mencukupi");
                 }
+=======
+                // Jika barang belum ada dalam keranjang, tambahkan ke keranjang
+                keranjang.Add(namabarang, qty);
+>>>>>>> ef0a15428c87f98fca98e892813bb344ac1be842
                 
             }
             else
