@@ -30,8 +30,6 @@ namespace Tubes_KPL_Kelompok1
 
         public void tambahBarang(UMKM umkm)
         {
-            
-            Dictionary<String, int> data;
             Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
             string kategoriString = Console.ReadLine();
 
@@ -71,6 +69,30 @@ namespace Tubes_KPL_Kelompok1
             {
                 // Jika barang tidak tersedia, tampilkan pesan kesalahan
                 Console.WriteLine($"Barang {namabarang} tidak tersedia dalam kategori {kategori}");
+            }
+        }
+        public void check(UMKM[] tit, string nama)
+        {
+            try
+            {
+                for (int i = 0; i < tit.Length; i++)
+                {
+                    if (tit[i].nama == nama)
+                    {
+                        tit[i].GetBarang();
+                        tit[i].KurangStock();
+                        tit[i].GetBarang();
+                    }
+                    else if (i == tit.Length)
+                    {
+                        throw new Exception("bang gaada nama yang kek gitu");
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 
