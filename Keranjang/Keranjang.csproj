@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1.csproj" />
-  </ItemGroup>
-
 </Project>
