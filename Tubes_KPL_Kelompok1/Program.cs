@@ -11,26 +11,21 @@ class program
 {
     static void Main(string[] args)
     {
-        String stringCek;
+        string stringCek;
         int intCek = 0;
         IdentifyUser cek = new IdentifyUser();
+        Console.WriteLine("Masukkan input berupa Pembeli atau UMKM");
         stringCek = Console.ReadLine();
-        bool umkmInstanceExists = false;
-        UMKM[] arrUMKM = new UMKM[20];
-        Keranjang keranjang = new Keranjang();
-        Keranjang.Manage manage = new Keranjang.Manage();
-        int indexUMKM = 0;
-        int banyakUMKM = 0;
+        List<UMKM> umkmList = new List<UMKM>();
+        int currentUMKMIndex = -1;
         string namaUMKM;
-        int loopCounter = 0;
-        BuyerConfig buyer = new BuyerConfig("Buyer");
 
         while (intCek != 11)
         {
-            if (stringCek.Equals("Pembeli"))
+            if (stringCek.Equals("Pembeli", StringComparison.OrdinalIgnoreCase))
             {
                 cek.Pembeli();
-                Pembeli a = new Pembeli("Haikal");
+                Pembeli a = new Pembeli("Username");
                 Console.WriteLine("Fitur Untuk Pembeli ");
                 Console.WriteLine("1. Tambah barang yang dipesan ");
                 Console.WriteLine("2. Print Keranjang");
@@ -42,7 +37,7 @@ class program
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
                 {
-                    a.tambahBarang(arrUMKM[indexUMKM]);
+                    a.tambahBarang(umkmList[currentUMKMIndex]);
                 }
                 else if (intCek == 2)
                 {
@@ -54,7 +49,7 @@ class program
                 }
                 else if (intCek == 4)
                 {
-                    manage.AddProduct();
+                    a.tambahBarang(umkmList[currentUMKMIndex]); // Assuming this method exists in Pembeli class
                 }
                 else if (intCek == 5)
                 {
@@ -66,20 +61,21 @@ class program
                     stringCek = Console.ReadLine();
                 }
             }
-            else if (stringCek.Equals("UMKM"))
+            else if (stringCek.Equals("UMKM", StringComparison.OrdinalIgnoreCase))
             {
                 cek.UMKM();
 
-                if (!umkmInstanceExists) // Memeriksa apakah instance UMKM sudah ada
+                if (currentUMKMIndex == -1)
                 {
                     Console.WriteLine("Masukkan nama UMKM");
                     namaUMKM = Console.ReadLine();
-                    arrUMKM[indexUMKM] = new UMKM(namaUMKM);
-                    Console.WriteLine("Anda login di akun UMKM dengan id :" + indexUMKM);
-                    Console.WriteLine("Dengan nama :" + arrUMKM[indexUMKM].Username);
-                    umkmInstanceExists = true;
+                    UMKM newUMKM = new UMKM(namaUMKM);
+                    umkmList.Add(newUMKM);
+                    currentUMKMIndex = umkmList.Count - 1;
                 }
 
+                Console.WriteLine("Anda login di akun UMKM dengan id :" + currentUMKMIndex);
+                Console.WriteLine("Dengan nama :" + umkmList[currentUMKMIndex].Username);
 
                 Console.WriteLine("Fitur Untuk UMKM ");
                 Console.WriteLine("1. Tambah Barang: ");
@@ -89,78 +85,57 @@ class program
                 Console.WriteLine("5. Tambah Akun UMKM");
                 Console.WriteLine("6. Ganti login akun UMKM (Menggunakan Index)");
                 Console.WriteLine("7. Tampilkan Index dan nama sesuai dengan Index");
-                Console.WriteLine("8. Membaca");
-                Console.WriteLine("9. Lihat Log");
-                Console.WriteLine("10. UMKM dan Jumlah Barang");
+                Console.WriteLine("8. Print");
+                Console.WriteLine("10. Login sebagai User yang lain");
                 Console.WriteLine("11. Keluar dari program");
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
                 {
-                    arrUMKM[indexUMKM].TambahBarang();
+                    umkmList[currentUMKMIndex].TambahBarang();
                 }
                 else if (intCek == 2)
                 {
-                    arrUMKM[indexUMKM].GetBarang();
+                    umkmList[currentUMKMIndex].GetBarang();
                 }
                 else if (intCek == 3)
                 {
-                    arrUMKM[indexUMKM].TambahStok();
+                    umkmList[currentUMKMIndex].TambahStok();
                 }
                 else if (intCek == 4)
                 {
-                    arrUMKM[indexUMKM].KurangStok();
+                    umkmList[currentUMKMIndex].KurangStok();
                 }
                 else if (intCek == 5)
                 {
-                    if (arrUMKM[indexUMKM] != null)
-                    {
-                        while (arrUMKM[indexUMKM] != null)
-                        {
-                            indexUMKM++;
-                        }
-                    }
-                    if (arrUMKM[indexUMKM] == null)
-                    {
-                        banyakUMKM = indexUMKM;
-                        Console.WriteLine("Masukkan nama UMKM");
-                        namaUMKM = Console.ReadLine();
-                        arrUMKM[indexUMKM] = new UMKM(namaUMKM);
-                        Console.WriteLine("Anda login di akun UMKM dengan id :" + indexUMKM);
-                        Console.WriteLine("Dengan nama :" + arrUMKM[indexUMKM].Username);
-                    }
+                    Console.WriteLine("Masukkan nama UMKM");
+                    namaUMKM = Console.ReadLine();
+                    UMKM newUMKM = new UMKM(namaUMKM);
+                    umkmList.Add(newUMKM);
+                    currentUMKMIndex = umkmList.Count - 1;
                 }
                 else if (intCek == 6)
                 {
                     Console.WriteLine("Masukkan input berupa Int index yang tersedia");
-                    while (loopCounter <= banyakUMKM)
+                    for (int i = 0; i < umkmList.Count; i++)
                     {
-                        Console.WriteLine("Berikut adalah array index id UMKM yang sudah disimpan");
-                        Console.WriteLine(loopCounter + ". " + arrUMKM[loopCounter].Username);
-                        loopCounter++;
+                        Console.WriteLine($"{i}. {umkmList[i].Username}");
                     }
-                    loopCounter = 0;
-
-                    indexUMKM = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("Anda login di akun UMKM dengan id :" + indexUMKM);
-                    Console.WriteLine("Dengan nama :" + arrUMKM[indexUMKM].Username);
+                    currentUMKMIndex = Convert.ToInt32(Console.ReadLine());
                 }
                 else if (intCek == 7)
                 {
-                    while (loopCounter <= banyakUMKM)
+                    for (int i = 0; i < umkmList.Count; i++)
                     {
-                        Console.WriteLine("Berikut adalah array index id UMKM yang sudah disimpan");
-                        Console.WriteLine(loopCounter + ". " + arrUMKM[loopCounter].Username);
-                        loopCounter++;
+                        Console.WriteLine($"{i}. {umkmList[i].Username}");
                     }
-                    loopCounter = 0;
                 }
                 else if (intCek == 8)
                 {
-                    buyer.readjson();
+                    ReadJson();
                 }
                 else if (intCek == 9)
                 {
-                    arrUMKM[indexUMKM].GetBarang();
+                    umkmList[currentUMKMIndex].GetBarang();
                 }
                 else if (intCek == 10)
                 {
@@ -168,6 +143,27 @@ class program
                     stringCek = Console.ReadLine();
                 }
             }
+        }
+    }
+
+    private static void ReadJson()
+    {
+        try
+        {
+            string jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), "umkmconfig.json");
+            if (File.Exists(jsonFilePath))
+            {
+                string json = File.ReadAllText(jsonFilePath);
+                Console.WriteLine(json);
+            }
+            else
+            {
+                Console.WriteLine("File umkmconfig.json tidak ditemukan.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
 }

@@ -14,33 +14,16 @@ public class UMKM
 {
     public string Username { get; set; }
     public Dictionary<string, int> Stock { get; set; } = new Dictionary<string, int>();
-    public enum KategoriBarang
-    {
-        Makanan,
-        Minuman,
-        Misc
-    };
+    public Dictionary<string, string> JenisProduk { get; set; } = new Dictionary<string, string>();
 
-    public Dictionary<KategoriBarang, Dictionary<string, int>> InsertBarang { get; set; } = new Dictionary<KategoriBarang, Dictionary<string, int>>();
     private const string logFileName = "umkmconfig.json";
     private readonly string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), logFileName);
-    private System.Timers.Timer autoUpdateTimer;
-
-
-    public class Buyer
-    {
-        public Dictionary<string, int> BarangYangDibeli { get; set; } = new Dictionary<string, int>();
-    }
-
-    public class UMKMData
-    {
-        public Buyer Buyer { get; set; } = new Buyer();
-    }
+    private readonly System.Timers.Timer autoUpdateTimer;
 
     public UMKM(string username)
     {
         this.Username = username;
-        autoUpdateTimer = new System.Timers.Timer(3600000);
+        autoUpdateTimer = new System.Timers.Timer(3600000); 
         autoUpdateTimer.Elapsed += AutoUpdateStock;
         autoUpdateTimer.Start();
     }
@@ -56,18 +39,23 @@ public class UMKM
         Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
         string kategoriString = Console.ReadLine();
 
-        if (!Enum.TryParse(kategoriString, out KategoriBarang kategori))
+        if (!Enum.TryParse(typeof(KategoriBarang), kategoriString, true, out var kategori))
         {
             Console.WriteLine("Kategori barang tidak valid.");
             return;
         }
 
-        if (!InsertBarang.ContainsKey(kategori))
+        if (Stock.ContainsKey(namaBarang))
         {
-            InsertBarang[kategori] = new Dictionary<string, int>();
+            Console.WriteLine($"Barang '{namaBarang}' sudah ada. Menambah stok.");
+            Stock[namaBarang] += stokBarang;
+        }
+        else
+        {
+            Stock[namaBarang] = stokBarang;
+            JenisProduk[namaBarang] = kategoriString;
         }
 
-        InsertBarang[kategori][namaBarang] = stokBarang;
         LogAction("Tambah Barang", namaBarang, stokBarang);
         SaveData();
     }
@@ -75,14 +63,12 @@ public class UMKM
     public void GetBarang()
     {
         Console.WriteLine("Nama UMKM: " + this.Username);
-        Console.WriteLine("Nama Barang\tStok barang");
+        Console.WriteLine("Nama Barang\tStok Barang\tKategori Barang");
 
-        foreach (var kategori in InsertBarang)
+        foreach (var barang in Stock)
         {
-            foreach (var barang in kategori.Value)
-            {
-                Console.WriteLine($"{barang.Key}\t\t{barang.Value}");
-            }
+            string kategori = JenisProduk.ContainsKey(barang.Key) ? JenisProduk[barang.Key] : "Unknown";
+            Console.WriteLine($"{barang.Key}\t\t{barang.Value}\t\t{kategori}");
         }
     }
 
@@ -98,30 +84,21 @@ public class UMKM
 
     private void UpdateStok(string action)
     {
-        Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
-        string kategoriString = Console.ReadLine();
-
         Console.WriteLine("Masukkan nama barang:");
         string namaBarang = Console.ReadLine();
 
-        Console.WriteLine($"Masukkan jumlah stok yang ingin {action.ToLower()}kan ke barang:");
+        Console.WriteLine($"Masukkan jumlah stok yang ingin {action.ToLower()}kan:");
         int stokBarang = Convert.ToInt32(Console.ReadLine());
 
-        if (!Enum.TryParse(kategoriString, out KategoriBarang kategori))
-        {
-            Console.WriteLine("Kategori barang tidak valid.");
-            return;
-        }
-
-        if (InsertBarang.ContainsKey(kategori) && InsertBarang[kategori].ContainsKey(namaBarang))
+        if (Stock.ContainsKey(namaBarang))
         {
             if (action == "Tambah Stok")
             {
-                InsertBarang[kategori][namaBarang] += stokBarang;
+                Stock[namaBarang] += stokBarang;
             }
             else if (action == "Kurang Stok")
             {
-                InsertBarang[kategori][namaBarang] = Math.Max(0, InsertBarang[kategori][namaBarang] - stokBarang);
+                Stock[namaBarang] = Math.Max(0, Stock[namaBarang] - stokBarang);
             }
 
             LogAction(action, namaBarang, stokBarang);
@@ -129,7 +106,7 @@ public class UMKM
         }
         else
         {
-            Console.WriteLine($"Barang '{namaBarang}' tidak ditemukan dalam kategori '{kategoriString}'.");
+            Console.WriteLine($"Barang '{namaBarang}' tidak ditemukan.");
         }
     }
 
@@ -137,12 +114,9 @@ public class UMKM
     {
         Console.WriteLine("Auto updating stock...");
 
-        foreach (var kategori in InsertBarang.Keys)
+        foreach (var barang in Stock.Keys)
         {
-            foreach (var barang in InsertBarang[kategori].Keys)
-            {
-                InsertBarang[kategori][barang] += 10; // Example logic: add 10 to each item's stock
-            }
+            Stock[barang] += 10; 
         }
 
         SaveData();
@@ -155,25 +129,90 @@ public class UMKM
         File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
     }
 
-    private void SaveData()
+    public void SaveData()
     {
-        string json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText(logFilePath, json);
-    }
+        List<UMKM> umkmList = new List<UMKM>();
 
-    public void ReadJson()
-    {
+        if (File.Exists(logFilePath))
+        {
+            try
+            {
+                string json = File.ReadAllText(logFilePath);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    umkmList = JsonSerializer.Deserialize<List<UMKM>>(json);
+                }
+            }
+            catch (JsonException jsonEx)
+            {
+                Console.WriteLine($"JSON format error: {jsonEx.Message}");
+                
+                umkmList = new List<UMKM>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading JSON file: {ex.Message}");
+                
+                umkmList = new List<UMKM>();
+            }
+        }
+
+        var existingUmkm = umkmList.Find(umkm => umkm.Username == this.Username);
+        if (existingUmkm != null)
+        {
+            existingUmkm.Stock = this.Stock;
+            existingUmkm.JenisProduk = this.JenisProduk;
+        }
+        else
+        {
+            umkmList.Add(this);
+        }
+
         try
         {
-            string json = File.ReadAllText(logFilePath);
-            Console.WriteLine(json);
+            string updatedJson = JsonSerializer.Serialize(umkmList, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(logFilePath, updatedJson);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error: {ex.Message}");
+            Console.WriteLine($"Error writing JSON file: {ex.Message}");
+        }
+    }
+
+    public static void ReadJson()
+    {
+        try
+        {
+            string[] lines = File.ReadAllLines("umkmconfig.json");
+            foreach (string line in lines)
+            {
+                try
+                {
+                    var umkm = JsonSerializer.Deserialize<UMKM>(line);
+                    Console.WriteLine($"Username: {umkm.Username}");
+                    Console.WriteLine($"Stock: {string.Join(", ", umkm.Stock)}");
+                    Console.WriteLine($"JenisProduk: {string.Join(", ", umkm.JenisProduk)}");
+                }
+                catch (JsonException)
+                {
+                    
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"");
         }
     }
 
 
 
+    public enum KategoriBarang
+    {
+        Makanan,
+        Minuman,
+        Misc
+    }
 }
+
+
