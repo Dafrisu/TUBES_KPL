@@ -42,10 +42,10 @@ namespace Tubes_KPL_Kelompok1
                 {
                     for (int i = 0; i < tit.Length; i++)
                     {
-                        if (tit[i].nama == nama)
+                        if (tit[i].Username == nama)
                         {
                             tit[i].GetBarang();
-                            tit[i].KurangStock();
+                            tit[i].KurangStok();
                             tit[i].GetBarang();
                         }
                         else if (i == tit.Length)
