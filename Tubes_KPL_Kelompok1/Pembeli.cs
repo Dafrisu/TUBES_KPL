@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Keranjang;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,17 @@ namespace Tubes_KPL_Kelompok1
 {
     public class Pembeli
     {
-        public string nama;
+        public String nama;
         public Pembeli(String nama) 
         {
             this.nama = nama;
         }
         public static Dictionary<String, int> keranjang = new Dictionary<String, int>();
 
+        KeranjangPembeli lib = new KeranjangPembeli();
+
         public void Printkeranjang()
         {
-
             foreach (KeyValuePair<string, int> barang in keranjang)
             {
                 Console.WriteLine(barang.Key + "\t\t" + barang.Value);
@@ -28,7 +30,6 @@ namespace Tubes_KPL_Kelompok1
 
         public void tambahBarang(UMKM umkm)
         {
-            Dictionary<String, int> data;
             Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
             string kategoriString = Console.ReadLine();
 
@@ -39,16 +40,29 @@ namespace Tubes_KPL_Kelompok1
             int qty = Convert.ToInt32(Console.ReadLine());
 
             UMKM.KategoriBarang kategori;
+            
             if (!Enum.TryParse(kategoriString, out kategori))
             {
                 Console.WriteLine("Kategori barang tidak valid.");
                 return;
             }
+            else
+            {
+                var stokkategori = umkm.InsertBarang[kategori];
+            }
 
             if(!keranjang.ContainsKey(namabarang))
             {
-                // Jika barang belum ada dalam keranjang, tambahkan ke keranjang
-                keranjang.Add(namabarang, qty);
+                int stok = umkm.InsertBarang[kategori][namabarang];
+                if(stok > qty)
+                {
+                    // Jika barang belum ada dalam keranjang, tambahkan ke keranjang
+                    keranjang.Add(namabarang, qty);
+                }
+                else
+                {
+                    Console.WriteLine("Stok Barang Tidak mencukupi");
+                }
                 
             }
             else
@@ -86,39 +100,41 @@ namespace Tubes_KPL_Kelompok1
             return search;
         }
 
-        public void check(UMKM[] tit, string nama)
+        public void EditKeranjang()
         {
             try
             {
-                if (searchKeranjang(tit))
-                {
-                    for (int i = 0; i < tit.Length; i++)
-                    {
+                Console.WriteLine("Keranjang sekarang: ");
+                Printkeranjang();
+                Console.WriteLine("Lakukan edit keranjang? (Ya/Tidak)");
+                String input = Console.ReadLine() ;
 
-                        if (tit != null)
-                        {
-                            if (tit[i].nama == nama)
-                            {
-                                tit[i].GetBarang();
-                                tit[i].KurangStock();
-                                tit[i].GetBarang();
-                            }
-                            else if (i == tit.Length)
-                            {
-                                throw new Exception("Toko ini tidak menjual " + nama);
-                            }
-                        }
-                        Console.WriteLine("Barang tidak ada");
-                    }
-                }
-                else
+                if (input == "Ya")
                 {
-                    Console.WriteLine("Barang tidak ada");
+                    Console.WriteLine("Masukkan nama barang: ");
+                    String nama_barang = Console.ReadLine();
+
+                    Console.WriteLine("Masukkan jumlah barang: ");
+                    int kurang = Convert.ToInt32(Console.ReadLine());
+
+                    lib.EditKeranjang(keranjang, nama_barang, kurang);
+                } 
+                else if (input == "Tidak")
+                {
+                    return;
+                } else
+                {
+                    throw new Exception("bang jawab 'Ya' atau 'Tidak'");
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Keranjang sekarang: ");
+                Printkeranjang();
             }
         }
     }

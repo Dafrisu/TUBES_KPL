@@ -1,33 +1,105 @@
-﻿namespace Keranjang
+﻿using System.Runtime.InteropServices.Marshalling;
+
+namespace Keranjang
 {
-    public class Keranjang()
+    public class KeranjangPembeli()
     {
-        public string namabarang { get; set; }
-        public double Price { get; set; }
-        public int qty { get; set; }
-        public string namaToko { get; set; }
-
-        public Dictionary<string, List<(string, int)>> keranjang = new Dictionary<string, List<(string, int)>>();
-        //Indomaret <Soda gembira, 10>
-        
-        public class Manage()
+        public bool SearchKeranjang(Dictionary<String, int> keranjang, String nama_barang)
         {
-            List<(string, int)> productList = new List<(string, int)>();
-            //SodaGembira, 10
-            public void AddProduct()
+            if (KeranjangIsNull(keranjang))
             {
-                Console.WriteLine("Masukan Nama Barang: ");
-                string namabarang = Console.ReadLine();
-
-                Console.WriteLine("Masukan jumlah pesanan Barang: ");
-                int qty = Convert.ToInt32(Console.ReadLine());
-
-                productList.Add((namabarang, qty));
-                foreach (var item in productList)
-                {
-                    Console.WriteLine(item);
-                }
+                return keranjang.ContainsKey(nama_barang);
+            }
+            else
+            {
+                return false;
             }
         }
+        public bool KeranjangIsNull(Dictionary<String, int> keranjang)
+        {
+            bool kosong = false;
+            if (keranjang != null)
+            {
+                kosong = true;
+                return kosong;
+            }
+            else
+            {
+                return kosong;
+            }
+        }
+        public void EditKeranjang(Dictionary<String, int> keranjang, String nama_barang, int Kurang)
+        {
+            try
+            {
+                if (KeranjangIsNull(keranjang) && SearchKeranjang(keranjang, nama_barang))
+                { 
+                    keranjang[nama_barang] = Kurang;
+                } 
+                else
+                {
+                    throw new Exception("Tidak ada" + nama_barang + "di keranjang");
+                }
+            } 
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        public void DeleteInKeranjang(Dictionary<String, int> keranjang, String nama_barang)
+        {
+            try 
+            {
+                if (KeranjangIsNull(keranjang) && SearchKeranjang(keranjang, nama_barang))
+                {
+                    keranjang.Remove(nama_barang);
+                }
+                else
+                {
+                    throw new Exception("Tidak ada" + nama_barang + "di keranjang");
+                }
+            } 
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        public void ClearKeranjang(Dictionary<String, int> keranjang)
+        {
+            try
+            {
+                if (KeranjangIsNull(keranjang))
+                {
+                    keranjang.Clear();
+                }
+                else
+                {
+                    throw new Exception("Keranjang kosong");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        /*public void AddKeranjang(Dictionary<String, int> keranjang, String nama_barang, int jumlah)
+        {
+            try
+            {
+                Console.WriteLine("Masukan Nama Barang: ");
+                String namabarang = Console.ReadLine();
+
+                Console.WriteLine("Masukan Jumlah Barang: ");
+                int qty = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                if (keranjang.ContainsKey(nama_barang))
+                {
+
+                }
+                Console.WriteLine(e.Message);
+            }
+        }*/
     }
 }

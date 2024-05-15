@@ -1,5 +1,4 @@
-
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using Tubes_KPL_Kelompok1;
@@ -17,8 +16,9 @@ class program
         stringCek = Console.ReadLine();
         bool umkmInstanceExists = false;
         UMKM[] arrUMKM = new UMKM[20];
-        Keranjang.Keranjang keranjang = new Keranjang.Keranjang();
-        Keranjang.Keranjang.Manage manage = new Keranjang.Keranjang.Manage();
+
+        KeranjangPembeli keranjang = new KeranjangPembeli();
+
         int indexUMKM = 0;
         int banyakUMKM = 0;
         string namaUMKM;
@@ -54,11 +54,11 @@ class program
                 }
                 else if (intCek == 4)
                 {
-                    manage.AddProduct();
+                    a.EditKeranjang();
                 }
                 else if (intCek == 5)
                 {
-                    a.check(arrUMKM,"dafa");
+                    
                 }
                 else if (intCek == 6)
                 {
@@ -156,7 +156,7 @@ class program
                 }
                 else if (intCek == 8)
                 {
-                    buyer.readjson();
+                    //buyer.readjson();
                 }
                 else if (intCek == 9)
                 {
