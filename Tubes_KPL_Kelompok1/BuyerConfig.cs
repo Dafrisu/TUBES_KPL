@@ -10,9 +10,10 @@ using System.Collections.Generic;
 
 namespace Tubes_KPL_Kelompok1
 {
+
     public class KeranjangConfig
     {
-        public Dictionary<string, Dictionary<string, int>> Keranjang { get; set; }
+            
     }
     public class LogEntry
     {
@@ -24,36 +25,45 @@ namespace Tubes_KPL_Kelompok1
 
     public class BuyerConfig
     {
+        public Dictionary<string, Dictionary<string, Dictionary<string, int>>> Pembeli { get; set; }
 
-        public void UpdateQuantity(string buyerName, string itemName, int newQuantity)
+        public static void UpdateQuantity(string buyerName, string umkmName, string itemName, int newQuantity)
         {
             string jsonFilePath = @"E:\TELKOM UNIVERSITY\TUGAS KULIAH\KONSTRUKSI PERANGKAT LUNAK (KPL)\TUBES\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
 
             // Baca JSON dari file
             string json = File.ReadAllText(jsonFilePath);
 
-            KeranjangConfig keranjangConfig = JsonSerializer.Deserialize<KeranjangConfig>(json);
+            BuyerConfig config = JsonSerializer.Deserialize<BuyerConfig>(json);
 
             // Periksa apakah nama pembeli ada dalam konfigurasi
-            if (keranjangConfig != null && keranjangConfig.Keranjang.ContainsKey(buyerName))
+            if (config != null && config.Pembeli != null && config.Pembeli.ContainsKey(buyerName))
             {
-                // Periksa apakah nama barang ada dalam keranjang pembeli
-                if (keranjangConfig.Keranjang[buyerName].ContainsKey(itemName))
+                // Periksa apakah nama UMKM ada dalam keranjang pembeli
+                if (config.Pembeli[buyerName].ContainsKey(umkmName))
                 {
-                    // Update kuantitas barang
-                    keranjangConfig.Keranjang[buyerName][itemName] = newQuantity;
+                    // Periksa apakah nama barang ada dalam UMKM
+                    if (config.Pembeli[buyerName][umkmName].ContainsKey(itemName))
+                    {
+                        // Update kuantitas barang
+                        config.Pembeli[buyerName][umkmName][itemName] = newQuantity;
 
-                    // Serialisasi kembali objek menjadi JSON dengan format yang sama seperti aslinya
-                    string updatedJson = JsonSerializer.Serialize(keranjangConfig, new JsonSerializerOptions { WriteIndented = true });
+                        // Serialisasi kembali objek menjadi JSON dengan format yang sama seperti aslinya
+                        string updatedJson = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
 
-                    // Tulis JSON yang telah diperbarui kembali ke file
-                    File.WriteAllText(jsonFilePath, updatedJson);
+                        // Tulis JSON yang telah diperbarui kembali ke file
+                        File.WriteAllText(jsonFilePath, updatedJson);
 
-                    Console.WriteLine($"Kuantitas barang '{itemName}' untuk pembeli '{buyerName}' berhasil diubah menjadi {newQuantity}.");
+                        Console.WriteLine($"Kuantitas barang '{itemName}' untuk pembeli '{buyerName}' di UMKM '{umkmName}' berhasil diubah menjadi {newQuantity}.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error: Barang '{itemName}' tidak ditemukan dalam UMKM '{umkmName}' untuk pembeli '{buyerName}'.");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine($"Error: Barang '{itemName}' tidak ditemukan dalam keranjang pembeli '{buyerName}'.");
+                    Console.WriteLine($"Error: UMKM '{umkmName}' tidak ditemukan dalam keranjang pembeli '{buyerName}'.");
                 }
             }
             else
@@ -61,19 +71,24 @@ namespace Tubes_KPL_Kelompok1
                 Console.WriteLine($"Error: Pembeli '{buyerName}' tidak ditemukan dalam konfigurasi.");
             }
         }
-        public void readjson()
+        public static void ReadJson()
         {
-            String json = File.ReadAllText(@"E:\TELKOM UNIVERSITY\TUGAS KULIAH\KONSTRUKSI PERANGKAT LUNAK (KPL)\TUBES\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json");
+            string jsonFilePath = @"E:\TELKOM UNIVERSITY\TUGAS KULIAH\KONSTRUKSI PERANGKAT LUNAK (KPL)\TUBES\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+            string json = File.ReadAllText(jsonFilePath);
             Console.WriteLine(json);
-            KeranjangConfig configkeranjang = JsonSerializer.Deserialize<KeranjangConfig>(json);
-            if (configkeranjang != null && configkeranjang.Keranjang != null)
+            BuyerConfig config = JsonSerializer.Deserialize<BuyerConfig>(json);
+            if (config != null && config.Pembeli != null)
             {
-                foreach (var pembeli in configkeranjang.Keranjang)
+                foreach (var pembeli in config.Pembeli)
                 {
                     Console.WriteLine($"Pembeli: {pembeli.Key}");
-                    foreach (var barang in pembeli.Value)
+                    foreach (var umkm in pembeli.Value)
                     {
-                        Console.WriteLine($"   Barang: {barang.Key}, Qty: {barang.Value}");
+                        Console.WriteLine($"UMKM: {umkm.Key}");
+                        foreach (var barang in umkm.Value)
+                        {
+                            Console.WriteLine($"   Barang: {barang.Key}, Qty: {barang.Value}");
+                        }
                     }
                 }
             }

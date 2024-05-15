@@ -28,6 +28,7 @@ public class UMKM
 
     public void TambahBarang()
     {
+        
         Console.WriteLine("Masukkan nama barang:");
         string namaBarang = Console.ReadLine();
 
