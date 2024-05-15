@@ -41,25 +41,27 @@ public class UMKM
             if (!Enum.TryParse(kategoriString, out kategori))
             {
                throw new Exception("Kategori barang tidak valid.");
-               return;
+                return;
             }
-            // Periksa apakah kategori barang sudah ada di dictionary
+            //Periksa apakah kategori barang sudah ada di dictionary
             if (!InsertBarang.ContainsKey(kategori))
             {
-                // Jika belum, tambahkan kategori baru
+                //Jika belum, tambahkan kategori baru
                 InsertBarang[kategori] = new Dictionary<string, int>();
             }
 
-            // Tambahkan barang baru
+            //Tambahkan barang baru
             InsertBarang[kategori][namaBarang] = stokBarang;
+            
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
+            
         }
     }
 
-    public void GetBarang()
+    public String GetBarang()
     {        
         try
         {
@@ -70,6 +72,7 @@ public class UMKM
             if(InsertBarang.Count == 0)
             {
                 throw new Exception("UMKM belum memiliki barang");
+                
             }
             else
             {
@@ -83,11 +86,13 @@ public class UMKM
                         }
                     }
                 }
+                return "berhasil";
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
+            return "Gagal";
         }
         
     }

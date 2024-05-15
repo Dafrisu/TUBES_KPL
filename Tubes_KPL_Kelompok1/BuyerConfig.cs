@@ -164,14 +164,15 @@ namespace Tubes_KPL_Kelompok1
                     // Serialisasi kembali objek menjadi JSON dengan format yang sama seperti aslinya
                     string updatedJson = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
 
-                    // Tulis JSON yang telah diperbarui kembali ke file
-                    File.WriteAllText(jsonFilePath, updatedJson);
 
+                        // Tulis JSON yang telah diperbarui kembali ke file
+                        File.WriteAllText(jsonFilePath, updatedJson);
                     Console.WriteLine($"Kuantitas barang '{itemName}' untuk pembeli '{buyerName}' di UMKM '{umkmName}' berhasil diubah menjadi {newQuantity}.");
                 }
                 else
                 {
                     Console.WriteLine($"Error: Barang '{itemName}' tidak ditemukan dalam UMKM '{umkmName}' untuk pembeli '{buyerName}'.");
+
                 }
             }
             else
