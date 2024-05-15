@@ -21,10 +21,13 @@ namespace Tubes_KPL_Kelompok1
 
         public void Printkeranjang()
         {
-
             foreach (KeyValuePair<string, int> barang in keranjang)
             {
                 Console.WriteLine(barang.Key + "\t\t" + barang.Value);
+            }
+            if (keranjang.Count == 0)
+            {
+                Console.WriteLine("Keranjang Masih Kosong");
             }
         }
 
@@ -36,6 +39,11 @@ namespace Tubes_KPL_Kelompok1
             {
                 try
                 {
+                    if (umkm == null)
+                    {
+                        cek = true;
+                        throw new Exception("UMKM Tidak ada");
+                    }
                     Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
                     string kategoriString = Console.ReadLine();
 
@@ -46,7 +54,7 @@ namespace Tubes_KPL_Kelompok1
                     }
                     Console.WriteLine("Masukan Nama Barang: ");
                     String namabarang = Console.ReadLine();
-
+                    
                     if (!umkm.InsertBarang[kategori].ContainsKey(namabarang))
                     {
                         throw new Exception("Barang Tidak ada");
