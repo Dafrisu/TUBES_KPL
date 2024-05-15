@@ -33,9 +33,9 @@ class program
         stringCek = Console.ReadLine();
         
 
-        while (intCek != 11)
+        while (intCek != 12)
         {
-            if (stringCek.Equals("Pembeli"))
+            if (stringCek.Equals("Pembeli"))        
             {
                 cek.Pembeli();
                 if (!pembeliInstanceExists) // Memeriksa apakah instance UMKM sudah ada
@@ -97,8 +97,7 @@ class program
                     Console.WriteLine("Dengan nama :" + arrUMKM[indexUMKM].nama);
                     umkmInstanceExists = true;
                 }
-
-
+                Console.WriteLine("Anda login di akun UMKM dengan id :" + indexUMKM);
                 Console.WriteLine("Fitur Untuk UMKM ");
                 Console.WriteLine("1. Tambah Barang: ");
                 Console.WriteLine("2. Print Barang UMKM");
@@ -107,10 +106,11 @@ class program
                 Console.WriteLine("5. Tambah Akun UMKM");
                 Console.WriteLine("6. Ganti login akun UMKM (Menggunakan Index)");
                 Console.WriteLine("7. Tampilkan Index dan nama sesuai dengan Index");
-                Console.WriteLine("8. Lihat Log");
-                Console.WriteLine("9. UMKM dan Jumlah Barang");
-                Console.WriteLine("10. Ganti Tipe User");
-                Console.WriteLine("11. Keluar dari program");
+                Console.WriteLine("8. Hapus Barang");
+                Console.WriteLine("9. Nama UMKM dan Jumlah Barang");
+                Console.WriteLine("10. Lihat Log");
+                Console.WriteLine("11. Ganti Tipe User");
+                Console.WriteLine("12. Keluar dari program");
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
                 {
@@ -173,17 +173,27 @@ class program
                     loopCounter = 0;
                 }
                 else if (intCek == 8)
-                {
-                    BuyerConfig.ReadJson();
+                }
+                    arrUMKM[indexUMKM].HapusBarang();
                 }
                 else if (intCek == 9)
                 {
                     arrUMKM[indexUMKM].jumlahproduk(arrUMKM);
+                    Console.WriteLine("");
                 }
                 else if (intCek == 10)
                 {
+                    BuyerConfig.ReadJson();  
+                    
+                }
+                else if(intCek == 11)
+                {
                     Console.WriteLine("Masukkan input berupa Pembeli atau UMKM");
                     stringCek = Console.ReadLine();
+                }
+                else if(intCek == 12)
+                {
+                    break;
                 }
             }
         }
