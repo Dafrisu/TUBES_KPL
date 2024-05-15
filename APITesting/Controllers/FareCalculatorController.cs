@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace APITesting.Controllers
 {
@@ -55,7 +55,17 @@ namespace APITesting.Controllers
         [HttpGet("all")]
         public IActionResult GetFareCalculations()
         {
-            return Ok(_fareCalculations);
+            var fareCalculationResults = _fareCalculations.Select((calculation, index) => new
+            {
+                Id = index + 1,
+                Dari = calculation.Dari,
+                Ke = calculation.Ke,
+                JarakDalamKM = calculation.JarakDalamKM,
+                HargaPerKM = calculation.HargaPerKM.ToString("N0", CultureInfo.InvariantCulture) + " IDR",
+                TotalHarga = calculation.TotalHarga.ToString("N0", CultureInfo.InvariantCulture) + " IDR"
+            });
+
+            return Ok(fareCalculationResults);
         }
     }
 }
