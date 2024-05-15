@@ -257,7 +257,8 @@ class programe
                     }
                     else if (intCek == 10)
                     {
-                        BuyerConfig.ReadJson();
+
+                        UMKM.ReadJson();
 
                     }
                     else if (intCek == 11)
@@ -279,4 +280,5 @@ class programe
             }
         }
     }
+    
 }
