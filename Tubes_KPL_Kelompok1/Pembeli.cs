@@ -5,75 +5,119 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Tubes_KPL_Kelompok1.UMKM;
+
 
 namespace Tubes_KPL_Kelompok1
 {
     public class Pembeli
     {
         public String nama;
+        KeranjangPembeli lib = new KeranjangPembeli();
         public Pembeli(String nama) 
         {
             this.nama = nama;
         }
-        public static Dictionary<String, int> keranjang = new Dictionary<String, int>();
+        public Dictionary<String, int> keranjang = new Dictionary<String, int>();
 
-        KeranjangPembeli lib = new KeranjangPembeli();
-
-        public void Printkeranjang()
+        public String Printkeranjang()
         {
-            foreach (KeyValuePair<string, int> barang in keranjang)
+
+            if (keranjang.Count == 0)
             {
-                Console.WriteLine(barang.Key + "\t\t" + barang.Value);
+                Console.WriteLine("Keranjang Masih Kosong");
+                return "gagal";
+            }
+            else
+            {
+                foreach (KeyValuePair<string, int> barang in keranjang)
+                {
+                    Console.WriteLine(barang.Key + "\t\t" + barang.Value);
+                }
+                return "berhasil";
             }
         }
 
         public void tambahBarang(UMKM umkm)
         {
-            Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
-            string kategoriString = Console.ReadLine();
-
-            Console.WriteLine("Masukan Nama Barang: ");
-            String namabarang = Console.ReadLine();
-
-            Console.WriteLine("Masukan Jumlah Barang: ");
-            int qty = Convert.ToInt32(Console.ReadLine());
-
+            Boolean cek = false;
             UMKM.KategoriBarang kategori;
-            
-            if (!Enum.TryParse(kategoriString, out kategori))
+            do
             {
-                Console.WriteLine("Kategori barang tidak valid.");
-                return;
-            }
-            else
-            {
-                var stokkategori = umkm.InsertBarang[kategori];
-            }
+                try
+                {
+                    if (umkm == null)
+                    {
+                        cek = true;
+                        throw new Exception("UMKM Tidak ada");
+                    }
+                    Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
+                    string kategoriString = Console.ReadLine();
 
-            if(!keranjang.ContainsKey(namabarang))
-            {
-                int stok = umkm.InsertBarang[kategori][namabarang];
-                if(stok > qty)
-                {
-                    // Jika barang belum ada dalam keranjang, tambahkan ke keranjang
-                    keranjang.Add(namabarang, qty);
+                    if (!Enum.TryParse(kategoriString, out kategori))
+                    {
+                        Console.WriteLine("Kategori barang tidak valid.");
+                        return;
+                    }
+                    Console.WriteLine("Masukan Nama Barang: ");
+                    String namabarang = Console.ReadLine();
+                    
+                    if (!umkm.InsertBarang[kategori].ContainsKey(namabarang))
+                    {
+                        throw new Exception("Barang Tidak ada");
+                        cek = true;
+                        return;
+                    }
+                    Console.WriteLine("Masukan Jumlah Barang: ");
+                    int qty = Convert.ToInt32(Console.ReadLine());
+                    if (!keranjang.ContainsKey(namabarang))
+                    {
+                        int stok = umkm.InsertBarang[kategori][namabarang];
+                        if (stok > qty)
+                        {
+                            // Jika barang belum ada dalam keranjang, tambahkan ke keranjang
+                            keranjang.Add(namabarang, qty);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Stok Barang Tidak mencukupi");
+                        }
+
+                    }
+                    else if (keranjang.ContainsKey(namabarang))
+                    {
+                        // Jika barang tidak tersedia, tampilkan pesan kesalahan
+                        //Console.WriteLine($"Barang {namabarang} tidak tersedia dalam kategori {kategori}");
+                        int stok = umkm.InsertBarang[kategori][namabarang];
+                        if (stok > qty)
+                        {
+                            // Jika barang sudah ada dalam keranjang, tambahkan jumlah QTY ke keranjang
+                            keranjang[namabarang] = keranjang[namabarang] + qty;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Stok Barang Tidak mencukupi");
+                        }
+
+                    }
+                    //tambahBarangJSON(kategoriString,namaBarang,qty);
+                    cek = true;
                 }
-                else
+                catch (NullReferenceException e)
                 {
-                    Console.WriteLine("Stok Barang Tidak mencukupi");
+                    Console.WriteLine("Inputan Tidak ada Di Data UMKM");
+                    cek = true;
                 }
-                
-            }
-            else
-            {
-                // Jika barang tidak tersedia, tampilkan pesan kesalahan
-                Console.WriteLine($"Barang {namabarang} tidak tersedia dalam kategori {kategori}");
-            }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            } while (!cek);
+            
         }
 
         public bool searchKeranjang(UMKM[] toko)
         {
+            
             Console.WriteLine("Masukan nama barang: ");
             String input = Console.ReadLine();
             bool search = false;
