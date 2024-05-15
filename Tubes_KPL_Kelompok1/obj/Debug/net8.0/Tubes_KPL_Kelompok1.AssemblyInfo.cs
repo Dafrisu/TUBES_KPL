@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Tubes_KPL_Kelompok1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c85d9d1e1087cad83cb8e6d57ffd1ac8a9aff7b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5db041a76676ff3439f9cf31e597061f719b1405")]
 [assembly: System.Reflection.AssemblyProductAttribute("Tubes_KPL_Kelompok1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Tubes_KPL_Kelompok1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
