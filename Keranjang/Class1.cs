@@ -4,9 +4,22 @@ namespace Keranjang
 {
     public class KeranjangPembeli()
     {
+        public bool KeranjangIsNull(Dictionary<String, int> keranjang)
+        {
+            bool kosong = true;
+            if (keranjang != null)
+            {
+                kosong = false;
+                return kosong;
+            }
+            else
+            {
+                return kosong;
+            }
+        }
         public bool SearchKeranjang(Dictionary<String, int> keranjang, String nama_barang)
         {
-            if (KeranjangIsNull(keranjang))
+            if (KeranjangIsNull(keranjang) == false)
             {
                 return keranjang.ContainsKey(nama_barang);
             }
@@ -15,24 +28,11 @@ namespace Keranjang
                 return false;
             }
         }
-        public bool KeranjangIsNull(Dictionary<String, int> keranjang)
-        {
-            bool kosong = false;
-            if (keranjang != null)
-            {
-                kosong = true;
-                return kosong;
-            }
-            else
-            {
-                return kosong;
-            }
-        }
         public void EditKeranjang(Dictionary<String, int> keranjang, String nama_barang, int Kurang)
         {
             try
             {
-                if (KeranjangIsNull(keranjang) && SearchKeranjang(keranjang, nama_barang))
+                if (KeranjangIsNull(keranjang) == false && SearchKeranjang(keranjang, nama_barang))
                 { 
                     keranjang[nama_barang] = Kurang;
                 } 
@@ -50,7 +50,7 @@ namespace Keranjang
         {
             try 
             {
-                if (KeranjangIsNull(keranjang) && SearchKeranjang(keranjang, nama_barang))
+                if (KeranjangIsNull(keranjang) == false && SearchKeranjang(keranjang, nama_barang))
                 {
                     keranjang.Remove(nama_barang);
                 }
@@ -68,7 +68,7 @@ namespace Keranjang
         {
             try
             {
-                if (KeranjangIsNull(keranjang))
+                if (KeranjangIsNull(keranjang) == false)
                 {
                     keranjang.Clear();
                 }
