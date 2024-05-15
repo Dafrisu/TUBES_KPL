@@ -1,5 +1,5 @@
 
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using Tubes_KPL_Kelompok1;
@@ -96,10 +96,8 @@ class program
                     Console.WriteLine("Dengan nama :" + arrUMKM[indexUMKM].nama);
                     umkmInstanceExists = true;
                 }
-<<<<<<< HEAD
-=======
+
                 Console.WriteLine("Anda login di akun UMKM dengan id :" + indexUMKM);
->>>>>>> 5a1e5855de2914e4be108da2755794fc97b46534
                 Console.WriteLine("Fitur Untuk UMKM ");
                 Console.WriteLine("1. Tambah Barang: ");
                 Console.WriteLine("2. Print Barang UMKM");
