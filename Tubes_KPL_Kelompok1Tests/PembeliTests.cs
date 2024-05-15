@@ -67,7 +67,6 @@ namespace Tubes_KPL_Kelompok1.Tests
     [TestClass()]
     public class UMKMUnitTest
     {
-        [TestMethod()]
         public void TestSaveData()
         {
             Console.WriteLine("Starting TestSaveData...");
@@ -93,7 +92,7 @@ namespace Tubes_KPL_Kelompok1.Tests
 
             Console.WriteLine("TestSaveData result: " + (success ? "Passed" : "Failed"));
         }
-        [TestMethod()]
+
         public void TestReadJson()
         {
             Console.WriteLine("Starting TestReadJson...");
@@ -108,11 +107,13 @@ namespace Tubes_KPL_Kelompok1.Tests
                 Console.WriteLine("TestReadJson result: Failed. Error: " + ex.Message);
             }
         }
+
         public void RunTests()
         {
             TestSaveData();
             TestReadJson();
         }
+
         public void Main(string[] args)
         {
             RunTests();
