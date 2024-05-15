@@ -93,6 +93,7 @@ namespace Tubes_KPL_Kelompok1
                         }
 
                     }
+                    //tambahBarangJSON(kategoriString,namaBarang,qty);
                     cek = true;
                 }
                 catch (NullReferenceException e)
@@ -105,7 +106,6 @@ namespace Tubes_KPL_Kelompok1
                     Console.WriteLine(e.Message);
                 }
             } while (!cek);
-            
             
         }
         public void check(UMKM[] tit, string nama)
