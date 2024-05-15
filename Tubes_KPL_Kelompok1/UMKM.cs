@@ -7,11 +7,19 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text.Json;
 using System.Security.Cryptography.X509Certificates;
+using System.Collections;
+using System.Timers;
 
 namespace Tubes_KPL_Kelompok1;
 public class UMKM
 {
-    public string nama;
+    public string nama { get; set; }
+    public Dictionary<string, int> Stock { get; set; } = new Dictionary<string, int>();
+    public Dictionary<string, string> JenisProduk { get; set; } = new Dictionary<string, string>();
+
+    private const string logFileName = "umkmconfig.json";
+    private readonly string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), logFileName);
+    private readonly System.Timers.Timer autoUpdateTimer;
     public enum KategoriBarang
     {
         Makanan,
@@ -24,6 +32,9 @@ public class UMKM
     public UMKM(string nama)
     {
         this.nama = nama;
+        autoUpdateTimer = new System.Timers.Timer(3600000);
+        autoUpdateTimer.Elapsed += AutoUpdateStock;
+        autoUpdateTimer.Start();
     }
 
     public void TambahBarang()
@@ -175,22 +186,145 @@ public class UMKM
         }
 
     }
-
-    public void ReadLogs()
+    private void UpdateStok(string action)
     {
-        string logFilePath = @"E:\TELKOM UNIVERSITY\TUGAS KULIAH\KONSTRUKSI PERANGKAT LUNAK (KPL)\TUBES\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
-        if (File.Exists(logFilePath))
+        Console.WriteLine("Masukkan nama barang:");
+        string namaBarang = Console.ReadLine();
+
+        Console.WriteLine($"Masukkan jumlah stok yang ingin {action.ToLower()}kan:");
+        int stokBarang = Convert.ToInt32(Console.ReadLine());
+
+        if (Stock.ContainsKey(namaBarang))
         {
-            string logJson = File.ReadAllText(logFilePath);
-            List<LogEntry> logs = JsonSerializer.Deserialize<List<LogEntry>>(logJson);
-            foreach (var log in logs)
+            if (action == "Tambah Stok")
             {
-                Console.WriteLine($"{log.Timestamp}: {log.BuyerName} updated {log.ItemName} to {log.Quantity}");
+                Stock[namaBarang] += stokBarang;
             }
+            else if (action == "Kurang Stok")
+            {
+                Stock[namaBarang] = Math.Max(0, Stock[namaBarang] - stokBarang);
+            }
+
+            LogAction(action, namaBarang, stokBarang);
+            SaveData();
         }
         else
         {
-            Console.WriteLine("No log entries found.");
+            Console.WriteLine($"Barang '{namaBarang}' tidak ditemukan.");
+        }
+    }
+    private void AutoUpdateStock(object source, ElapsedEventArgs e)
+    {
+        Console.WriteLine("Auto updating stock...");
+
+        foreach (var barang in Stock.Keys)
+        {
+            Stock[barang] += 10;
+        }
+
+        SaveData();
+        Console.WriteLine("Stock updated automatically.");
+    }
+
+    private void LogAction(string action, string namaBarang, int stokBarang)
+    {
+        string logMessage = $"{DateTime.Now}: {action} - Nama Barang: {namaBarang}, Jumlah: {stokBarang}";
+        File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
+    }
+
+    public void SaveData()
+    {
+        List<UMKM> umkmList = new List<UMKM>();
+
+        if (File.Exists(logFilePath))
+        {
+            try
+            {
+                string json = File.ReadAllText(logFilePath);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    umkmList = JsonSerializer.Deserialize<List<UMKM>>(json);
+                }
+            }
+            catch (JsonException jsonEx)
+            {
+                Console.WriteLine($"JSON format error: {jsonEx.Message}");
+
+                umkmList = new List<UMKM>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading JSON file: {ex.Message}");
+
+                umkmList = new List<UMKM>();
+            }
+        }
+
+        var existingUmkm = umkmList.Find(umkm => umkm.nama == this.nama);
+        if (existingUmkm != null)
+        {
+            existingUmkm.Stock = this.Stock;
+            existingUmkm.JenisProduk = this.JenisProduk;
+        }
+        else
+        {
+            umkmList.Add(this);
+        }
+
+        try
+        {
+            string updatedJson = JsonSerializer.Serialize(umkmList, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(logFilePath, updatedJson);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error writing JSON file: {ex.Message}");
+        }
+    }
+
+    public static void WriteJson()
+    {
+        try
+        {
+            string[] lines = File.ReadAllLines("umkmconfig.json");
+            foreach (string line in lines)
+            {
+                try
+                {
+                    var umkm = JsonSerializer.Deserialize<UMKM>(line);
+                    Console.WriteLine($"Username: {umkm.nama}");
+                    Console.WriteLine($"Stock: {string.Join(", ", umkm.Stock)}");
+                    Console.WriteLine($"JenisProduk: {string.Join(", ", umkm.JenisProduk)}");
+                }
+                catch (JsonException)
+                {
+
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"");
+        }
+    }
+    public static void ReadJson()
+    {
+        try
+        {
+            string jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), "umkmconfig.json");
+            if (File.Exists(jsonFilePath))
+            {
+                string json = File.ReadAllText(jsonFilePath);
+                Console.WriteLine(json);
+            }
+            else
+            {
+                Console.WriteLine("File umkmconfig.json tidak ditemukan.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
     public void jumlahproduk(UMKM[] input)
