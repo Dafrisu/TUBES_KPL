@@ -46,7 +46,7 @@ namespace Tubes_KPL_Kelompok1
             }
 
             if(!keranjang.ContainsKey(namabarang))
-    {
+            {
                 // Jika barang belum ada dalam keranjang, tambahkan ke keranjang
                 keranjang.Add(namabarang, qty);
                 

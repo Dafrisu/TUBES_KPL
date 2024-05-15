@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Text.Json;
+using System.Security.Cryptography.X509Certificates;
+
 namespace Tubes_KPL_Kelompok1;
 public class UMKM
 {
@@ -95,6 +98,24 @@ public class UMKM
             hasilSekarang = InsertBarang[kategori][namaBarang];
             Console.WriteLine("Jumlah stok telah ditambah");
             Console.WriteLine("Jumlah Stok sekarang adalah :"+hasilSekarang);
+            LogEntry log = new LogEntry
+            {
+                BuyerName = this.nama,
+                ItemName = namaBarang,
+                Quantity = hasilSekarang,
+                Timestamp = DateTime.Now
+            };
+
+            string logFilePath = @"E:\TELKOM UNIVERSITY\TUGAS KULIAH\KONSTRUKSI PERANGKAT LUNAK (KPL)\TUBES\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+            List<LogEntry> logs = new List<LogEntry>();
+            if (File.Exists(logFilePath))
+            {
+                string logJson = File.ReadAllText(logFilePath);
+                logs = JsonSerializer.Deserialize<List<LogEntry>>(logJson);
+            }
+            logs.Add(log);
+            string updatedLogJson = JsonSerializer.Serialize(logs, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(logFilePath, updatedLogJson);
         }
     }
     public void KurangStock()
@@ -142,5 +163,48 @@ public class UMKM
                 }
             }
         }
+
     }
+
+    public void ReadLogs()
+    {
+        string logFilePath = @"E:\TELKOM UNIVERSITY\TUGAS KULIAH\KONSTRUKSI PERANGKAT LUNAK (KPL)\TUBES\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+        if (File.Exists(logFilePath))
+        {
+            string logJson = File.ReadAllText(logFilePath);
+            List<LogEntry> logs = JsonSerializer.Deserialize<List<LogEntry>>(logJson);
+            foreach (var log in logs)
+            {
+                Console.WriteLine($"{log.Timestamp}: {log.BuyerName} updated {log.ItemName} to {log.Quantity}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("No log entries found.");
+        }
+    }
+    public void jumlahproduk(UMKM[] input)
+    {
+        int hitung = 0;
+        int loop = 0;
+        foreach (KategoriBarang kategori in Enum.GetValues(typeof(KategoriBarang)))
+        {
+            if (InsertBarang.ContainsKey(kategori))
+            {
+                foreach (KeyValuePair<string, int> barang in InsertBarang[kategori])
+                {
+                    hitung++;
+                }
+            }
+        }
+        foreach (var m in input)
+        {
+            if (m != null)
+            {
+                Console.WriteLine("Nama UMKM: " + m.nama);
+                Console.WriteLine("Jumlah Barang: " + hitung);
+            }
+        }
+    }
+
 }
