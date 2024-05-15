@@ -28,6 +28,7 @@ public class UMKM
 
     public void TambahBarang()
     {
+        // Menambah barang baru ke UMKM
         Console.WriteLine("Masukkan nama barang:");
         string namaBarang = Console.ReadLine();
 
@@ -58,6 +59,8 @@ public class UMKM
 
     public void GetBarang()
     {
+        // Menampilkan barang yang dimiliki oleh UMKM
+        
         Console.WriteLine("Nama UMKM: " + this.nama);
         Console.WriteLine("Nama Barang\tStok barang");
 
@@ -74,6 +77,7 @@ public class UMKM
     }
 
     public void TambahStock() {
+        // Menambah jumlah stok barang
         Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
         string kategoriString = Console.ReadLine();
 
@@ -120,6 +124,8 @@ public class UMKM
     }
     public void KurangStock()
     {
+        // Mengurangi jumlah stok barang
+       
         Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
         string kategoriString = Console.ReadLine();
 
@@ -185,7 +191,44 @@ public class UMKM
     }
     public void jumlahproduk(UMKM[] input)
     {
-        int hitung = 0;
+        // Menghitung jumlah barang yang dimiliki oleh UMKM
+        try
+        {
+            if (input == null)
+            {
+                throw new Exception("UMKM tidak ditemukan");
+            }
+            int hitung = 0;
+            int loop = 0;
+            foreach (KategoriBarang kategori in Enum.GetValues(typeof(KategoriBarang)))
+            {
+                if (InsertBarang.ContainsKey(kategori))
+                {
+                    foreach (KeyValuePair<string, int> barang in InsertBarang[kategori])
+                    {
+                        hitung++;
+                    }
+                }
+            }
+            foreach (var m in input)
+            {
+                if (m != null)
+                {
+                    Console.WriteLine("Nama UMKM: " + m.nama);
+                    Console.WriteLine("Jumlah Barang: " + hitung);
+
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        finally
+        {
+            Console.WriteLine("Proses selesai");
+        }
+       /* int hitung = 0;
         int loop = 0;
         foreach (KategoriBarang kategori in Enum.GetValues(typeof(KategoriBarang)))
         {
@@ -203,8 +246,30 @@ public class UMKM
             {
                 Console.WriteLine("Nama UMKM: " + m.nama);
                 Console.WriteLine("Jumlah Barang: " + hitung);
+                
             }
+        }*/
+    }
+    public void HapusBarang()
+    {
+        Console.WriteLine("Masukkan nama barang:");
+        string namaBarang = Console.ReadLine();
+        Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
+        string kategoriString = Console.ReadLine();
+        KategoriBarang kategori;
+        if(!Enum.TryParse(kategoriString, true, out kategori))
+        {
+            Console.WriteLine("Kategori barang tidak valid.");
+            return;
+        }
+        if(InsertBarang.ContainsKey(kategori) && InsertBarang[kategori].ContainsKey(namaBarang))
+        {
+            InsertBarang[kategori].Remove(namaBarang);
+            Console.WriteLine("Barang berhasil dihapus.");
+        }
+        else
+        {
+            Console.WriteLine("Barang tidak ditemukan pada kategori tersebut.");
         }
     }
-
 }
