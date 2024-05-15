@@ -33,7 +33,7 @@ class programe
         stringCek = Console.ReadLine();
         
 
-        while (intCek != 12)
+        while (intCek != 15)
         {
             if (stringCek.Equals("Pembeli"))
             {
@@ -51,14 +51,14 @@ class programe
                 Console.WriteLine("1. Tambah barang yang dipesan ");
                 Console.WriteLine("2. Print Keranjang");
                 Console.WriteLine("3. Search barang");
-                Console.WriteLine("4. Tambah Barang yang dipesan V2");
-                Console.WriteLine("5. Mengurangi jumlah stok UMKM berdasarkan pesanan di keranjang(Order)");
-                Console.WriteLine("6. Tambah Akun Pembeli");
-                Console.WriteLine("7. Ganti login akun Pembeli (Menggunakan Index)");
-                Console.WriteLine("8. Tampilkan Index dan nama sesuai dengan Index");
-                Console.WriteLine("9. Edit Keranjang");
+                Console.WriteLine("4. Tambah Akun Pembeli");
+                Console.WriteLine("5. Ganti login akun Pembeli (Menggunakan Index)");
+                Console.WriteLine("6. Tampilkan Index dan nama sesuai dengan Index");
+                Console.WriteLine("7. Edit Keranjang");
+                Console.WriteLine("8. Masukan Data Ke keranjang Json");
+                Console.WriteLine("9. Tampilkan Json");
                 Console.WriteLine("10. Login sebagai User yang lain");
-                Console.WriteLine("12. Keluar dari program");
+                Console.WriteLine("15. Keluar dari Program");
                 try
                 {
                     intCek = Convert.ToInt32(Console.ReadLine());
@@ -75,16 +75,6 @@ class programe
                         arrPembeli[indexPembeli].searchKeranjang(arrUMKM);
                     }
                     else if (intCek == 4)
-                    {
-
-                    }
-                    else if (intCek == 5)
-                    {
-                        //Keranjang.check(arrUMKM,"Dafa");
-                        Console.WriteLine("");
-
-                    }
-                    else if (intCek == 6)
                     {
                         if (arrPembeli[indexPembeli] != null)
                         {
@@ -103,7 +93,7 @@ class programe
                             Console.WriteLine("Dengan nama :" + arrPembeli[indexPembeli].nama);
                         }
                     }
-                    else if (intCek == 7)
+                    else if (intCek == 5)
                     {
                         Console.WriteLine("Masukkan input berupa Int index yang tersedia");
                         while (loopCounter <= banyakPembeli)
@@ -119,7 +109,7 @@ class programe
                         Console.WriteLine("Dengan nama :" + arrPembeli[indexPembeli].nama);
 
                     }
-                    else if (intCek == 8)
+                    else if (intCek == 6)
                     {
                         Console.WriteLine("Berikut adalah array index id UMKM yang sudah disimpan");
                         while (loopCounter <= banyakPembeli)
@@ -129,16 +119,30 @@ class programe
                         }
                         loopCounter = 0;
                     }
-                    else if (intCek == 9)
+                    else if (intCek == 7)
                     {
                         arrPembeli[indexPembeli].EditKeranjang();
+                    }
+                    else if (intCek == 8)
+                    {
+
+                        Console.WriteLine("Masukan Nama Barang: ");
+                        String namabarang = Console.ReadLine();
+
+                        Console.WriteLine("Masukan Jumlah Barang: ");
+                        int qty = Convert.ToInt32(Console.ReadLine());
+                        BuyerConfig.tambahbarangjson("dafa", arrPembeli[indexPembeli].nama, namabarang, qty);
+                    }
+                    else if (intCek == 9)
+                    {
+                        BuyerConfig.printJson();
                     }
                     else if (intCek == 10)
                     {
                         Console.WriteLine("Masukkan input berupa Pembeli atau UMKM");
                         stringCek = Console.ReadLine();
                     }
-                    else if (intCek == 12) { 
+                    else if (intCek == 15) { 
                         
                     }
                     else{
@@ -149,6 +153,8 @@ class programe
                 {
                     Console.WriteLine(e.Message);
                 }
+                
+                
             }
             else if (stringCek.Equals("UMKM"))
             {
@@ -176,7 +182,7 @@ class programe
                 Console.WriteLine("9. Nama UMKM dan Jumlah Barang");
                 Console.WriteLine("10. Lihat Log");
                 Console.WriteLine("11. Ganti Tipe User");
-                Console.WriteLine("12. Keluar dari program");
+                Console.WriteLine("15. Keluar dari program");
                 try
                 {
                     intCek = Convert.ToInt32(Console.ReadLine());
@@ -259,7 +265,7 @@ class programe
                         Console.WriteLine("Masukkan input berupa Pembeli atau UMKM");
                         stringCek = Console.ReadLine();
                     }
-                    else if (intCek == 12)
+                    else if (intCek == 15)
                     {
 
                     }
