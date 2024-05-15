@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Text.Json;
 namespace Tubes_KPL_Kelompok1.Tests
 {
     [TestClass()]
@@ -61,6 +61,61 @@ namespace Tubes_KPL_Kelompok1.Tests
         {
             UMKM umkm = new UMKM("dafa");
             Assert.AreEqual("Gagal", umkm.GetBarang());
+        }
+    }
+
+    [TestClass()]
+    public class UMKMUnitTest
+    {
+        [TestMethod()]
+        public void TestSaveData()
+        {
+            Console.WriteLine("Starting TestSaveData...");
+
+            UMKM umkm = new UMKM("TestUMKM");
+            umkm.Stock.Add("TestProduct", 10);
+            umkm.JenisProduk.Add("TestProduct", "TestCategory");
+
+            umkm.SaveData();
+
+            // Check if the JSON file exists and contains the expected data
+            string json = File.ReadAllText("umkmconfig.json");
+            List<UMKM> umkmList = JsonSerializer.Deserialize<List<UMKM>>(json);
+            bool success = false;
+            foreach (var item in umkmList)
+            {
+                if (item.nama == "TestUMKM" && item.Stock.ContainsKey("TestProduct"))
+                {
+                    success = true;
+                    break;
+                }
+            }
+
+            Console.WriteLine("TestSaveData result: " + (success ? "Passed" : "Failed"));
+        }
+        [TestMethod()]
+        public void TestReadJson()
+        {
+            Console.WriteLine("Starting TestReadJson...");
+
+            try
+            {
+                string json = File.ReadAllText("umkmconfig.json");
+                Console.WriteLine("TestReadJson result: Passed");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("TestReadJson result: Failed. Error: " + ex.Message);
+            }
+        }
+        public void RunTests()
+        {
+            TestSaveData();
+            TestReadJson();
+        }
+        public void Main(string[] args)
+        {
+            RunTests();
         }
     }
 }
