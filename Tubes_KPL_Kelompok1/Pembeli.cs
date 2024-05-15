@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Tubes_KPL_Kelompok1.UMKM;
+
 
 
 
@@ -17,17 +17,23 @@ namespace Tubes_KPL_Kelompok1
         {
             this.nama = nama;
         }
-        public static Dictionary<String, int> keranjang = new Dictionary<String, int>();
+        public Dictionary<String, int> keranjang = new Dictionary<String, int>();
 
-        public void Printkeranjang()
+        public String Printkeranjang()
         {
-            foreach (KeyValuePair<string, int> barang in keranjang)
-            {
-                Console.WriteLine(barang.Key + "\t\t" + barang.Value);
-            }
+
             if (keranjang.Count == 0)
             {
                 Console.WriteLine("Keranjang Masih Kosong");
+                return "gagal";
+            }
+            else
+            {
+                foreach (KeyValuePair<string, int> barang in keranjang)
+                {
+                    Console.WriteLine(barang.Key + "\t\t" + barang.Value);
+                }
+                return "berhasil";
             }
         }
 
