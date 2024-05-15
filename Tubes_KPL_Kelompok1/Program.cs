@@ -26,7 +26,7 @@ class program
 
         while (intCek != 10)
         {
-            if (stringCek.Equals("Pembeli"))
+            if (stringCek.Equals("Pembeli"))        
             {
                 cek.Pembeli();
                 Pembeli a = new Pembeli("Haikal");
