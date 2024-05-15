@@ -54,7 +54,7 @@ class program
                 Console.WriteLine("4. Tambah Barang yang dipesan V2");
                 Console.WriteLine("5. Mengurangi jumlah stok UMKM berdasarkan pesanan di keranjang(Order)");
                 Console.WriteLine("6. Login sebagai User yang lain");
-                Console.WriteLine("11. Keluar dari program");
+                Console.WriteLine("12. Keluar dari program");
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
                 {
@@ -93,7 +93,6 @@ class program
                     Console.WriteLine("Masukkan nama UMKM");
                     namaUMKM = Console.ReadLine();
                     arrUMKM[indexUMKM] = new UMKM(namaUMKM);
-                    Console.WriteLine("Anda login di akun UMKM dengan id :" + indexUMKM);
                     Console.WriteLine("Dengan nama :" + arrUMKM[indexUMKM].nama);
                     umkmInstanceExists = true;
                 }
@@ -173,7 +172,7 @@ class program
                     loopCounter = 0;
                 }
                 else if (intCek == 8)
-                }
+                {
                     arrUMKM[indexUMKM].HapusBarang();
                 }
                 else if (intCek == 9)
@@ -190,10 +189,6 @@ class program
                 {
                     Console.WriteLine("Masukkan input berupa Pembeli atau UMKM");
                     stringCek = Console.ReadLine();
-                }
-                else if(intCek == 12)
-                {
-                    break;
                 }
             }
         }
