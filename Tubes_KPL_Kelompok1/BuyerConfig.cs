@@ -31,7 +31,23 @@ namespace Tubes_KPL_Kelompok1
         {
             public Dictionary<string, Dictionary<string, int>> UMKM { get; set; }
         }
-        
+        public static void tambahbarangjson(String umkmname, String buyername, String namabarang, int qty)
+        {
+            string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+
+            // Baca JSON dari file
+            string json = File.ReadAllText(jsonFilePath);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            BuyerConfig config = JsonSerializer.Deserialize<BuyerConfig>(json, options);
+            if (config.Pembeli.ContainsKey(buyername))
+            {
+
+            }
+        }
         public static void UpdateQuantity(string buyerName, string umkmName, string itemName, int newQuantity)
         {
             string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
