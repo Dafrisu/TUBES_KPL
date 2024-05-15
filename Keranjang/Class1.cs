@@ -82,24 +82,5 @@ namespace Keranjang
                 Console.WriteLine(e.Message);
             }
         }
-        /*public void AddKeranjang(Dictionary<String, int> keranjang, String nama_barang, int jumlah)
-        {
-            try
-            {
-                Console.WriteLine("Masukan Nama Barang: ");
-                String namabarang = Console.ReadLine();
-
-                Console.WriteLine("Masukan Jumlah Barang: ");
-                int qty = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (Exception e)
-            {
-                if (keranjang.ContainsKey(nama_barang))
-                {
-
-                }
-                Console.WriteLine(e.Message);
-            }
-        }*/
     }
 }
