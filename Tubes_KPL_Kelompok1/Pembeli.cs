@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Keranjang;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-
-
 namespace Tubes_KPL_Kelompok1
 {
     public class Pembeli
     {
-        public string nama;
+        public String nama;
+        KeranjangPembeli lib = new KeranjangPembeli();
         public Pembeli(String nama) 
         {
             this.nama = nama;
@@ -114,46 +114,26 @@ namespace Tubes_KPL_Kelompok1
             } while (!cek);
             
         }
-        public void check(UMKM[] tit, string nama)
-        {
-            try
-            {
-                for (int i = 0; i < tit.Length; i++)
-                {
-                    if (tit[i].nama == nama)
-                    {
-                        tit[i].GetBarang();
-                        tit[i].KurangStock();
-                        tit[i].GetBarang();
-                    }
-                    else if (i == tit.Length)
-                    {
-                        throw new Exception("bang gaada nama yang kek gitu");
-                    }
 
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        public void searchKeranjang()
+        public bool searchKeranjang(UMKM[] toko)
         {
             
             Console.WriteLine("Masukan nama barang: ");
             String input = Console.ReadLine();
             bool search = false;
-
             try
             {
-                foreach (var pair in keranjang)
+                for (int i = 0; i < toko.Length && search == false; i++) // Iterate through all UMKM entries
                 {
-                    if (keranjang.ContainsKey(input))
+                    foreach (var kategoriBarang in toko[i].InsertBarang.Keys) // Iterate through categories
                     {
-                        search = true;
+                        var barangDictionary = toko[i].InsertBarang[kategoriBarang]; // Get the dictionary for this category
 
+                        if (barangDictionary.ContainsKey(input)) // Check if item name exists in this category's dictionary
+                        {
+                            search = true;
+                            Console.WriteLine("Barang '" + input + "' ditemukan di UMKM " + toko[i].nama /* property to identify UMKM */); // Informative 
+                        }
                     }
                 }
             }
@@ -161,24 +141,44 @@ namespace Tubes_KPL_Kelompok1
             {
                 Console.WriteLine("Input Invalid");
             }
+            return search;
+        }
+
+        public void EditKeranjang()
+        {
+            try
+            {
+                Console.WriteLine("Keranjang sekarang: ");
+                Printkeranjang();
+                Console.WriteLine("Lakukan edit keranjang? (Ya/Tidak)");
+                String input = Console.ReadLine() ;
+
+                if (input == "Ya")
+                {
+                    Console.WriteLine("Masukkan nama barang: ");
+                    String nama_barang = Console.ReadLine();
+
+                    Console.WriteLine("Masukkan jumlah barang: ");
+                    int kurang = Convert.ToInt32(Console.ReadLine());
+
+                    lib.EditKeranjang(keranjang, nama_barang, kurang);
+                } 
+                else if (input == "Tidak")
+                {
+                    return;
+                } else
+                {
+                    throw new Exception("bang jawab 'Ya' atau 'Tidak'");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             finally
             {
-                if (search)
-                {
-                    Console.WriteLine("Barang ditemukan");
-                    foreach (KeyValuePair<string, int> barang in keranjang)
-                    {
-                        if (barang.Key == input)
-                        {
-                            Console.WriteLine(barang.Key + "\t\t" + barang.Value);
-                        }
-                    }
-                    //Console.WriteLine(input.Key + "\t\t" + input.Value);
-                }
-                else
-                {
-                    Console.WriteLine("Barang tidak ditemukan");
-                }
+                Console.WriteLine("Keranjang sekarang: ");
+                Printkeranjang();
             }
         }
     }
