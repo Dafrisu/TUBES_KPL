@@ -228,27 +228,6 @@ public class UMKM
         {
             Console.WriteLine("Proses selesai");
         }
-       /* int hitung = 0;
-        int loop = 0;
-        foreach (KategoriBarang kategori in Enum.GetValues(typeof(KategoriBarang)))
-        {
-            if (InsertBarang.ContainsKey(kategori))
-            {
-                foreach (KeyValuePair<string, int> barang in InsertBarang[kategori])
-                {
-                    hitung++;
-                }
-            }
-        }
-        foreach (var m in input)
-        {
-            if (m != null)
-            {
-                Console.WriteLine("Nama UMKM: " + m.nama);
-                Console.WriteLine("Jumlah Barang: " + hitung);
-                
-            }
-        }*/
     }
     public void HapusBarang()
     {
