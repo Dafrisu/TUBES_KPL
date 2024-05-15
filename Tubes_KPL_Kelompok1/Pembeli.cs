@@ -6,8 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using static Tubes_KPL_Kelompok1.UMKM;
 
-
-
 namespace Tubes_KPL_Kelompok1
 {
     public class Pembeli
@@ -60,20 +58,24 @@ namespace Tubes_KPL_Kelompok1
             }
         }
 
-        public void searchKeranjang()
+        public bool searchKeranjang(UMKM[] toko)
         {
             Console.WriteLine("Masukan nama barang: ");
             String input = Console.ReadLine();
             bool search = false;
-
             try
             {
-                foreach (var pair in keranjang)
+                for (int i = 0; i < toko.Length && search == false; i++) // Iterate through all UMKM entries
                 {
-                    if (keranjang.ContainsKey(input))
+                    foreach (var kategoriBarang in toko[i].InsertBarang.Keys) // Iterate through categories
                     {
-                        search = true;
+                        var barangDictionary = toko[i].InsertBarang[kategoriBarang]; // Get the dictionary for this category
 
+                        if (barangDictionary.ContainsKey(input)) // Check if item name exists in this category's dictionary
+                        {
+                            search = true;
+                            Console.WriteLine("Barang '" + input + "' ditemukan di UMKM " + toko[i].nama /* property to identify UMKM */); // Informative 
+                        }
                     }
                 }
             }
@@ -81,24 +83,42 @@ namespace Tubes_KPL_Kelompok1
             {
                 Console.WriteLine("Input Invalid");
             }
-            finally
+            return search;
+        }
+
+        public void check(UMKM[] tit, string nama)
+        {
+            try
             {
-                if (search)
+                if (searchKeranjang(tit))
                 {
-                    Console.WriteLine("Barang ditemukan");
-                    foreach (KeyValuePair<string, int> barang in keranjang)
+                    for (int i = 0; i < tit.Length; i++)
                     {
-                        if (barang.Key == input)
+
+                        if (tit != null)
                         {
-                            Console.WriteLine(barang.Key + "\t\t" + barang.Value);
+                            if (tit[i].nama == nama)
+                            {
+                                tit[i].GetBarang();
+                                tit[i].KurangStock();
+                                tit[i].GetBarang();
+                            }
+                            else if (i == tit.Length)
+                            {
+                                throw new Exception("Toko ini tidak menjual " + nama);
+                            }
                         }
+                        Console.WriteLine("Barang tidak ada");
                     }
-                    //Console.WriteLine(input.Key + "\t\t" + input.Value);
                 }
                 else
                 {
-                    Console.WriteLine("Barang tidak ditemukan");
+                    Console.WriteLine("Barang tidak ada");
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
     }

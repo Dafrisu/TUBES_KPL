@@ -1,6 +1,4 @@
-﻿using Tubes_KPL_Kelompok1;
-using static Tubes_KPL_Kelompok1.UMKM;
-namespace Keranjang
+﻿namespace Keranjang
 {
     public class Keranjang()
     {
@@ -9,32 +7,9 @@ namespace Keranjang
         public int qty { get; set; }
         public string namaToko { get; set; }
 
-
         public Dictionary<string, List<(string, int)>> keranjang = new Dictionary<string, List<(string, int)>>();
         //Indomaret <Soda gembira, 10>
-        public void check(UMKM[] tit, string nama)
-        {
-            try
-            {
-                for (int i = 0; i < tit.Length; i++)
-                {
-                    if (tit[i].nama == nama)
-                    {
-                        tit[i].GetBarang();
-                        tit[i].KurangStock();
-                        tit[i].GetBarang();
-                    }
-                    else if (i == tit.Length)
-                    {
-                        throw new Exception("bang gaada nama yang kek gitu");
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
+        
         public class Manage()
         {
             List<(string, int)> productList = new List<(string, int)>();

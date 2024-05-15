@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using Tubes_KPL_Kelompok1;
-using static Tubes_KPL_Kelompok1.Keranjang;
+using Keranjang;
 using static Tubes_KPL_Kelompok1.UMKM;
 using static Tubes_KPL_Kelompok1.IdentifyUser;
 
@@ -17,8 +17,8 @@ class program
         stringCek = Console.ReadLine();
         bool umkmInstanceExists = false;
         UMKM[] arrUMKM = new UMKM[20];
-        Keranjang keranjang = new Keranjang();
-        Keranjang.Manage manage = new Keranjang.Manage();
+        Keranjang.Keranjang keranjang = new Keranjang.Keranjang();
+        Keranjang.Keranjang.Manage manage = new Keranjang.Keranjang.Manage();
         int indexUMKM = 0;
         int banyakUMKM = 0;
         string namaUMKM;
@@ -49,7 +49,7 @@ class program
                 }
                 else if (intCek == 3)
                 {
-                    a.searchKeranjang();
+                    a.searchKeranjang(arrUMKM);
                 }
                 else if (intCek == 4)
                 {
@@ -57,7 +57,7 @@ class program
                 }
                 else if (intCek == 5)
                 {
-                    //Keranjang.check(arrUMKM,"Dafa");
+                    a.check(arrUMKM,"dafa");
                 }
                 else if (intCek == 6)
                 {
