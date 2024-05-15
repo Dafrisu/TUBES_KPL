@@ -8,6 +8,10 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Tubes_KPL_Kelompok1
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\
+=======
+build_property.ProjectDir = D:\Kuliah\SEM4\KPL\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\
+>>>>>>> 89918279e7f26a4910068a4c6664bb0f62ed616c
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
