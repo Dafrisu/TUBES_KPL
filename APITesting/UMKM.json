@@ -1,0 +1,26 @@
+[
+  {
+    "Username": "UMKM1",
+    "Stock": {
+      "Product1": 10,
+      "Product2": 20,
+      "Product3": 15
+    }
+  },
+  {
+    "Username": "UMKM2",
+    "Stock": {
+      "Product4": 8,
+      "Product5": 12,
+      "Product6": 18
+    }
+  },
+  {
+    "Username": "UMKM3",
+    "Stock": {
+      "Product7": 6,
+      "Product8": 9,
+      "Product9": 14
+    }
+  }
+]
