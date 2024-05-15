@@ -19,17 +19,14 @@ namespace Keranjang.Tests
         {
             if (k.KeranjangIsNull(keranjang) == false)
             {
-                Assert.Fail();
+                Assert.IsNotNull(keranjang);
             }
         }
         [TestMethod()]
         public void SearchKeranjangTest()
         {
             keranjang.Add("Pepsi", 10);
-            if (k.SearchKeranjang(keranjang, "Pepsi"))
-            {
-                Assert.Fail();
-            }
+            Assert.IsTrue(k.SearchKeranjang(keranjang, "Pepsi"));
         }
         [TestMethod()]
         public void EditKeranjangTest()

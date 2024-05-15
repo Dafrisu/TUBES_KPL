@@ -67,9 +67,10 @@ namespace Tubes_KPL_Kelompok1.Tests
     [TestClass()]
     public class UMKMUnitTest
     {
-        [TestMethod()]
-        public static void TestSaveData()
+        public void TestSaveData()
         {
+            Console.WriteLine("Starting TestSaveData...");
+
             UMKM umkm = new UMKM("TestUMKM");
             umkm.Stock.Add("TestProduct", 10);
             umkm.JenisProduk.Add("TestProduct", "TestCategory");
@@ -89,26 +90,33 @@ namespace Tubes_KPL_Kelompok1.Tests
                 }
             }
 
-            Console.WriteLine("SaveData test result: " + (success ? "Passed" : "Failed"));
+            Console.WriteLine("TestSaveData result: " + (success ? "Passed" : "Failed"));
         }
-        [TestMethod()]
-        public static void TestReadJson()
+
+        public void TestReadJson()
         {
+            Console.WriteLine("Starting TestReadJson...");
+
             try
             {
                 string json = File.ReadAllText("umkmconfig.json");
-                Console.WriteLine("ReadJson test result: Passed");
+                Console.WriteLine("TestReadJson result: Passed");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("ReadJson test result: Failed. Error: " + ex.Message);
+                Console.WriteLine("TestReadJson result: Failed. Error: " + ex.Message);
             }
         }
-        [TestMethod()]
-        public static void RunTests()
+
+        public void RunTests()
         {
             TestSaveData();
             TestReadJson();
+        }
+
+        public void Main(string[] args)
+        {
+            RunTests();
         }
     }
 }
