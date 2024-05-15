@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace Tubes_KPL_Kelompok1.Tests
 {
@@ -12,16 +13,44 @@ namespace Tubes_KPL_Kelompok1.Tests
     public class PembeliTests
     {
         [TestMethod()]
-        public void PrintkeranjangTest()
+        public void PrintkeranjangKosongTest()
         {
             Pembeli buyer = new Pembeli("Haikal");
 
             Assert.AreEqual("gagal", buyer.Printkeranjang());
-            UMKM umkm = new UMKM("dafa");
+        }
+        [TestMethod()]
+        public void PrintkeranjangisiTest()
+        {
+            Pembeli buyer = new Pembeli("Haikal");
             buyer.keranjang.Add("ad", 10);
             Assert.AreEqual("berhasil", buyer.Printkeranjang());
         }
 
+        [TestMethod()]
+        public void tambahBarangJSONTest()
+        {
+            Boolean expected = false;
+            BuyerConfig buyer = new BuyerConfig();
+            BuyerConfig.tambahbarangjson("dafa", "Haikal", "Bakso", 3);
+            BuyerConfig config = JsonSerializer.Deserialize<BuyerConfig>(BuyerConfig.json);
+            String umkmname = "dafa";
+            String buyername = "Haikal";
+            String namabarang = "Bakso";
+            int qty = 3;
+            if (config.Pembeli.ContainsKey(buyername)){
+                var buy = config.Pembeli[buyername];
+                if (buy.UMKM.ContainsKey(umkmname)) 
+                { 
+                   var umkm = buy.UMKM[umkmname];
+                    if (umkm.ContainsKey(namabarang)) 
+                    { 
+                        expected = true;
+                    }
+                }
+            }
+            Assert.IsTrue(expected);
+        }
     }
 
     [TestClass()]
