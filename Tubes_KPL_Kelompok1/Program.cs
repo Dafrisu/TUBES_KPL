@@ -9,8 +9,8 @@ using static Tubes_KPL_Kelompok1.IdentifyUser;
 
 class program
 {
-    void Main(string[] args)
-    {
+    static void Main(string[] args)
+    { 
         String stringCek;
         int intCek = 0;
         IdentifyUser cek = new IdentifyUser();
@@ -60,6 +60,7 @@ class program
                 else if (intCek == 5)
                 {
                     //Keranjang.check(arrUMKM,"Dafa");
+                    Console.WriteLine("");
                     
                 }
                 else if (intCek == 6)
@@ -91,9 +92,9 @@ class program
                 Console.WriteLine("5. Tambah Akun UMKM");
                 Console.WriteLine("6. Ganti login akun UMKM (Menggunakan Index)");
                 Console.WriteLine("7. Tampilkan Index dan nama sesuai dengan Index");
-                Console.WriteLine("9. Lihat Log");
-                Console.WriteLine("10. UMKM dan Jumlah Barang");
-                Console.WriteLine("8. Ganti Tipe User");
+                Console.WriteLine("8. Lihat Log");
+                Console.WriteLine("9. UMKM dan Jumlah Barang");
+                Console.WriteLine("10. Ganti Tipe User");
                 Console.WriteLine("11. Keluar dari program");
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
@@ -158,7 +159,7 @@ class program
                 }
                 else if (intCek == 8)
                 {
-                    buyer.readjson();
+                    BuyerConfig.ReadJson();
                 }
                 else if (intCek == 9)
                 {
