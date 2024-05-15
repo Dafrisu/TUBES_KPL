@@ -175,24 +175,6 @@ public class UMKM
         }
 
     }
-
-    public void ReadLogs()
-    {
-        string logFilePath = @"E:\TELKOM UNIVERSITY\TUGAS KULIAH\KONSTRUKSI PERANGKAT LUNAK (KPL)\TUBES\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
-        if (File.Exists(logFilePath))
-        {
-            string logJson = File.ReadAllText(logFilePath);
-            List<LogEntry> logs = JsonSerializer.Deserialize<List<LogEntry>>(logJson);
-            foreach (var log in logs)
-            {
-                Console.WriteLine($"{log.Timestamp}: {log.BuyerName} updated {log.ItemName} to {log.Quantity}");
-            }
-        }
-        else
-        {
-            Console.WriteLine("No log entries found.");
-        }
-    }
     public void jumlahproduk(UMKM[] input)
     {
         // Menghitung jumlah barang yang dimiliki oleh UMKM

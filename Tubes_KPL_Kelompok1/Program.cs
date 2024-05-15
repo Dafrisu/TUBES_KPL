@@ -135,7 +135,7 @@ class programe
                     }
                     else if (intCek == 9)
                     {
-                        BuyerConfig.printJson();
+                        BuyerConfig.ReadJson();
                     }
                     else if (intCek == 10)
                     {
