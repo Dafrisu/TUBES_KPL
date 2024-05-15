@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Text.Json;
 namespace Tubes_KPL_Kelompok1.Tests
 {
     [TestClass()]
@@ -61,6 +61,54 @@ namespace Tubes_KPL_Kelompok1.Tests
         {
             UMKM umkm = new UMKM("dafa");
             Assert.AreEqual("Gagal", umkm.GetBarang());
+        }
+    }
+
+    [TestClass()]
+    public class UMKMUnitTest
+    {
+        [TestMethod()]
+        public static void TestSaveData()
+        {
+            UMKM umkm = new UMKM("TestUMKM");
+            umkm.Stock.Add("TestProduct", 10);
+            umkm.JenisProduk.Add("TestProduct", "TestCategory");
+
+            umkm.SaveData();
+
+            // Check if the JSON file exists and contains the expected data
+            string json = File.ReadAllText("umkmconfig.json");
+            List<UMKM> umkmList = JsonSerializer.Deserialize<List<UMKM>>(json);
+            bool success = false;
+            foreach (var item in umkmList)
+            {
+                if (item.nama == "TestUMKM" && item.Stock.ContainsKey("TestProduct"))
+                {
+                    success = true;
+                    break;
+                }
+            }
+
+            Console.WriteLine("SaveData test result: " + (success ? "Passed" : "Failed"));
+        }
+        [TestMethod()]
+        public static void TestReadJson()
+        {
+            try
+            {
+                string json = File.ReadAllText("umkmconfig.json");
+                Console.WriteLine("ReadJson test result: Passed");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ReadJson test result: Failed. Error: " + ex.Message);
+            }
+        }
+        [TestMethod()]
+        public static void RunTests()
+        {
+            TestSaveData();
+            TestReadJson();
         }
     }
 }
