@@ -1,41 +1,43 @@
 {
   "Pembeli": {
     "Haikal": {
-        "UMKM": {
-            "dafa": {
-                "SotoAyam": 10,
-                "MieGacoan": 12
-            },
-            "david": {
-                "SodaGembira": 5,
-                "SemurJengkol": 3
-            }
+      "UMKM": {
+        "dafa": {
+          "SotoAyam": 10,
+          "MieGacoan": 12,
+          "Ayam": 20,
+          "Ikan": 12
+        },
+        "david": {
+          "SodaGembira": 5,
+          "SemurJengkol": 3
         }
+      }
     },
     "Dafa": {
-        "UMKM": {
-            "dafa": {
-                "SodaGembira": 5,
-                "SemurJengkol": 3
-            },
-            "david": {
-                "SodaGembira": 5,
-                "SemurJengkol": 3
-            }
+      "UMKM": {
+        "dafa": {
+          "SodaGembira": 5,
+          "SemurJengkol": 3
+        },
+        "david": {
+          "SodaGembira": 5,
+          "SemurJengkol": 3
         }
-        
+      }
     },
     "Darryl": {
-        "UMKM": {
-            "dafa": {
-                "Kikil": 3,
-                "SotoAyam": 8
-            },
-            "david": {
-                "SodaGembira": 5,
-                "SemurJengkol": 3
-            }
+      "UMKM": {
+        "dafa": {
+          "Kikil": 3,
+          "SotoAyam": 8,
+          "Ayam": 10
+        },
+        "david": {
+          "SodaGembira": 5,
+          "SemurJengkol": 3
         }
+      }
     }
   }
 }

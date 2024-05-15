@@ -31,7 +31,81 @@ namespace Tubes_KPL_Kelompok1
         {
             public Dictionary<string, Dictionary<string, int>> UMKM { get; set; }
         }
-        
+        public static void printJson()
+        {
+            string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+
+            // Baca JSON dari file
+            string json = File.ReadAllText(jsonFilePath);
+            Console.WriteLine(json);
+        }
+        public static void tambahbarangjson(String umkmname, String buyername, String namabarang, int qty)
+        {
+            string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+
+            // Baca JSON dari file
+            string json = File.ReadAllText(jsonFilePath);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            BuyerConfig config = JsonSerializer.Deserialize<BuyerConfig>(json, options);
+            if(config != null && config.Pembeli != null) 
+            {
+                if (config.Pembeli.ContainsKey(buyername))
+                {
+                    if (config != null && config.Pembeli != null)
+                    {
+                        if (config.Pembeli.ContainsKey(buyername))
+                        {
+                            var buyer = config.Pembeli[buyername];
+
+                            if (buyer.UMKM.ContainsKey(umkmname))
+                            {
+                                var umkm = buyer.UMKM[umkmname];
+
+                                if (umkm.ContainsKey(namabarang))
+                                {
+                                    umkm[namabarang] += qty;
+                                }
+                                else
+                                {
+                                    umkm[namabarang] = qty;
+                                }
+                            }
+                            else
+                            {
+                                buyer.UMKM[umkmname] = new Dictionary<string, int> { { namabarang, qty } };
+                            }
+                        }
+                        else
+                        {
+                            config.Pembeli[buyername] = new Buyer
+                            {
+                                UMKM = new Dictionary<string, Dictionary<string, int>>
+                    {
+                        { umkmname, new Dictionary<string, int> { { namabarang, qty } } }
+                    }
+                            };
+                        }
+
+                        // Serialisasi kembali objek menjadi JSON dengan format yang sama seperti aslinya
+
+                        string updatedJson = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
+
+                        // Tulis JSON yang telah diperbarui kembali ke file
+                        File.WriteAllText(jsonFilePath, updatedJson);
+
+                        Console.WriteLine($"Barang '{namabarang}' dengan kuantitas {qty} berhasil ditambahkan ke UMKM '{umkmname}' untuk pembeli '{buyername}'.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error: Konfigurasi tidak valid atau pembeli '{buyername}' tidak ditemukan.");
+                    }
+                }
+            }
+        }
         public static void UpdateQuantity(string buyerName, string umkmName, string itemName, int newQuantity)
         {
             string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
@@ -90,14 +164,15 @@ namespace Tubes_KPL_Kelompok1
                     // Serialisasi kembali objek menjadi JSON dengan format yang sama seperti aslinya
                     string updatedJson = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
 
-                    // Tulis JSON yang telah diperbarui kembali ke file
-                    File.WriteAllText(jsonFilePath, updatedJson);
 
+                        // Tulis JSON yang telah diperbarui kembali ke file
+                        File.WriteAllText(jsonFilePath, updatedJson);
                     Console.WriteLine($"Kuantitas barang '{itemName}' untuk pembeli '{buyerName}' di UMKM '{umkmName}' berhasil diubah menjadi {newQuantity}.");
                 }
                 else
                 {
                     Console.WriteLine($"Error: Barang '{itemName}' tidak ditemukan dalam UMKM '{umkmName}' untuk pembeli '{buyerName}'.");
+
                 }
             }
             else
