@@ -30,33 +30,98 @@ namespace Tubes_KPL_Kelompok1
 
         public void tambahBarang(UMKM umkm)
         {
-            Dictionary<String, int> data;
-            Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
-            string kategoriString = Console.ReadLine();
-
-            Console.WriteLine("Masukan Nama Barang: ");
-            String namabarang = Console.ReadLine();
-
-            Console.WriteLine("Masukan Jumlah Barang: ");
-            int qty = Convert.ToInt32(Console.ReadLine());
-
+            Boolean cek = false;
             UMKM.KategoriBarang kategori;
-            if (!Enum.TryParse(kategoriString, out kategori))
+            do
             {
-                Console.WriteLine("Kategori barang tidak valid.");
-                return;
-            }
+                try
+                {
+                    Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
+                    string kategoriString = Console.ReadLine();
 
-            if(!keranjang.ContainsKey(namabarang))
+                    if (!Enum.TryParse(kategoriString, out kategori))
+                    {
+                        Console.WriteLine("Kategori barang tidak valid.");
+                        return;
+                    }
+                    Console.WriteLine("Masukan Nama Barang: ");
+                    String namabarang = Console.ReadLine();
+
+                    if (!umkm.InsertBarang[kategori].ContainsKey(namabarang))
+                    {
+                        throw new Exception("Barang Tidak ada");
+                        cek = true;
+                        return;
+                    }
+                    Console.WriteLine("Masukan Jumlah Barang: ");
+                    int qty = Convert.ToInt32(Console.ReadLine());
+                    if (!keranjang.ContainsKey(namabarang))
+                    {
+                        int stok = umkm.InsertBarang[kategori][namabarang];
+                        if (stok > qty)
+                        {
+                            // Jika barang belum ada dalam keranjang, tambahkan ke keranjang
+                            keranjang.Add(namabarang, qty);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Stok Barang Tidak mencukupi");
+                        }
+
+                    }
+                    else if (keranjang.ContainsKey(namabarang))
+                    {
+                        // Jika barang tidak tersedia, tampilkan pesan kesalahan
+                        //Console.WriteLine($"Barang {namabarang} tidak tersedia dalam kategori {kategori}");
+                        int stok = umkm.InsertBarang[kategori][namabarang];
+                        if (stok > qty)
+                        {
+                            // Jika barang sudah ada dalam keranjang, tambahkan jumlah QTY ke keranjang
+                            keranjang[namabarang] = keranjang[namabarang] + qty;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Stok Barang Tidak mencukupi");
+                        }
+
+                    }
+                    cek = true;
+                }
+                catch (NullReferenceException e)
+                {
+                    Console.WriteLine("Inputan Tidak ada Di Data UMKM");
+                    cek = true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            } while (!cek);
+            
+            
+        }
+        public void check(UMKM[] tit, string nama)
+        {
+            try
             {
-                // Jika barang belum ada dalam keranjang, tambahkan ke keranjang
-                keranjang.Add(namabarang, qty);
-                
+                for (int i = 0; i < tit.Length; i++)
+                {
+                    if (tit[i].nama == nama)
+                    {
+                        tit[i].GetBarang();
+                        tit[i].KurangStock();
+                        tit[i].GetBarang();
+                    }
+                    else if (i == tit.Length)
+                    {
+                        throw new Exception("bang gaada nama yang kek gitu");
+                    }
+
+                }
             }
-            else
+            catch (Exception e)
             {
-                // Jika barang tidak tersedia, tampilkan pesan kesalahan
-                Console.WriteLine($"Barang {namabarang} tidak tersedia dalam kategori {kategori}");
+                Console.WriteLine(e.Message);
             }
         }
 

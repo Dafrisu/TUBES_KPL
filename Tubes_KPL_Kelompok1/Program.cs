@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using Tubes_KPL_Kelompok1;
-using static Tubes_KPL_Kelompok1.Keranjang;
+using Keranjang;
 using static Tubes_KPL_Kelompok1.UMKM;
 using static Tubes_KPL_Kelompok1.IdentifyUser;
 
@@ -11,26 +11,42 @@ class program
 {
     static void Main(string[] args)
     {
+        //Global Variabel
         String stringCek;
         int intCek = 0;
-        IdentifyUser cek = new IdentifyUser();
-        stringCek = Console.ReadLine();
         bool umkmInstanceExists = false;
-        UMKM[] arrUMKM = new UMKM[20];
-        Keranjang keranjang = new Keranjang();
-        Keranjang.Manage manage = new Keranjang.Manage();
+        bool pembeliInstanceExists = false;
         int indexUMKM = 0;
         int banyakUMKM = 0;
         string namaUMKM;
         int loopCounter = 0;
-        BuyerConfig buyer = new BuyerConfig();
+        int indexPembeli = 0;
+        String namaPembeli;
 
-        while (intCek != 99)
+        //Pemanggilan Class
+        UMKM[] arrUMKM = new UMKM[20];
+        BuyerConfig buyer = new BuyerConfig();
+        Pembeli[] arrPembeli = new Pembeli[20];
+
+        //Initial run
+        IdentifyUser cek = new IdentifyUser();
+        stringCek = Console.ReadLine();
+        
+
+        while (intCek != 12)
         {
             if (stringCek.Equals("Pembeli"))        
             {
                 cek.Pembeli();
-                Pembeli a = new Pembeli("Haikal");
+                if (!pembeliInstanceExists) // Memeriksa apakah instance UMKM sudah ada
+                {
+                    Console.WriteLine("Masukkan nama Pembeli");
+                    namaPembeli = Console.ReadLine();
+                    arrPembeli[indexPembeli] = new Pembeli(namaPembeli);
+                    Console.WriteLine("Anda login di akun Pembeli dengan id :" + indexPembeli);
+                    Console.WriteLine("Dengan nama :" + arrPembeli[indexPembeli].nama);
+                    pembeliInstanceExists = true;
+                }
                 Console.WriteLine("Fitur Untuk Pembeli ");
                 Console.WriteLine("1. Tambah barang yang dipesan ");
                 Console.WriteLine("2. Print Keranjang");
@@ -38,27 +54,29 @@ class program
                 Console.WriteLine("4. Tambah Barang yang dipesan V2");
                 Console.WriteLine("5. Mengurangi jumlah stok UMKM berdasarkan pesanan di keranjang(Order)");
                 Console.WriteLine("6. Login sebagai User yang lain");
-                Console.WriteLine("10. Keluar dari program");
+                Console.WriteLine("12. Keluar dari program");
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
                 {
-                    a.tambahBarang(arrUMKM[indexUMKM]);
+                    arrPembeli[indexPembeli].tambahBarang(arrUMKM[indexUMKM]);
                 }
                 else if (intCek == 2)
                 {
-                    a.Printkeranjang();
+                    arrPembeli[indexPembeli].Printkeranjang();
                 }
                 else if (intCek == 3)
                 {
-                    a.searchKeranjang();
+                    arrPembeli[indexPembeli].searchKeranjang();
                 }
                 else if (intCek == 4)
                 {
-                    manage.AddProduct();
+                    
                 }
                 else if (intCek == 5)
                 {
                     //Keranjang.check(arrUMKM,"Dafa");
+                    Console.WriteLine("");
+                    
                 }
                 else if (intCek == 6)
                 {
@@ -75,7 +93,6 @@ class program
                     Console.WriteLine("Masukkan nama UMKM");
                     namaUMKM = Console.ReadLine();
                     arrUMKM[indexUMKM] = new UMKM(namaUMKM);
-                    Console.WriteLine("Anda login di akun UMKM dengan id :" + indexUMKM);
                     Console.WriteLine("Dengan nama :" + arrUMKM[indexUMKM].nama);
                     umkmInstanceExists = true;
                 }
@@ -88,10 +105,10 @@ class program
                 Console.WriteLine("5. Tambah Akun UMKM");
                 Console.WriteLine("6. Ganti login akun UMKM (Menggunakan Index)");
                 Console.WriteLine("7. Tampilkan Index dan nama sesuai dengan Index");
-                Console.WriteLine("8. Ganti Tipe User");
+                Console.WriteLine("8. Hapus Barang");
                 Console.WriteLine("9. Nama UMKM dan Jumlah Barang");
                 Console.WriteLine("10. Lihat Log");
-                Console.WriteLine("11. Hapus Barang");
+                Console.WriteLine("11. Ganti Tipe User");
                 Console.WriteLine("12. Keluar dari program");
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
@@ -156,7 +173,7 @@ class program
                 }
                 else if (intCek == 8)
                 {
-                    buyer.readjson();
+                    arrUMKM[indexUMKM].HapusBarang();
                 }
                 else if (intCek == 9)
                 {
@@ -165,16 +182,13 @@ class program
                 }
                 else if (intCek == 10)
                 {
-                    Console.WriteLine("Masukkan input berupa Pembeli atau UMKM");
-                    stringCek = Console.ReadLine();
+                    BuyerConfig.ReadJson();  
+                    
                 }
                 else if(intCek == 11)
                 {
-                    arrUMKM[indexUMKM].HapusBarang();
-                }
-                else if(intCek == 12)
-                {
-                    break;
+                    Console.WriteLine("Masukkan input berupa Pembeli atau UMKM");
+                    stringCek = Console.ReadLine();
                 }
             }
         }
