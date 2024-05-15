@@ -31,5 +31,8 @@ namespace Tubes_KPL_Kelompok1
             currentState = UserState.Pembeli;
             Console.WriteLine("Anda login menggunakan user Pembeli");
         }
+        public UserState getCurrentState() {
+            return this.currentState;
+        }
     }
 }
