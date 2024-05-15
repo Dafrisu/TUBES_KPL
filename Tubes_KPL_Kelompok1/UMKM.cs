@@ -67,16 +67,12 @@ public class UMKM
         
         Console.WriteLine("Nama UMKM: " + this.nama);
         Console.WriteLine("Nama Barang\tStok barang");
-
-        foreach (KategoriBarang kategori in Enum.GetValues(typeof(KategoriBarang)))
             if(InsertBarang.Count == 0)
             {
                 throw new Exception("UMKM belum memiliki barang");
             }
             else
             {
-                Console.WriteLine("Nama UMKM: " + this.nama);
-                Console.WriteLine("Nama Barang\tStok barang");
                 foreach (KategoriBarang kategori in Enum.GetValues(typeof(KategoriBarang)))
                 {
                     if (InsertBarang.ContainsKey(kategori))

@@ -119,9 +119,9 @@ class program
                 }
                 else if (intCek == 8)
                 {
+                    Console.WriteLine("Berikut adalah array index id UMKM yang sudah disimpan");
                     while (loopCounter <= banyakPembeli)
                     {
-                        Console.WriteLine("Berikut adalah array index id UMKM yang sudah disimpan");
                         Console.WriteLine(loopCounter + ". " + arrPembeli[loopCounter].nama);
                         loopCounter++;
                     }
