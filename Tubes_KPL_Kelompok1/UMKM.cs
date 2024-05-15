@@ -52,7 +52,7 @@ public class UMKM
             if (!Enum.TryParse(kategoriString, out kategori))
             {
                throw new Exception("Kategori barang tidak valid.");
-                return;
+               return;
             }
             //Periksa apakah kategori barang sudah ada di dictionary
             if (!InsertBarang.ContainsKey(kategori))
