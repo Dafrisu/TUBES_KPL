@@ -52,8 +52,9 @@ class program
                 Console.WriteLine("2. Print Keranjang");
                 Console.WriteLine("3. Search barang");
                 Console.WriteLine("4. Tambah Barang yang dipesan V2");
-                Console.WriteLine("5. Mengurangi jumlah stok UMKM berdasarkan pesanan di keranjang(Order)");
+                Console.WriteLine("5. Mengurangi jumlah stok UMKM berdasarkan pesanan di keranjang(Order)");                
                 Console.WriteLine("6. Login sebagai User yang lain");
+                Console.WriteLine("7. Menambahkan Pembeli (JSON)");
                 Console.WriteLine("12. Keluar dari program");
                 intCek = Convert.ToInt32(Console.ReadLine());
                 if (intCek == 1)
@@ -82,6 +83,18 @@ class program
                 {
                     Console.WriteLine("Masukkan input berupa Pembeli atau UMKM");
                     stringCek = Console.ReadLine();
+                }
+                else if (intCek == 7)
+                {
+                    Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
+                    string kategoriString = Console.ReadLine();
+
+                    Console.WriteLine("Masukan Nama Barang: ");
+                    String namabarang = Console.ReadLine();
+
+                    Console.WriteLine("Masukan Jumlah Barang: ");
+                    int qty = Convert.ToInt32(Console.ReadLine());
+                    BuyerConfig.tambahbarangjson(arrUMKM[indexUMKM].nama, "Haikal", namabarang, qty);
                 }
             }
             else if (stringCek.Equals("UMKM"))
