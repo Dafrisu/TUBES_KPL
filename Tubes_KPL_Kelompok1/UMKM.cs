@@ -41,7 +41,7 @@ public class UMKM
             if (!Enum.TryParse(kategoriString, out kategori))
             {
                throw new Exception("Kategori barang tidak valid.");
-                return;
+               return;
             }
             // Periksa apakah kategori barang sudah ada di dictionary
             if (!InsertBarang.ContainsKey(kategori))
@@ -63,20 +63,16 @@ public class UMKM
     {        
         try
         {
-        // Menampilkan barang yang dimiliki oleh UMKM
-        
+            // Menampilkan barang yang dimiliki oleh UMKM
         Console.WriteLine("Nama UMKM: " + this.nama);
         Console.WriteLine("Nama Barang\tStok barang");
 
-        foreach (KategoriBarang kategori in Enum.GetValues(typeof(KategoriBarang)))
             if(InsertBarang.Count == 0)
             {
                 throw new Exception("UMKM belum memiliki barang");
             }
             else
             {
-                Console.WriteLine("Nama UMKM: " + this.nama);
-                Console.WriteLine("Nama Barang\tStok barang");
                 foreach (KategoriBarang kategori in Enum.GetValues(typeof(KategoriBarang)))
                 {
                     if (InsertBarang.ContainsKey(kategori))
