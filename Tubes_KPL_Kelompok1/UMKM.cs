@@ -66,7 +66,7 @@ public class UMKM
             InsertBarang[kategori][namaBarang] = stokBarang;
 
             // Create a new instance of UMKMTesting and populate it with the correct data
-            UMKMTesting umkm = new UMKMTesting
+            UMKMLib umkm = new UMKMLib
             {
                 nama = this.nama,
                 Stock = this.InsertBarang.SelectMany(d => d.Value)
@@ -89,7 +89,7 @@ public class UMKM
             }
 
             // Call WriteJson to update the JSON file
-            UMKMTesting.WriteJson(umkm);
+            UMKMLib.WriteJson(umkm);
         }
         catch (Exception e)
         {
@@ -377,6 +377,6 @@ public class UMKM
     }
     public static void read()
     {
-        UMKMTesting.ReadJson();
+        UMKMLib.ReadJson();
     }
 }
