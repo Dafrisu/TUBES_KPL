@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeranjangTests", "Keranjang
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tubes_KPL_Kelompok1Tests", "Tubes_KPL_Kelompok1Tests\Tubes_KPL_Kelompok1Tests.csproj", "{4E0E01E6-00C7-49B2-8736-E12E96FA5372}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIUnitTesting", "APIUnitTesting\APIUnitTesting.csproj", "{E031866E-8851-4855-BE29-2E46C6BDABFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIUnitTesting", "APIUnitTesting\APIUnitTesting.csproj", "{E031866E-8851-4855-BE29-2E46C6BDABFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UMKMLibrary", "..\UMKMLib\UMKMLibrary.csproj", "{31543E40-5254-4757-BD92-8C01BF7254A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{E031866E-8851-4855-BE29-2E46C6BDABFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E031866E-8851-4855-BE29-2E46C6BDABFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E031866E-8851-4855-BE29-2E46C6BDABFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31543E40-5254-4757-BD92-8C01BF7254A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31543E40-5254-4757-BD92-8C01BF7254A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31543E40-5254-4757-BD92-8C01BF7254A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31543E40-5254-4757-BD92-8C01BF7254A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

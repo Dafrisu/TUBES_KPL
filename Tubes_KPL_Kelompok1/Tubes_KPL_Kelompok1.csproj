@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\UMKMLib\UMKMLibrary.csproj" />
     <ProjectReference Include="..\Keranjang\Keranjang.csproj" />
   </ItemGroup>
 
