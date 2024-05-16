@@ -5,7 +5,15 @@ VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tubes_KPL_Kelompok1", "Tubes_KPL_Kelompok1\Tubes_KPL_Kelompok1.csproj", "{978E330B-5BB2-44F8-A725-A95D485BD6AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keranjang", "Keranjang\Keranjang.csproj", "{6C2DB5B3-11A7-49A9-9307-9F72B1C79090}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keranjang", "Keranjang\Keranjang.csproj", "{6C2DB5B3-11A7-49A9-9307-9F72B1C79090}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APITesting", "APITesting\APITesting.csproj", "{B330BD17-B7D6-4F69-AAD4-3F35260CA67A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeranjangTests", "KeranjangTests\KeranjangTests.csproj", "{C7A14119-75D9-4002-B857-6B4769286FAD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tubes_KPL_Kelompok1Tests", "Tubes_KPL_Kelompok1Tests\Tubes_KPL_Kelompok1Tests.csproj", "{4E0E01E6-00C7-49B2-8736-E12E96FA5372}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIUnitTesting", "APIUnitTesting\APIUnitTesting.csproj", "{E031866E-8851-4855-BE29-2E46C6BDABFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +29,22 @@ Global
 		{6C2DB5B3-11A7-49A9-9307-9F72B1C79090}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C2DB5B3-11A7-49A9-9307-9F72B1C79090}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C2DB5B3-11A7-49A9-9307-9F72B1C79090}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B330BD17-B7D6-4F69-AAD4-3F35260CA67A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B330BD17-B7D6-4F69-AAD4-3F35260CA67A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B330BD17-B7D6-4F69-AAD4-3F35260CA67A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B330BD17-B7D6-4F69-AAD4-3F35260CA67A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7A14119-75D9-4002-B857-6B4769286FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7A14119-75D9-4002-B857-6B4769286FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7A14119-75D9-4002-B857-6B4769286FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7A14119-75D9-4002-B857-6B4769286FAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E0E01E6-00C7-49B2-8736-E12E96FA5372}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E0E01E6-00C7-49B2-8736-E12E96FA5372}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E0E01E6-00C7-49B2-8736-E12E96FA5372}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E0E01E6-00C7-49B2-8736-E12E96FA5372}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E031866E-8851-4855-BE29-2E46C6BDABFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E031866E-8851-4855-BE29-2E46C6BDABFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E031866E-8851-4855-BE29-2E46C6BDABFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E031866E-8851-4855-BE29-2E46C6BDABFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
