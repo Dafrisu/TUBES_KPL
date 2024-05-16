@@ -108,7 +108,7 @@ class programe
                             }
                             loopCounter = 0;
 
-                            indexUMKM = Convert.ToInt32(Console.ReadLine());
+                            indexPembeli = Convert.ToInt32(Console.ReadLine());
                             Console.WriteLine("Anda login di akun UMKM dengan id :" + indexPembeli);
                             Console.WriteLine("Dengan nama :" + arrPembeli[indexPembeli].nama);
 

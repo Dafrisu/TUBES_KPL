@@ -18,25 +18,23 @@ namespace Tubes_KPL_Kelompok1
         {
             public Dictionary<string, Dictionary<string, int>> UMKM { get; set; }
         }
-        static string jsonFileName = "buyerconfig.json";
-        static string jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), jsonFileName);
+        static string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+
 
         // Baca JSON dari file
         public static string json = File.ReadAllText(jsonFilePath);
 
         public static void printJson()
         {
-            string jsonFileName = "buyerconfig.json";
-            string jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), jsonFileName);
+            string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+
             // Baca JSON dari file
             string json = File.ReadAllText(jsonFilePath);
             Console.WriteLine(json);
         }
         public static void tambahbarangjson(String umkmname, String buyername, String namabarang, int qty)
         {
-            //sementara di hide//string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
-            string jsonFileName = "buyerconfig.json";
-            string jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), jsonFileName);
+            string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
             // Baca JSON dari file
             string json = File.ReadAllText(jsonFilePath);
 
@@ -96,8 +94,8 @@ namespace Tubes_KPL_Kelompok1
         }
         public static void UpdateQuantity(string buyerName, string umkmName, string itemName, int newQuantity)
         {
-            string jsonFileName = "buyerconfig.json";
-            string jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), jsonFileName);
+            string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+
             // Baca JSON dari file
             string json = File.ReadAllText(jsonFilePath);
             var options = new JsonSerializerOptions
@@ -145,8 +143,8 @@ namespace Tubes_KPL_Kelompok1
             };
             try
             {
-                string jsonFileName = "buyerconfig.json";
-                string jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), jsonFileName);
+                string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+
                 string json = File.ReadAllText(jsonFilePath);
                 if (jsonFilePath != null)
                 {
