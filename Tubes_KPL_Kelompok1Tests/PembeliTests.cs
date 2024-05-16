@@ -63,4 +63,44 @@ namespace Tubes_KPL_Kelompok1.Tests
             Assert.AreEqual("Gagal", umkm.GetBarang());
         }
     }
+    [TestClass()]
+    public class UMKMTests
+    {
+        //Testing fersya
+        [TestMethod()]
+        public void jumlahprodukTest()
+        {
+           
+            UMKM umkm = new UMKM("DoNut Surrender");
+            umkm.TambahBarang(); 
+            UMKM[] umkmArray = new UMKM[] { umkm, null };
+            int totalProducts = umkm.jumlahproduk();
+            Assert.IsTrue(totalProducts == 20);
+        }
+    }
+    [TestClass()]
+    public class UMKMTests2
+    {
+        [TestMethod()]
+        public void HapusBarangTest()
+        {
+            UMKM umkm = new UMKM("Toko Kelontong");
+
+            string namaBarang = "Sabun";
+            UMKM.KategoriBarang kategori = UMKM.KategoriBarang.Misc;
+            int initialStock = 10;
+            umkm.TambahBarang();
+            try
+            {
+                umkm.HapusBarang();
+            }
+            catch (Exception e)
+            {
+                
+                Assert.Fail($"Unexpected exception: {e.Message}");
+            }
+            bool itemRemoved = !umkm.InsertBarang.ContainsKey(kategori);
+            Assert.IsTrue(itemRemoved, $"barang '{namaBarang}' tidak terhapus dari kategori {kategori}");
+        }   
+    }
 }

@@ -255,4 +255,9 @@ public class UMKM
             Console.WriteLine("Barang tidak ditemukan pada kategori tersebut.");
         }
     }
+
+    public int jumlahproduk()
+    {
+        throw new NotImplementedException();
+    }
 }
