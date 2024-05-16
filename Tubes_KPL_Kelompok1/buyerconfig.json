@@ -1,16 +1,43 @@
 {
-  "Keranjang": {
+  "Pembeli": {
     "Haikal": {
-      "SotoAyam": 10,
-      "MieGacoan": 12
+      "UMKM": {
+        "dafa": {
+          "SotoAyam": 10,
+          "MieGacoan": 12,
+          "Bakso": 15,
+          "Ayam": 10
+        },
+        "david": {
+          "SodaGembira": 5,
+          "SemurJengkol": 3
+        }
+      }
     },
     "Dafa": {
-      "SodaGembira": 5,
-      "SemurJengkol": 3
+      "UMKM": {
+        "dafa": {
+          "SodaGembira": 5,
+          "SemurJengkol": 3
+        },
+        "david": {
+          "SodaGembira": 5,
+          "SemurJengkol": 3
+        }
+      }
     },
     "Darryl": {
-      "Kikil": 3,
-      "SotoAyam": 8
+      "UMKM": {
+        "dafa": {
+          "Kikil": 3,
+          "SotoAyam": 8,
+          "Ayam": 10
+        },
+        "david": {
+          "SodaGembira": 5,
+          "SemurJengkol": 3
+        }
+      }
     }
   }
 }

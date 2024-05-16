@@ -7,81 +7,215 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text.Json;
 using System.Security.Cryptography.X509Certificates;
+using System.Collections;
 using System.Timers;
+using System.Configuration;
+using UMKMLibrary;
 
 namespace Tubes_KPL_Kelompok1;
 public class UMKM
 {
-    public string Username { get; set; }
+    public string nama { get; set; }
     public Dictionary<string, int> Stock { get; set; } = new Dictionary<string, int>();
     public Dictionary<string, string> JenisProduk { get; set; } = new Dictionary<string, string>();
 
     private const string logFileName = "umkmconfig.json";
     private readonly string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), logFileName);
     private readonly System.Timers.Timer autoUpdateTimer;
-
-    public UMKM(string username)
+    public enum KategoriBarang
     {
-        this.Username = username;
-        autoUpdateTimer = new System.Timers.Timer(3600000); 
+        Makanan,
+        Minuman,
+        Misc
+    };
+
+    public Dictionary<KategoriBarang, Dictionary<String, int>> InsertBarang = new Dictionary<KategoriBarang, Dictionary<String, int>>();
+
+    public UMKM(string nama)
+    {
+        this.nama = nama;
+        autoUpdateTimer = new System.Timers.Timer(3600000);
         autoUpdateTimer.Elapsed += AutoUpdateStock;
         autoUpdateTimer.Start();
     }
 
     public void TambahBarang()
     {
-        Console.WriteLine("Masukkan nama barang:");
-        string namaBarang = Console.ReadLine();
+        try
+        {
+            Console.WriteLine("Masukkan nama barang:");
+            string namaBarang = Console.ReadLine();
+            Console.WriteLine("Masukkan stok barang:");
+            int stokBarang = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
+            string kategoriString = Console.ReadLine();
+            // Ubah input kategori menjadi enum
+            KategoriBarang kategori;
+            if (!Enum.TryParse(kategoriString, out kategori))
+            {
+                throw new Exception("Kategori barang tidak valid.");
+            }
+            //Periksa apakah kategori barang sudah ada di dictionary
+            if (!InsertBarang.ContainsKey(kategori))
+            {
+                //Jika belum, tambahkan kategori baru
+                InsertBarang[kategori] = new Dictionary<string, int>();
+            }
 
-        Console.WriteLine("Masukkan stok barang:");
-        int stokBarang = Convert.ToInt32(Console.ReadLine());
+            //Tambahkan barang baru
+            InsertBarang[kategori][namaBarang] = stokBarang;
 
+            // Create a new instance of UMKMTesting and populate it with the correct data
+            UMKMTesting umkm = new UMKMTesting
+            {
+                nama = this.nama,
+                Stock = this.InsertBarang.SelectMany(d => d.Value)
+                                          .ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
+                JenisProduk = new Dictionary<string, string>()
+            };
+
+            // Populate JenisProduk with all products and their categories
+            foreach (var stockEntry in umkm.Stock)
+            {
+                // Check if the product exists in any category
+                foreach (var categoryEntry in this.InsertBarang)
+                {
+                    if (categoryEntry.Value.ContainsKey(stockEntry.Key))
+                    {
+                        umkm.JenisProduk.Add(stockEntry.Key, categoryEntry.Key.ToString());
+                        break;
+                    }
+                }
+            }
+
+            // Call WriteJson to update the JSON file
+            UMKMTesting.WriteJson(umkm);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
+
+    public String GetBarang()
+    {
+        try
+        {
+            // Menampilkan barang yang dimiliki oleh UMKM
+            Console.WriteLine("Nama UMKM: " + this.nama);
+            Console.WriteLine("Nama Barang\tStok barang");
+
+            if (InsertBarang.Count == 0)
+            {
+                throw new Exception("UMKM belum memiliki barang");
+
+            }
+            else
+            {
+                foreach (KategoriBarang kategori in Enum.GetValues(typeof(KategoriBarang)))
+                {
+                    if (InsertBarang.ContainsKey(kategori))
+                    {
+                        foreach (KeyValuePair<string, int> barang in InsertBarang[kategori])
+                        {
+                            Console.WriteLine(barang.Key + "\t\t" + barang.Value);
+                        }
+                    }
+                }
+                return "berhasil";
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return "Gagal";
+        }
+
+    }
+
+    public void TambahStock()
+    {
+        KategoriBarang kategori;
+        int hasilSekarang;
+        try
+        {
+            Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
+            string kategoriString = Console.ReadLine();
+            if (!Enum.TryParse(kategoriString, out kategori))
+            {
+                throw new Exception("Kategori Barang tidak ditemukan");
+            }
+            Console.WriteLine("Masukkan nama barang:");
+            string namaBarang = Console.ReadLine();
+            if (!InsertBarang[kategori].ContainsKey(namaBarang))
+            {
+                throw new Exception("Nama Barang tidak ditemukan");
+            }
+            Console.WriteLine("Masukkan jumlah stok yang ingin ditambahkan ke barang:");
+            int stokBarang = Convert.ToInt32(Console.ReadLine());
+            if (Enum.TryParse(kategoriString, out kategori) && InsertBarang[kategori].ContainsKey(namaBarang))
+            {
+                int jumlahSekarang = InsertBarang[kategori][namaBarang];
+                InsertBarang[kategori][namaBarang] = jumlahSekarang + stokBarang;
+                hasilSekarang = InsertBarang[kategori][namaBarang];
+                Console.WriteLine("Jumlah stok telah ditambah");
+                Console.WriteLine("Jumlah Stok sekarang adalah :" + hasilSekarang);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+    public void KurangStock()
+    {
+        KategoriBarang kategori;
+        // Mengurangi jumlah stok barang
         Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
         string kategoriString = Console.ReadLine();
-
-        if (!Enum.TryParse(typeof(KategoriBarang), kategoriString, true, out var kategori))
+        if (!Enum.TryParse(kategoriString, out kategori))
         {
-            Console.WriteLine("Kategori barang tidak valid.");
-            return;
+            Console.WriteLine("Kategori Barang tidak ditemukan");
         }
 
-        if (Stock.ContainsKey(namaBarang))
+        Console.WriteLine("Masukkan nama barang:");
+        string namaBarang = Console.ReadLine();
+        if (!InsertBarang[kategori].ContainsKey(namaBarang))
         {
-            Console.WriteLine($"Barang '{namaBarang}' sudah ada. Menambah stok.");
-            Stock[namaBarang] += stokBarang;
-        }
-        else
-        {
-            Stock[namaBarang] = stokBarang;
-            JenisProduk[namaBarang] = kategoriString;
+            Console.WriteLine("Nama Barang tidak ditemukan");
         }
 
-        LogAction("Tambah Barang", namaBarang, stokBarang);
-        SaveData();
-    }
-
-    public void GetBarang()
-    {
-        Console.WriteLine("Nama UMKM: " + this.Username);
-        Console.WriteLine("Nama Barang\tStok Barang\tKategori Barang");
-
-        foreach (var barang in Stock)
+        Console.WriteLine("Masukkan jumlah stok yang akan dikurangkan barang:");
+        int stokBarang = Convert.ToInt32(Console.ReadLine());
+        if (Enum.TryParse(kategoriString, out kategori) && InsertBarang[kategori].ContainsKey(namaBarang))
         {
-            string kategori = JenisProduk.ContainsKey(barang.Key) ? JenisProduk[barang.Key] : "Unknown";
-            Console.WriteLine($"{barang.Key}\t\t{barang.Value}\t\t{kategori}");
+            int jumlahSekarang = InsertBarang[kategori][namaBarang];
+            int hasilSekarang;
+            if (jumlahSekarang <= 0)
+            {
+                Console.WriteLine("Stok tidak bisa dikurangi karena sudah 0");
+            }
+            else if (jumlahSekarang > 0)
+            {
+                int tempKurang = jumlahSekarang - stokBarang;
+                if (tempKurang >= 0)
+                {
+                    InsertBarang[kategori][namaBarang] = jumlahSekarang - stokBarang;
+                    Console.WriteLine("Jumlah stok telah dikurang");
+                    hasilSekarang = InsertBarang[kategori][namaBarang];
+                    Console.WriteLine("Jumlah stok sekarang adalah :" + hasilSekarang);
+                }
+                else if (tempKurang < 0)
+                {
+                    InsertBarang[kategori][namaBarang] = 0;
+                    hasilSekarang = InsertBarang[kategori][namaBarang];
+                    Console.WriteLine("Jumlah stok sekarang adalah :" + hasilSekarang);
+                }
+            }
         }
-    }
 
-    public void TambahStok()
-    {
-        UpdateStok("Tambah Stok");
     }
-
-    public void KurangStok()
-    {
-        UpdateStok("Kurang Stok");
-    }
-
     private void UpdateStok(string action)
     {
         Console.WriteLine("Masukkan nama barang:");
@@ -109,14 +243,13 @@ public class UMKM
             Console.WriteLine($"Barang '{namaBarang}' tidak ditemukan.");
         }
     }
-
     private void AutoUpdateStock(object source, ElapsedEventArgs e)
     {
         Console.WriteLine("Auto updating stock...");
 
         foreach (var barang in Stock.Keys)
         {
-            Stock[barang] += 10; 
+            Stock[barang] += 10;
         }
 
         SaveData();
@@ -146,18 +279,18 @@ public class UMKM
             catch (JsonException jsonEx)
             {
                 Console.WriteLine($"JSON format error: {jsonEx.Message}");
-                
+
                 umkmList = new List<UMKM>();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading JSON file: {ex.Message}");
-                
+
                 umkmList = new List<UMKM>();
             }
         }
 
-        var existingUmkm = umkmList.Find(umkm => umkm.Username == this.Username);
+        var existingUmkm = umkmList.Find(umkm => umkm.nama == this.nama);
         if (existingUmkm != null)
         {
             existingUmkm.Stock = this.Stock;
@@ -179,40 +312,71 @@ public class UMKM
         }
     }
 
-    public static void ReadJson()
+
+    public void jumlahproduk(UMKM[] input)
     {
+        // Menghitung jumlah barang yang dimiliki oleh UMKM
         try
         {
-            string[] lines = File.ReadAllLines("umkmconfig.json");
-            foreach (string line in lines)
+            if (input == null)
             {
-                try
+                throw new Exception("UMKM tidak ditemukan");
+            }
+            int hitung = 0;
+            int loop = 0;
+            foreach (KategoriBarang kategori in Enum.GetValues(typeof(KategoriBarang)))
+            {
+                if (InsertBarang.ContainsKey(kategori))
                 {
-                    var umkm = JsonSerializer.Deserialize<UMKM>(line);
-                    Console.WriteLine($"Username: {umkm.Username}");
-                    Console.WriteLine($"Stock: {string.Join(", ", umkm.Stock)}");
-                    Console.WriteLine($"JenisProduk: {string.Join(", ", umkm.JenisProduk)}");
+                    foreach (KeyValuePair<string, int> barang in InsertBarang[kategori])
+                    {
+                        hitung++;
+                    }
                 }
-                catch (JsonException)
+            }
+            foreach (var m in input)
+            {
+                if (m != null)
                 {
-                    
+                    Console.WriteLine("Nama UMKM: " + m.nama);
+                    Console.WriteLine("Jumlah Barang: " + hitung);
+
                 }
             }
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            Console.WriteLine($"");
+            Console.WriteLine(e.Message);
+        }
+        finally
+        {
+            Console.WriteLine("Proses selesai");
         }
     }
-
-
-
-    public enum KategoriBarang
+    public void HapusBarang()
     {
-        Makanan,
-        Minuman,
-        Misc
+        Console.WriteLine("Masukkan nama barang:");
+        string namaBarang = Console.ReadLine();
+        Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
+        string kategoriString = Console.ReadLine();
+        KategoriBarang kategori;
+        if (!Enum.TryParse(kategoriString, true, out kategori))
+        {
+            Console.WriteLine("Kategori barang tidak valid.");
+            return;
+        }
+        if (InsertBarang.ContainsKey(kategori) && InsertBarang[kategori].ContainsKey(namaBarang))
+        {
+            InsertBarang[kategori].Remove(namaBarang);
+            Console.WriteLine("Barang berhasil dihapus.");
+        }
+        else
+        {
+            Console.WriteLine("Barang tidak ditemukan pada kategori tersebut.");
+        }
+    }
+    public static void read()
+    {
+        UMKMTesting.ReadJson();
     }
 }
-
-
