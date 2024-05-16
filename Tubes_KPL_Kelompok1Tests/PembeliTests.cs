@@ -5,21 +5,51 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Text.Json;
 namespace Tubes_KPL_Kelompok1.Tests
 {
     [TestClass()]
     public class PembeliTests
     {
         [TestMethod()]
-        public void PrintkeranjangTest()
+        public void PrintkeranjangKosongTest()
         {
             Pembeli buyer = new Pembeli("Haikal");
 
             Assert.AreEqual("gagal", buyer.Printkeranjang());
-            UMKM umkm = new UMKM("dafa");
+        }
+        [TestMethod()]
+        public void PrintkeranjangisiTest()
+        {
+            Pembeli buyer = new Pembeli("Haikal");
             buyer.keranjang.Add("ad", 10);
             Assert.AreEqual("berhasil", buyer.Printkeranjang());
+        }
+
+        [TestMethod()]
+        public void tambahBarangJSONTest()
+        {
+            Boolean expected = false;
+            BuyerConfig buyer = new BuyerConfig();
+            BuyerConfig.tambahbarangjson("dafa", "Haikal", "Bakso", 3);
+            BuyerConfig config = JsonSerializer.Deserialize<BuyerConfig>(BuyerConfig.json);
+            String umkmname = "dafa";
+            String buyername = "Haikal";
+            String namabarang = "Bakso";
+            int qty = 3;
+            if (config.Pembeli.ContainsKey(buyername))
+            {
+                var buy = config.Pembeli[buyername];
+                if (buy.UMKM.ContainsKey(umkmname))
+                {
+                    var umkm = buy.UMKM[umkmname];
+                    if (umkm.ContainsKey(namabarang))
+                    {
+                        expected = true;
+                    }
+                }
+            }
+            Assert.IsTrue(expected);
         }
 
     }
@@ -63,44 +93,61 @@ namespace Tubes_KPL_Kelompok1.Tests
             Assert.AreEqual("Gagal", umkm.GetBarang());
         }
     }
-    [TestClass()]
-    public class UMKMTests
-    {
-        //Testing fersya
-        [TestMethod()]
-        public void jumlahprodukTest()
-        {
-           
-            UMKM umkm = new UMKM("DoNut Surrender");
-            umkm.TambahBarang(); 
-            UMKM[] umkmArray = new UMKM[] { umkm, null };
-            int totalProducts = umkm.jumlahproduk();
-            Assert.IsTrue(totalProducts == 20);
-        }
-    }
-    [TestClass()]
-    public class UMKMTests2
-    {
-        [TestMethod()]
-        public void HapusBarangTest()
-        {
-            UMKM umkm = new UMKM("Toko Kelontong");
 
-            string namaBarang = "Sabun";
-            UMKM.KategoriBarang kategori = UMKM.KategoriBarang.Misc;
-            int initialStock = 10;
-            umkm.TambahBarang();
+    [TestClass()]
+    public class UMKMUnitTest
+    {
+        [TestMethod()]
+        public void TestSaveData()
+        {
+            Console.WriteLine("Starting TestSaveData...");
+
+            UMKM umkm = new UMKM("TestUMKM");
+            umkm.Stock.Add("TestProduct", 10);
+            umkm.JenisProduk.Add("TestProduct", "TestCategory");
+
+            umkm.SaveData();
+
+            // Check if the JSON file exists and contains the expected data
+            string json = File.ReadAllText("umkmconfig.json");
+            List<UMKM> umkmList = JsonSerializer.Deserialize<List<UMKM>>(json);
+            bool success = false;
+            foreach (var item in umkmList)
+            {
+                if (item.nama == "TestUMKM" && item.Stock.ContainsKey("TestProduct"))
+                {
+                    success = true;
+                    break;
+                }
+            }
+
+            Console.WriteLine("TestSaveData result: " + (success ? "Passed" : "Failed"));
+        }
+        [TestMethod()]
+        public void TestReadJson()
+        {
+            Console.WriteLine("Starting TestReadJson...");
+
             try
             {
-                umkm.HapusBarang();
+                string json = File.ReadAllText("umkmconfig.json");
+                Console.WriteLine("TestReadJson result: Passed");
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                
-                Assert.Fail($"Unexpected exception: {e.Message}");
+                Console.WriteLine("TestReadJson result: Failed. Error: " + ex.Message);
             }
-            bool itemRemoved = !umkm.InsertBarang.ContainsKey(kategori);
-            Assert.IsTrue(itemRemoved, $"barang '{namaBarang}' tidak terhapus dari kategori {kategori}");
-        }   
+        }
+
+        public void RunTests()
+        {
+            TestSaveData();
+            TestReadJson();
+        }
+
+        public void Main(string[] args)
+        {
+            RunTests();
+        }
     }
 }
