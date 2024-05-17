@@ -369,24 +369,30 @@ public class UMKM
     }
     public void HapusBarang()
     {
-        Console.WriteLine("Masukkan nama barang:");
-        string namaBarang = Console.ReadLine();
-        Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
-        string kategoriString = Console.ReadLine();
-        KategoriBarang kategori;
-        if(!Enum.TryParse(kategoriString, true, out kategori))
+        try
         {
-            Console.WriteLine("Kategori barang tidak valid.");
-            return;
+            Console.WriteLine("Masukkan nama barang:");
+            string namaBarang = Console.ReadLine();
+            Console.WriteLine("Masukkan kategori barang (Makanan, Minuman, Misc):");
+            string kategoriString = Console.ReadLine();
+            KategoriBarang kategori;
+            if (!Enum.TryParse(kategoriString, true, out kategori))
+            {
+                throw new Exception("Kategori barang tidak valid.");
+            }
+            if (InsertBarang.ContainsKey(kategori) && InsertBarang[kategori].ContainsKey(namaBarang))
+            {
+                InsertBarang[kategori].Remove(namaBarang);
+                Console.WriteLine("Barang berhasil dihapus.");
+            }
+            else
+            {
+                throw new Exception("Barang tidak ditemukan pada kategori tersebut.");
+            }
         }
-        if(InsertBarang.ContainsKey(kategori) && InsertBarang[kategori].ContainsKey(namaBarang))
+        catch (Exception e)
         {
-            InsertBarang[kategori].Remove(namaBarang);
-            Console.WriteLine("Barang berhasil dihapus.");
-        }
-        else
-        {
-            Console.WriteLine("Barang tidak ditemukan pada kategori tersebut.");
-        }
+            Console.WriteLine(e.Message);
+        }   
     }
 }
