@@ -268,7 +268,7 @@ class programe
                         else if (intCek == 10)
                         {
 
-                            UMKM.ReadJson();
+                            UMKM.read();
 
                         }
                         else if (intCek == 11)
