@@ -256,7 +256,7 @@ public class UMKM
             {
                 Console.WriteLine($"Error reading JSON file: {ex.Message}");
 
-                umkmList = new List<UMKM>();
+                umkmList = new List<UMKM>(;
             }
         }
 

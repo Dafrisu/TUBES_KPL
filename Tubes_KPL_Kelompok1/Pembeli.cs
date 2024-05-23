@@ -18,6 +18,7 @@ namespace Tubes_KPL_Kelompok1
             this.nama = nama;
         }
         public Dictionary<String, int> keranjang = new Dictionary<String, int>();
+        
 
         public String Printkeranjang()
         {
