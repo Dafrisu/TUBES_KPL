@@ -41,18 +41,12 @@ class programe
         {
             try
             {
-<<<<<<< HEAD
-                if (stringCek.Equals("Pembeli"))
-                {
-                    cek.Pembeli();
-=======
                 IdentifyUser cek = new IdentifyUser();
                 stringCek = Console.ReadLine();
                 if (stringCek.Equals("Pembeli"))
                 {
                     cek.Pembeli();
                     stateAplikasi.FiturPembeli();
->>>>>>> c7e506a88ac31deb6a188dd957e4b6b609b98245
                     if (!pembeliInstanceExists) // Memeriksa apakah instance UMKM sudah ada
                     {
                         Console.WriteLine("Masukkan nama Pembeli");
@@ -73,11 +67,7 @@ class programe
                     Console.WriteLine("8. Masukan Data Ke keranjang Json");
                     Console.WriteLine("9. Tampilkan Json");
                     Console.WriteLine("10. Login sebagai User yang lain");
-<<<<<<< HEAD
-                    Console.WriteLine("15. Keluar dari Program");
-=======
                     Console.WriteLine("23. Keluar dari Program");
->>>>>>> c7e506a88ac31deb6a188dd957e4b6b609b98245
                     try
                     {
                         intCek = Convert.ToInt32(Console.ReadLine());
@@ -158,17 +148,10 @@ class programe
                         }
                         else if (intCek == 10)
                         {
-<<<<<<< HEAD
-                            Console.WriteLine("Masukkan input berupa Pembeli atau UMKM");
-                            stringCek = Console.ReadLine();
-                        }
-                        else if (intCek == 15)
-=======
                             Console.WriteLine("Masukkan input berupa Pembeli atau UMKM atau Admin");
                             stringCek = Console.ReadLine();
                         }
                         else if (intCek == 23)
->>>>>>> c7e506a88ac31deb6a188dd957e4b6b609b98245
                         {
 
                         }
@@ -187,11 +170,7 @@ class programe
                 else if (stringCek.Equals("UMKM"))
                 {
                     cek.UMKM();
-<<<<<<< HEAD
-
-=======
                     stateAplikasi.FiturUMKM();
->>>>>>> c7e506a88ac31deb6a188dd957e4b6b609b98245
                     if (!umkmInstanceExists) // Memeriksa apakah instance UMKM sudah ada
                     {
                         Console.WriteLine("Masukkan nama UMKM");
@@ -289,21 +268,6 @@ class programe
                         }
                         else if (intCek == 10)
                         {
-<<<<<<< HEAD
-                            BuyerConfig.ReadJson();
-
-                        }
-                        else if (intCek == 11)
-                        {
-                            Console.WriteLine("Masukkan input berupa Pembeli atau UMKM");
-                            stringCek = Console.ReadLine();
-                        }
-                        else if (intCek == 15)
-                        {
-
-                        }
-=======
-
                             UMKM.read();
 
                         }
@@ -316,7 +280,6 @@ class programe
                         {
 
                         }
->>>>>>> c7e506a88ac31deb6a188dd957e4b6b609b98245
                         else
                         {
                             throw new Exception("Input Tidak Valid");
@@ -325,14 +288,7 @@ class programe
                     catch (Exception e)
                     {
                         Console.WriteLine(e.Message);
-<<<<<<< HEAD
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-=======
+
                     }
                 }else if (stringCek.Equals("Admin")){
                     cek.Admin();
@@ -389,7 +345,6 @@ class programe
                 {
                     throw new Exception("Inputan Salah");
                 }
->>>>>>> c7e506a88ac31deb6a188dd957e4b6b609b98245
             }
             catch (Exception e)
             {

@@ -18,11 +18,8 @@ namespace Tubes_KPL_Kelompok1
         {
             public Dictionary<string, Dictionary<string, int>> UMKM { get; set; }
         }
-<<<<<<< HEAD
         static string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
-=======
-        static string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
->>>>>>> c7e506a88ac31deb6a188dd957e4b6b609b98245
+
 
 
         // Baca JSON dari file
@@ -30,24 +27,14 @@ namespace Tubes_KPL_Kelompok1
 
         public static void printJson()
         {
-<<<<<<< HEAD
             string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
-=======
-            string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
->>>>>>> c7e506a88ac31deb6a188dd957e4b6b609b98245
-
             // Baca JSON dari file
             string json = File.ReadAllText(jsonFilePath);
             Console.WriteLine(json);
         }
         public static void tambahbarangjson(String umkmname, String buyername, String namabarang, int qty)
         {
-<<<<<<< HEAD
             string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
-
-=======
-            string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
->>>>>>> c7e506a88ac31deb6a188dd957e4b6b609b98245
             // Baca JSON dari file
             string json = File.ReadAllText(jsonFilePath);
 
@@ -107,11 +94,8 @@ namespace Tubes_KPL_Kelompok1
         }
         public static void UpdateQuantity(string buyerName, string umkmName, string itemName, int newQuantity)
         {
-<<<<<<< HEAD
+
             string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
-=======
-            string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
->>>>>>> c7e506a88ac31deb6a188dd957e4b6b609b98245
 
             // Baca JSON dari file
             string json = File.ReadAllText(jsonFilePath);
@@ -160,12 +144,7 @@ namespace Tubes_KPL_Kelompok1
             };
             try
             {
-<<<<<<< HEAD
                 string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
-=======
-                string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
->>>>>>> c7e506a88ac31deb6a188dd957e4b6b609b98245
-
                 string json = File.ReadAllText(jsonFilePath);
                 if (jsonFilePath != null)
                 {
