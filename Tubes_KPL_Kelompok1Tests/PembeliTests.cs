@@ -149,5 +149,54 @@ namespace Tubes_KPL_Kelompok1.Tests
         {
             RunTests();
         }
+
+    }
+    [TestClass()]
+    public class testAppstate
+    {
+        [TestMethod()]
+        public void TestingAppsState()
+        {
+            stateAplikasi state = new stateAplikasi();
+            state.FiturUMKM();
+            Assert.AreEqual(stateAplikasi.AppsState.FiturUMKM, state.getCurrentState());
+            state.FiturPembeli();
+            Assert.AreEqual(stateAplikasi.AppsState.FiturPembeli, state.getCurrentState());
+            state.FiturAdmin();
+            Assert.AreEqual(stateAplikasi.AppsState.FiturAdmin, state.getCurrentState());
+        }
+    }
+    [TestClass()]
+    public class testjumlahproduk
+    {
+        [TestMethod()]
+        public void TestingJumlahProduk()
+        {
+            UMKM umkm = new UMKM("bakso");
+            umkm.Stock.Add("Bakso", 10);
+            umkm.Stock.Add("Mie Ayam", 5);
+            umkm.Stock.Add("Sate", 15);
+            Assert.AreEqual(10, umkm.Stock["Bakso"]);
+            Assert.AreEqual(5, umkm.Stock["Mie Ayam"]);
+            Assert.AreEqual(15, umkm.Stock["Sate"]);
+        }
+    }
+    [TestClass()]
+    public class testUMKM
+    {
+        [TestMethod()]
+        public void TestHapusBarang()
+        {
+            UMKM umkm = new UMKM("DoNut Surrender");
+            umkm.InsertBarang[UMKM.KategoriBarang.Makanan] = new Dictionary<string, int>
+            {
+                { "Donut Coklat", 10 }
+            };
+            string input = "Donut Coklat\nMakanan";
+            StringReader stringReader = new StringReader(input);
+            Console.SetIn(stringReader);
+            umkm.HapusBarang(); 
+            Assert.IsFalse(umkm.InsertBarang[UMKM.KategoriBarang.Makanan].ContainsKey("DoNut Coklat"));
+        }
     }
 }
