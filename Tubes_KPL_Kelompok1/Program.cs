@@ -36,7 +36,7 @@ class programe
         
         
 
-        while (intCek != 23)
+        while (intCek != 15)
         {
             try
             {
@@ -66,7 +66,7 @@ class programe
                     Console.WriteLine("8. Masukan Data Ke keranjang Json");
                     Console.WriteLine("9. Tampilkan Json");
                     Console.WriteLine("10. Login sebagai User yang lain");
-                    Console.WriteLine("23. Keluar dari Program");
+                    Console.WriteLine("15. Keluar dari Program");
                     try
                     {
                         intCek = Convert.ToInt32(Console.ReadLine());
@@ -150,7 +150,7 @@ class programe
                             Console.WriteLine("Masukkan input berupa Pembeli atau UMKM atau Admin");
                             stringCek = Console.ReadLine();
                         }
-                        else if (intCek == 23)
+                        else if (intCek == 15)
                         {
 
                         }
@@ -276,7 +276,7 @@ class programe
                             Console.WriteLine("Masukkan input berupa Pembeli atau UMKM atau Admin");
                             stringCek = Console.ReadLine();
                         }
-                        else if (intCek == 23)
+                        else if (intCek == 15)
                         {
 
                         }
