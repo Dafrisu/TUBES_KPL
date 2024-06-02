@@ -46,14 +46,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="GUILogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="GUILogin.Designer.cs">
+      <DependentUpon>GUILogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIUmkm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIUmkm.Designer.cs">
+      <DependentUpon>GUIUmkm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginCredentials.cs" />
+    <Compile Include="GUIPembeli.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIPembeli.Designer.cs">
+      <DependentUpon>GUIPembeli.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUILogin.resx">
+      <DependentUpon>GUILogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIPembeli.resx">
+      <DependentUpon>GUIPembeli.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIUmkm.resx">
+      <DependentUpon>GUIUmkm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

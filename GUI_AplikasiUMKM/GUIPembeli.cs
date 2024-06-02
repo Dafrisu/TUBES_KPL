@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace GUI_AplikasiUMKM
 {
-    public partial class Form1 : Form
+    public partial class GUIPembeli : Form
     {
-        public Form1()
+        public GUIPembeli()
         {
             InitializeComponent();
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
