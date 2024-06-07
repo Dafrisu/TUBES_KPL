@@ -14,6 +14,7 @@ namespace GUI_APP
     {
         private List<Panel> panelList;
         private FlowLayoutPanel panelContainer;
+        private FlowLayoutPanel layoutKeranjang;
         public GUIPembeli()
         {
             InitializeComponent();
@@ -24,16 +25,13 @@ namespace GUI_APP
             panelContainer.AutoScroll = true; // Izinkan kontainer untuk melakukan scroll jika diperlukan
             this.Controls.Add(panelContainer);
 
-
+            // menampilkan panel menu, yang berada di atas aplikasi, yang berisi keranjang, profil dll
             panelMenu();
 
+            // menggenerate barang (sementara, hanya untuk testing)
             BarangUMKM.GenerateBarang();
-            // Tambahkan 10 panel secara dinamis ke dalam kontainer
+            // Menambahkan panel yang berisi barang barang dari UMKM
             AddPanels();
-
-            // Tambahkan button untuk memodifikasi panel
-
-            
         }
 
         private void panelMenu()
@@ -63,12 +61,65 @@ namespace GUI_APP
             {
                 MessageBox.Show("Keranjang di Klik");
                 panelContainer.Visible = false;
+                KeranjangPembeli();
+                interfaceKeranjang();
+                layoutKeranjang.Visible = true;
             };
 
             panelAtas.Controls.Add(keranjang);
             panelAtas.Controls.Add(pictureBox);
             panelAtas.Controls.Add(userLabel);
             panelContainer.Controls.Add(panelAtas);
+        }
+
+        private void KeranjangPembeli()
+        {
+            layoutKeranjang = new FlowLayoutPanel();
+            layoutKeranjang.Dock = DockStyle.Fill;
+            layoutKeranjang.AutoScroll = true; // Izinkan kontainer untuk melakukan scroll jika diperlukan
+            this.Controls.Add(layoutKeranjang);
+
+            // untuk panel bagian atas
+            Panel panelAtas = new Panel();
+            panelAtas.Size = new System.Drawing.Size(760, 70);
+            panelAtas.BackColor = System.Drawing.Color.GreenYellow;
+
+            Label backLabel = new Label();
+            backLabel.Text = "Back";
+            backLabel.Size = new System.Drawing.Size(150, 25);
+            backLabel.Font = new Font("Arial", 9, FontStyle.Regular);
+            backLabel.Location = new System.Drawing.Point(10, 30);
+            backLabel.Click += (sender, e) =>
+            {
+                layoutKeranjang.Visible = false;
+                panelContainer.Visible = true;
+            };
+
+            panelAtas.Controls.Add(backLabel);
+            layoutKeranjang.Controls.Add(panelAtas);
+
+        }
+
+        private void interfaceKeranjang()
+        {
+            int i = 0;
+            foreach (var barang in DataKeranjang.listKeranjang)
+            {
+                Panel panel = new Panel();
+                panel.Size = new System.Drawing.Size(500, 100);
+                panel.Location = new System.Drawing.Point(10, 40 + (110 * i));
+                panel.BackColor = System.Drawing.Color.Gray;
+
+                // bikin label namabarang
+                Label label = new Label();
+                label.Text = barang.namabarang;
+                label.Size = new System.Drawing.Size(150, 25);
+                label.Font = new Font("Arial", 9, FontStyle.Regular);
+                label.Location = new System.Drawing.Point(40, 30);
+
+                panel.Controls.Add(label);
+                layoutKeranjang.Controls.Add(panel);
+            }
         }
 
         private void AddPanels()
@@ -101,7 +152,7 @@ namespace GUI_APP
 
                 // bikin stok label
                 Label stoklabel = new Label();
-                stoklabel.Text = "Stok : " + barang.stok ;
+                stoklabel.Text = "Stok : " + barang.stok;
                 stoklabel.Size = new System.Drawing.Size(150, 25);
                 stoklabel.Font = new Font("Arial", 8, FontStyle.Regular);
                 stoklabel.Location = new System.Drawing.Point(40, 60);
@@ -113,6 +164,7 @@ namespace GUI_APP
                 hargalabel.Size = new System.Drawing.Size(150, 25);
                 hargalabel.Location = new System.Drawing.Point(380, 40);
 
+                // menambahkan semua attribut diatas ke panel
                 panel.Controls.Add(label);
                 panel.Controls.Add(stoklabel);
                 panel.Controls.Add(button);
@@ -127,6 +179,7 @@ namespace GUI_APP
                     if(barang.stok > 0)
                     {
                         MessageBox.Show($"{label.Text} Berhasil dimasukan ke keranjang!");
+                        DataKeranjang.tambahkeKeranjang(barang.namabarang, barang.harga);
                         barang.stok = barang.stok - 1;
                         stoklabel.Text = "Stok : " + barang.stok;
                     }
