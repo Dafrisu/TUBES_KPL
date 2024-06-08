@@ -47,9 +47,9 @@
             // 
             this.LabelLogin.AutoSize = true;
             this.LabelLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.LabelLogin.Location = new System.Drawing.Point(339, 96);
+            this.LabelLogin.Location = new System.Drawing.Point(381, 120);
             this.LabelLogin.Name = "LabelLogin";
-            this.LabelLogin.Size = new System.Drawing.Size(101, 39);
+            this.LabelLogin.Size = new System.Drawing.Size(118, 46);
             this.LabelLogin.TabIndex = 0;
             this.LabelLogin.Text = "Login";
             // 
@@ -57,49 +57,52 @@
             // 
             this.labelWelcome.AutoSize = true;
             this.labelWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.labelWelcome.Location = new System.Drawing.Point(170, 21);
+            this.labelWelcome.Location = new System.Drawing.Point(191, 26);
             this.labelWelcome.Name = "labelWelcome";
-            this.labelWelcome.Size = new System.Drawing.Size(450, 48);
+            this.labelWelcome.Size = new System.Drawing.Size(539, 58);
             this.labelWelcome.TabIndex = 1;
             this.labelWelcome.Text = "Welcome To MyUMKM";
             // 
             // labelUsername
             // 
             this.labelUsername.AutoSize = true;
-            this.labelUsername.Location = new System.Drawing.Point(106, 178);
+            this.labelUsername.Location = new System.Drawing.Point(119, 222);
             this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(70, 16);
+            this.labelUsername.Size = new System.Drawing.Size(83, 20);
             this.labelUsername.TabIndex = 2;
             this.labelUsername.Text = "Username";
             // 
             // labelPassword
             // 
             this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(109, 218);
+            this.labelPassword.Location = new System.Drawing.Point(123, 272);
             this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(67, 16);
+            this.labelPassword.Size = new System.Drawing.Size(78, 20);
             this.labelPassword.TabIndex = 3;
             this.labelPassword.Text = "Password";
             // 
             // textBoxUsername
             // 
-            this.textBoxUsername.Location = new System.Drawing.Point(182, 175);
+            this.textBoxUsername.Location = new System.Drawing.Point(205, 219);
+            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(426, 22);
+            this.textBoxUsername.Size = new System.Drawing.Size(479, 26);
             this.textBoxUsername.TabIndex = 4;
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(183, 218);
+            this.textBoxPassword.Location = new System.Drawing.Point(206, 272);
+            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(425, 22);
+            this.textBoxPassword.Size = new System.Drawing.Size(478, 26);
             this.textBoxPassword.TabIndex = 5;
             // 
             // ButtonLogin
             // 
-            this.ButtonLogin.Location = new System.Drawing.Point(433, 363);
+            this.ButtonLogin.Location = new System.Drawing.Point(487, 454);
+            this.ButtonLogin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonLogin.Name = "ButtonLogin";
-            this.ButtonLogin.Size = new System.Drawing.Size(75, 26);
+            this.ButtonLogin.Size = new System.Drawing.Size(84, 32);
             this.ButtonLogin.TabIndex = 6;
             this.ButtonLogin.Text = "Login";
             this.ButtonLogin.UseVisualStyleBackColor = true;
@@ -107,9 +110,10 @@
             // 
             // ButtonRegister
             // 
-            this.ButtonRegister.Location = new System.Drawing.Point(272, 365);
+            this.ButtonRegister.Location = new System.Drawing.Point(306, 456);
+            this.ButtonRegister.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonRegister.Name = "ButtonRegister";
-            this.ButtonRegister.Size = new System.Drawing.Size(75, 24);
+            this.ButtonRegister.Size = new System.Drawing.Size(84, 30);
             this.ButtonRegister.TabIndex = 7;
             this.ButtonRegister.Text = "Register";
             this.ButtonRegister.UseVisualStyleBackColor = true;
@@ -117,9 +121,10 @@
             // radioPembeli
             // 
             this.radioPembeli.AutoSize = true;
-            this.radioPembeli.Location = new System.Drawing.Point(6, 33);
+            this.radioPembeli.Location = new System.Drawing.Point(7, 41);
+            this.radioPembeli.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.radioPembeli.Name = "radioPembeli";
-            this.radioPembeli.Size = new System.Drawing.Size(78, 20);
+            this.radioPembeli.Size = new System.Drawing.Size(90, 24);
             this.radioPembeli.TabIndex = 8;
             this.radioPembeli.TabStop = true;
             this.radioPembeli.Text = "Pembeli";
@@ -129,9 +134,10 @@
             // radioUMKM
             // 
             this.radioUMKM.AutoSize = true;
-            this.radioUMKM.Location = new System.Drawing.Point(126, 33);
+            this.radioUMKM.Location = new System.Drawing.Point(142, 41);
+            this.radioUMKM.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.radioUMKM.Name = "radioUMKM";
-            this.radioUMKM.Size = new System.Drawing.Size(68, 20);
+            this.radioUMKM.Size = new System.Drawing.Size(82, 24);
             this.radioUMKM.TabIndex = 9;
             this.radioUMKM.TabStop = true;
             this.radioUMKM.Text = "UMKM";
@@ -141,9 +147,9 @@
             // labelTypeUser
             // 
             this.labelTypeUser.AutoSize = true;
-            this.labelTypeUser.Location = new System.Drawing.Point(112, 293);
+            this.labelTypeUser.Location = new System.Drawing.Point(126, 366);
             this.labelTypeUser.Name = "labelTypeUser";
-            this.labelTypeUser.Size = new System.Drawing.Size(64, 16);
+            this.labelTypeUser.Size = new System.Drawing.Size(73, 20);
             this.labelTypeUser.TabIndex = 10;
             this.labelTypeUser.Text = "TipeUser";
             // 
@@ -151,17 +157,19 @@
             // 
             this.groupBox1.Controls.Add(this.radioPembeli);
             this.groupBox1.Controls.Add(this.radioUMKM);
-            this.groupBox1.Location = new System.Drawing.Point(183, 257);
+            this.groupBox1.Location = new System.Drawing.Point(206, 321);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 78);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Size = new System.Drawing.Size(225, 98);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             // 
-            // Form1
+            // GUILogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(900, 562);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.labelTypeUser);
             this.Controls.Add(this.ButtonRegister);
@@ -172,8 +180,10 @@
             this.Controls.Add(this.labelUsername);
             this.Controls.Add(this.labelWelcome);
             this.Controls.Add(this.LabelLogin);
-            this.Name = "Form1";
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = "GUILogin";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.GUILogin_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

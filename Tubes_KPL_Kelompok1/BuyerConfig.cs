@@ -18,7 +18,8 @@ namespace Tubes_KPL_Kelompok1
         {
             public Dictionary<string, Dictionary<string, int>> UMKM { get; set; }
         }
-        static string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+        static string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+
 
 
         // Baca JSON dari file
@@ -26,15 +27,14 @@ namespace Tubes_KPL_Kelompok1
 
         public static void printJson()
         {
-            string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
-
+            string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
             // Baca JSON dari file
             string json = File.ReadAllText(jsonFilePath);
             Console.WriteLine(json);
         }
         public static void tambahbarangjson(String umkmname, String buyername, String namabarang, int qty)
         {
-            string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+            string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
             // Baca JSON dari file
             string json = File.ReadAllText(jsonFilePath);
 
@@ -66,7 +66,7 @@ namespace Tubes_KPL_Kelompok1
                     {
                         buyer.UMKM[umkmname] = new Dictionary<string, int> { { namabarang, qty } };
                     }
-                }
+                } 
                 else
                 {
                     config.Pembeli[buyername] = new Buyer
@@ -94,7 +94,8 @@ namespace Tubes_KPL_Kelompok1
         }
         public static void UpdateQuantity(string buyerName, string umkmName, string itemName, int newQuantity)
         {
-            string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
+
+            string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
 
             // Baca JSON dari file
             string json = File.ReadAllText(jsonFilePath);
@@ -143,8 +144,7 @@ namespace Tubes_KPL_Kelompok1
             };
             try
             {
-                string jsonFilePath = @"C:\Users\daffa\Documents\File semester 4\TP KPL\Tubes_KPL_Kelompok1\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
-
+                string jsonFilePath = @"C:\Users\haika\OneDrive\Dokumen\KULIAH\SEMESTER 4\Konstruksi Perangkat Lunak\Tubes\TUBES_KPL\Tubes_KPL_Kelompok1\buyerconfig.json";
                 string json = File.ReadAllText(jsonFilePath);
                 if (jsonFilePath != null)
                 {

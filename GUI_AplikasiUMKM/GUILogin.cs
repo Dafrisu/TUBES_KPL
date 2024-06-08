@@ -56,5 +56,10 @@ namespace GUI_AplikasiUMKM
         {
             tipe = radioUMKM.Text;
         }
+
+        private void GUILogin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
