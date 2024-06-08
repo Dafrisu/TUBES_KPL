@@ -35,6 +35,8 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "GUIPembeli";
             Text = "GUIPembeli";
             Load += GUIPembeli_Load;
@@ -42,5 +44,7 @@
         }
 
         #endregion
+
+        private Panel panel1;
     }
 }

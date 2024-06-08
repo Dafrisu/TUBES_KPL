@@ -121,7 +121,16 @@
   <data name="Keranjangicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>16744398191571183082-128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="MinusIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>5020973501543238905-128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlusIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>117199341543238913-128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="profilePic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>8788070391647100444-128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TrashcanIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>10170060371674824728-128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

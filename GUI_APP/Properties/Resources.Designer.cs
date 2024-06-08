@@ -73,9 +73,39 @@ namespace GUI_APP.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MinusIcon {
+            get {
+                object obj = ResourceManager.GetObject("MinusIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PlusIcon {
+            get {
+                object obj = ResourceManager.GetObject("PlusIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap profilePic {
             get {
                 object obj = ResourceManager.GetObject("profilePic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TrashcanIcon {
+            get {
+                object obj = ResourceManager.GetObject("TrashcanIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
