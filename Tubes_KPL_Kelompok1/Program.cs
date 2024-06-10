@@ -35,6 +35,7 @@ class programe
         
         
         
+        
 
         while (intCek != 15)
         {
@@ -267,7 +268,6 @@ class programe
                         }
                         else if (intCek == 10)
                         {
-
                             UMKM.read();
 
                         }
@@ -288,6 +288,7 @@ class programe
                     catch (Exception e)
                     {
                         Console.WriteLine(e.Message);
+
                     }
                 }else if (stringCek.Equals("Admin")){
                     cek.Admin();
