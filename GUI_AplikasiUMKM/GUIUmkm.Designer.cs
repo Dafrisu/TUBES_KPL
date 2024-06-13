@@ -49,8 +49,9 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(427, 304);
+            this.dataGridView1.Size = new System.Drawing.Size(382, 304);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // ColumnTipe
             // 
@@ -71,11 +72,11 @@
             this.ColumnStok.HeaderText = "Stok";
             this.ColumnStok.MinimumWidth = 6;
             this.ColumnStok.Name = "ColumnStok";
-            this.ColumnStok.Width = 125;
+            this.ColumnStok.Width = 80;
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(533, 89);
+            this.buttonAdd.Location = new System.Drawing.Point(476, 90);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 1;
@@ -84,7 +85,7 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(533, 119);
+            this.buttonDelete.Location = new System.Drawing.Point(476, 119);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 2;
@@ -93,7 +94,7 @@
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(533, 149);
+            this.buttonEdit.Location = new System.Drawing.Point(476, 148);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(75, 23);
             this.buttonEdit.TabIndex = 3;
@@ -119,11 +120,11 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTipe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNama;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnStok;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTipe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNama;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnStok;
     }
 }

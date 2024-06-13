@@ -19,12 +19,21 @@ namespace GUI_APP
         Panel fixedpanel;
         Panel containerPanel;
         Label totalHargaLabel;
+        List<BarangUMKM> listUMKM = new List<BarangUMKM>();
 
         public GUIPembeli()
         {
             InitializeComponent();
             // menggenerate barang (sementara, hanya untuk testing)
-            BarangUMKM.GenerateBarang();
+            BarangUMKM Haikal = new BarangUMKM();
+            Haikal.GenerateBarang1();
+
+            BarangUMKM Dafa = new BarangUMKM();
+            Dafa.GenerateBarang2();
+            
+            listUMKM.Add(Haikal);
+            listUMKM.Add(Dafa);
+
             totalHargaLabel = new Label();
 
             containerPanel = new Panel();
@@ -168,7 +177,7 @@ namespace GUI_APP
                 plusitem.Location = new Point(435, 65);
                 plusitem.Click += (sender, e) =>
                 {
-                    foreach(var barangumkm in BarangUMKM.listBarang)
+                    foreach(var barangumkm in listUMKM)
                     {
                         if (barang.namabarang.Equals(barangumkm.namabarang)){
                             if(barangumkm.stok > 0)
@@ -196,29 +205,31 @@ namespace GUI_APP
                 minusitem.Location = new Point(365, 65);
                 minusitem.Click += (sender, e) =>
                 {
-                    foreach (var barangumkm in BarangUMKM.listBarang)
+                    foreach (var umkm in listUMKM)
                     {
-                        if (barang.namabarang.Equals(barangumkm.namabarang))
-                        {
-                            if(barang.qty > 1)
+                        foreach (var barangumkm in umkm.listBarang) {
+                            if (barang.namabarang.Equals(barangumkm.namabarang))
                             {
-                                barangumkm.stok++;
-                                barang.qty--;
-                                fixedpanel.Controls.Remove(totalHargaLabel);
-                                totalharga = updatetotalharga();
-                                totalHargaLabel.Text = "Total Harga: RP." + totalharga;
-                                fixedpanel.Controls.Add(totalHargaLabel);
-                                Labelqty.Text = "" + barang.qty;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Barang Dihapus");
-                                deletefromKeranjang(barang);
-                                fixedpanel.Controls.Remove(totalHargaLabel);
-                                totalharga = updatetotalharga();
-                                totalHargaLabel.Text = "Total Harga: RP." + totalharga;
-                                fixedpanel.Controls.Add(totalHargaLabel);
-                                layoutKeranjang.Controls.Remove(panel);
+                                if (barang.qty > 1)
+                                {
+                                    barangumkm.stok++;
+                                    barang.qty--;
+                                    fixedpanel.Controls.Remove(totalHargaLabel);
+                                    totalharga = updatetotalharga();
+                                    totalHargaLabel.Text = "Total Harga: RP." + totalharga;
+                                    fixedpanel.Controls.Add(totalHargaLabel);
+                                    Labelqty.Text = "" + barang.qty;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Barang Dihapus");
+                                    deletefromKeranjang(barang);
+                                    fixedpanel.Controls.Remove(totalHargaLabel);
+                                    totalharga = updatetotalharga();
+                                    totalHargaLabel.Text = "Total Harga: RP." + totalharga;
+                                    fixedpanel.Controls.Add(totalHargaLabel);
+                                    layoutKeranjang.Controls.Remove(panel);
+                                }
                             }
                         }
                     }
@@ -271,88 +282,95 @@ namespace GUI_APP
             fixedpanel.Controls.Add(totalHargaLabel);
         }
 
-        private void AddPanels()
+        public void AddPanels()
         {
             
             panelList = new List<Panel>();
             int i = 0;
-            foreach(var barang in BarangUMKM.listBarang)
+            foreach(var umkm in listUMKM)
             {
-
-                // Bikin Panel
-                Panel panel = new Panel();
-                panel.Size = new System.Drawing.Size(500, 100);
-                panel.Location = new System.Drawing.Point(10, 40 + (110 * i));
-                panel.BackColor = System.Drawing.Color.WhiteSmoke;
-
-                // bikin button
-                Button button = new Button();
-                button.Text = $"ADD";
-                button.Size = new System.Drawing.Size(70, 25);
-                button.Font = new Font("Arial", 7, FontStyle.Regular);
-                button.Location = new System.Drawing.Point(400, 70);
-
-                // bikin label namabarang
-                Label label = new Label();
-                label.Text = barang.namabarang;
-                label.Size = new System.Drawing.Size(150, 25);
-                label.Font = new Font("Arial", 9, FontStyle.Regular);
-                label.Location = new System.Drawing.Point(40, 30);
-
-                // bikin stok label
-                Label stoklabel = new Label();
-                stoklabel.Text = "Stok : " + barang.stok;
-                stoklabel.Size = new System.Drawing.Size(150, 25);
-                stoklabel.Font = new Font("Arial", 8, FontStyle.Regular);
-                stoklabel.Location = new System.Drawing.Point(40, 60);
-
-                // label harga
-                Label hargalabel = new Label();
-                hargalabel.Text = "Harga : " + barang.harga;
-                hargalabel.Font = new Font("Arial", 8, FontStyle.Regular);
-                hargalabel.Size = new System.Drawing.Size(150, 25);
-                hargalabel.Location = new System.Drawing.Point(380, 40);
-
-                // menambahkan semua attribut diatas ke panel
-                panel.Controls.Add(label);
-                panel.Controls.Add(stoklabel);
-                panel.Controls.Add(button);
-                panel.Controls.Add(hargalabel);
-                panelContainer.Controls.Add(panel);
-
-                panelList.Add(panel);
-
-                int buttonIndex = i + 1;
-                button.Click += (sender, e) =>
+                foreach (var barang in umkm.listBarang) 
                 {
-                    if(barang.stok > 0)
-                    {
-                        MessageBox.Show($"{label.Text} Berhasil dimasukan ke keranjang!");
-                        DataKeranjang.tambahkeKeranjang(barang.namabarang, barang.harga);
-                        barang.stok = barang.stok - 1;
-                        stoklabel.Text = "Stok : " + barang.stok;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Barang sudah habis");
-                    }
-                    
-                };
-                
+                    // Bikin Panel
+                    Panel panel = new Panel();
+                    panel.Size = new System.Drawing.Size(500, 100);
+                    panel.Location = new System.Drawing.Point(10, 40 + (110 * i));
+                    panel.BackColor = System.Drawing.Color.WhiteSmoke;
 
-                i++;
+                    // bikin button
+                    Button button = new Button();
+                    button.Text = $"ADD";
+                    button.Size = new System.Drawing.Size(70, 25);
+                    button.Font = new Font("Arial", 7, FontStyle.Regular);
+                    button.Location = new System.Drawing.Point(400, 70);
+
+                    // bikin label namabarang
+                    Label label = new Label();
+                    label.Text = barang.namabarang;
+                    label.Size = new System.Drawing.Size(150, 25);
+                    label.Font = new Font("Arial", 9, FontStyle.Regular);
+                    label.Location = new System.Drawing.Point(40, 30);
+
+                    // bikin stok label
+                    Label stoklabel = new Label();
+                    stoklabel.Text = "Stok : " + barang.stok;
+                    stoklabel.Size = new System.Drawing.Size(150, 25);
+                    stoklabel.Font = new Font("Arial", 8, FontStyle.Regular);
+                    stoklabel.Location = new System.Drawing.Point(40, 60);
+
+                    // label harga
+                    Label hargalabel = new Label();
+                    hargalabel.Text = "Harga : " + barang.harga;
+                    hargalabel.Font = new Font("Arial", 8, FontStyle.Regular);
+                    hargalabel.Size = new System.Drawing.Size(150, 25);
+                    hargalabel.Location = new System.Drawing.Point(380, 40);
+
+                    // menambahkan semua attribut diatas ke panel
+                    panel.Controls.Add(label);
+                    panel.Controls.Add(stoklabel);
+                    panel.Controls.Add(button);
+                    panel.Controls.Add(hargalabel);
+                    panelContainer.Controls.Add(panel);
+
+                    panelList.Add(panel);
+
+                    int buttonIndex = i + 1;
+                    button.Click += (sender, e) =>
+                    {
+                        if (barang.stok > 0)
+                        {
+                            MessageBox.Show($"{label.Text} Berhasil dimasukan ke keranjang!");
+                            DataKeranjang.tambahkeKeranjang(barang.namabarang, barang.harga);
+                            barang.stok = barang.stok - 1;
+                            stoklabel.Text = "Stok : " + barang.stok;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Barang sudah habis");
+                        }
+
+                    };
+
+
+                    i++;
+                }
             }
         }
 
+                
+
         private void deletefromKeranjang(DataKeranjang barang)
         {
-            foreach (var barangumkm in BarangUMKM.listBarang)
+            foreach (var umkm in listUMKM)
             {
-                if (barang.namabarang.Equals(barangumkm.namabarang))
-                {
-                    barangumkm.stok = barangumkm.stok + barang.qty;
-                    DataKeranjang.listKeranjang.Remove(barang);
+                foreach (var barangumkm in umkm.listBarang) {
+                    if (barang.namabarang.Equals(barangumkm.namabarang))
+                    {
+                        barangumkm.stok = barangumkm.stok + barang.qty;
+                        DataKeranjang.listKeranjang.Remove(barang);
+                    }
                 }
+                
             }
         }
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace GUI_AplikasiUMKM
 {
     public partial class GUIUmkm : Form
@@ -15,6 +16,10 @@ namespace GUI_AplikasiUMKM
         public GUIUmkm()
         {
             InitializeComponent();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
         }
     }
 }
