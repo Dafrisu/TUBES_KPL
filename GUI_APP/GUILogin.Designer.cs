@@ -45,9 +45,10 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Sans Serif Collection", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(194, 34);
+            label1.Location = new Point(155, 27);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(588, 68);
+            label1.Size = new Size(492, 59);
             label1.TabIndex = 0;
             label1.Text = "WELCOME TO MYUMKM";
             label1.Click += label1_Click;
@@ -56,27 +57,30 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Sans Serif Collection", 9.999999F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(399, 123);
+            label2.Location = new Point(319, 98);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(122, 49);
+            label2.Size = new Size(110, 42);
             label2.TabIndex = 1;
             label2.Text = "LOGIN";
             // 
             // labelUsername
             // 
             labelUsername.AutoSize = true;
-            labelUsername.Location = new Point(111, 217);
+            labelUsername.Location = new Point(89, 174);
+            labelUsername.Margin = new Padding(2, 0, 2, 0);
             labelUsername.Name = "labelUsername";
-            labelUsername.Size = new Size(100, 25);
+            labelUsername.Size = new Size(82, 20);
             labelUsername.TabIndex = 2;
             labelUsername.Text = "Username :";
             // 
             // labelPass
             // 
             labelPass.AutoSize = true;
-            labelPass.Location = new Point(116, 277);
+            labelPass.Location = new Point(93, 222);
+            labelPass.Margin = new Padding(2, 0, 2, 0);
             labelPass.Name = "labelPass";
-            labelPass.Size = new Size(96, 25);
+            labelPass.Size = new Size(77, 20);
             labelPass.TabIndex = 3;
             labelPass.Text = "Password :";
             // 
@@ -84,18 +88,21 @@
             // 
             groupBox1.Controls.Add(radioPembeli);
             groupBox1.Controls.Add(radioUMKM);
-            groupBox1.Location = new Point(216, 336);
+            groupBox1.Location = new Point(173, 269);
+            groupBox1.Margin = new Padding(2, 2, 2, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(300, 70);
+            groupBox1.Padding = new Padding(2, 2, 2, 2);
+            groupBox1.Size = new Size(240, 56);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             // 
             // radioPembeli
             // 
             radioPembeli.AutoSize = true;
-            radioPembeli.Location = new Point(167, 23);
+            radioPembeli.Location = new Point(134, 18);
+            radioPembeli.Margin = new Padding(2, 2, 2, 2);
             radioPembeli.Name = "radioPembeli";
-            radioPembeli.Size = new Size(99, 29);
+            radioPembeli.Size = new Size(83, 24);
             radioPembeli.TabIndex = 1;
             radioPembeli.TabStop = true;
             radioPembeli.Text = "Pembeli";
@@ -105,9 +112,10 @@
             // radioUMKM
             // 
             radioUMKM.AutoSize = true;
-            radioUMKM.Location = new Point(25, 24);
+            radioUMKM.Location = new Point(20, 19);
+            radioUMKM.Margin = new Padding(2, 2, 2, 2);
             radioUMKM.Name = "radioUMKM";
-            radioUMKM.Size = new Size(91, 29);
+            radioUMKM.Size = new Size(75, 24);
             radioUMKM.TabIndex = 0;
             radioUMKM.TabStop = true;
             radioUMKM.Text = "UMKM";
@@ -116,33 +124,36 @@
             // 
             // fieldUser
             // 
-            fieldUser.Location = new Point(216, 220);
+            fieldUser.Location = new Point(173, 176);
+            fieldUser.Margin = new Padding(2, 2, 2, 2);
             fieldUser.Name = "fieldUser";
-            fieldUser.Size = new Size(470, 31);
+            fieldUser.Size = new Size(377, 27);
             fieldUser.TabIndex = 5;
             // 
             // FieldPass
             // 
-            FieldPass.Location = new Point(216, 277);
+            FieldPass.Location = new Point(173, 222);
+            FieldPass.Margin = new Padding(2, 2, 2, 2);
             FieldPass.Name = "FieldPass";
-            FieldPass.Size = new Size(470, 31);
+            FieldPass.Size = new Size(377, 27);
             FieldPass.TabIndex = 5;
             // 
             // buttonLogin
             // 
-            buttonLogin.Location = new Point(409, 437);
+            buttonLogin.Location = new Point(327, 350);
+            buttonLogin.Margin = new Padding(2, 2, 2, 2);
             buttonLogin.Name = "buttonLogin";
-            buttonLogin.Size = new Size(112, 34);
+            buttonLogin.Size = new Size(90, 27);
             buttonLogin.TabIndex = 6;
             buttonLogin.Text = "LOGIN";
             buttonLogin.UseVisualStyleBackColor = true;
             buttonLogin.Click += buttonLogin_Click;
             // 
-            // Form1
+            // GUILogin
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(900, 562);
+            ClientSize = new Size(720, 450);
             Controls.Add(buttonLogin);
             Controls.Add(FieldPass);
             Controls.Add(fieldUser);
@@ -151,8 +162,10 @@
             Controls.Add(labelUsername);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "Form1";
+            Margin = new Padding(2, 2, 2, 2);
+            Name = "GUILogin";
             Text = "Form1";
+            Load += GUILogin_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);

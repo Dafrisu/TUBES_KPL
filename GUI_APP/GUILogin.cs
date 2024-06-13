@@ -26,7 +26,7 @@ namespace GUI_APP
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            
+
             // boolean untuk mengecek apakah akun ada atau tidak
             bool cekCredentials = Akun.CekLogin(fieldUser.Text, FieldPass.Text, tipe);
             if (!cekCredentials)
@@ -45,20 +45,28 @@ namespace GUI_APP
                         this.Visible = false;
                         guipembeli.Show();
                     }
-                    else if(tipe.Equals("UMKM"))
+                    else if (tipe.Equals("UMKM"))
                     {
-                        throw new Exception("Belom buat UMKM");
+                        username = fieldUser.Text;
+                        GUIUMKM guipembeli = new GUIUMKM();
+                        this.Visible = false;
+                        guipembeli.Show();
                     }
                     else
                     {
                         throw new Exception("Gagal Membaca User");
                     }
                 }
-                catch( Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
             }
+        }
+
+        private void GUILogin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
