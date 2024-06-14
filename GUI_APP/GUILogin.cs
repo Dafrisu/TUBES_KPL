@@ -7,6 +7,7 @@ namespace GUI_APP
         public GUILogin()
         {
             InitializeComponent();
+            
         }
 
         private void radioUMKM_CheckedChanged(object sender, EventArgs e)
