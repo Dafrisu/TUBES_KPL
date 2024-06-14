@@ -9,6 +9,7 @@ namespace GUI_APP
     internal class DataKeranjang
     {
         public String namabarang;
+        public String namaPenjual;
         public int qty;
         public int harga;
         public static int total;
@@ -19,14 +20,15 @@ namespace GUI_APP
             
         }
 
-        public DataKeranjang(string namabarang, int harga)
+        public DataKeranjang(string namabarang, int harga, String namaPenjual)
         {
             this.namabarang = namabarang;
             this.harga = harga;
+            this.namaPenjual = namaPenjual;
             this.qty = 1;
         }
 
-        public static void tambahkeKeranjang(String namabarang, int harga)
+        public static void tambahkeKeranjang(String namabarang, int harga, String namaPenjual)
         {
             Boolean found = false;
             foreach(var barang in listKeranjang)
@@ -39,7 +41,7 @@ namespace GUI_APP
             }
             if (!found)
             {
-                listKeranjang.Add(new DataKeranjang(namabarang, harga));
+                listKeranjang.Add(new DataKeranjang(namabarang, harga, namaPenjual));
             }
         }
     }

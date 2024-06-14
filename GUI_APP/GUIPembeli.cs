@@ -25,9 +25,12 @@ namespace GUI_APP
         {
             InitializeComponent();
             // menggenerate barang (sementara, hanya untuk testing)
-            BarangUMKM Darryl = new BarangUMKM();
-            Darryl.GenerateBarang1();
-            
+            BarangUMKM Haikal = new BarangUMKM("Haikal");
+            Haikal.GenerateBarang1();
+
+            BarangUMKM Dafa = new BarangUMKM("Dafa");
+            Dafa.GenerateBarang2();
+
             listUMKM.Add(Darryl);
 
             totalHargaLabel = new Label();
@@ -166,6 +169,14 @@ namespace GUI_APP
                 Labelqty.Size = new Size(50, 25);
                 Labelqty.Location = new Point(400, 65);
 
+                // label untuk nama UMKM/penjual
+                Label namapenjual = new Label();
+                namapenjual.Text = "UMKM: " + barang.namaPenjual;
+                namapenjual.Size = new Size(125, 25);
+                namapenjual.Location = new Point(200, 50);
+                namapenjual.Font = new Font("Arial", 8, FontStyle.Regular);
+
+                // icon untuk + barang
                 PictureBox plusitem = new PictureBox();
                 plusitem.Size = new Size(25, 25);
                 plusitem.Image = Properties.Resources.PlusIcon;
@@ -173,27 +184,33 @@ namespace GUI_APP
                 plusitem.Location = new Point(435, 65);
                 plusitem.Click += (sender, e) =>
                 {
-                    foreach(var barangumkm in listUMKM)
+                    foreach(var UMKM in listUMKM)
                     {
-                        if (barang.namabarang.Equals(barangumkm.namabarang)){
-                            if(barangumkm.stok > 0)
+                        foreach(var barangumkm in UMKM.listBarang)
+                        {
+                            if (barang.namabarang.Equals(barangumkm.namabarang))
                             {
-                                barangumkm.stok--;
-                                barang.qty++;
-                                fixedpanel.Controls.Remove(totalHargaLabel);
-                                totalharga = updatetotalharga();
-                                totalHargaLabel.Text = "Total Harga: RP." + totalharga;
-                                fixedpanel.Controls.Add(totalHargaLabel);
-                                Labelqty.Text = "" + barang.qty;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Stok barang habis");
+                                if (barangumkm.stok > 0)
+                                {
+                                    barangumkm.stok--;
+                                    barang.qty++;
+                                    fixedpanel.Controls.Remove(totalHargaLabel);
+                                    totalharga = updatetotalharga();
+                                    totalHargaLabel.Text = "Total Harga: RP." + totalharga;
+                                    fixedpanel.Controls.Add(totalHargaLabel);
+                                    Labelqty.Text = "" + barang.qty;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Stok barang habis");
+                                }
                             }
                         }
+                        
                     }
                 };
 
+                // icon untuk - barang
                 PictureBox minusitem = new PictureBox();
                 minusitem.Size = new Size(25, 25);
                 minusitem.Image = Properties.Resources.MinusIcon;
@@ -231,6 +248,7 @@ namespace GUI_APP
                     }
                 };
 
+                // icon untuk delete barang
                 PictureBox deleteitem = new PictureBox();
                 deleteitem.Size = new Size(25, 25);
                 deleteitem.Image = Properties.Resources.TrashcanIcon;
@@ -247,6 +265,8 @@ namespace GUI_APP
                     layoutKeranjang.Controls.Remove(panel);
                 };
 
+                // menambahkan semua icon ke layout
+                panel.Controls.Add(namapenjual);
                 panel.Controls.Add(plusitem);
                 panel.Controls.Add(minusitem);
                 panel.Controls.Add(deleteitem);
@@ -321,7 +341,15 @@ namespace GUI_APP
                     hargalabel.Size = new System.Drawing.Size(150, 25);
                     hargalabel.Location = new System.Drawing.Point(380, 40);
 
+                    // label nama UMKM
+                    Label labelUMKM = new Label();
+                    labelUMKM.Text = "UMKM: " + umkm.NamaUMKM;
+                    labelUMKM.Font = new Font("Arial", 8, FontStyle.Regular);
+                    labelUMKM.Size = new System.Drawing.Size(125, 25);
+                    labelUMKM.Location = new Point(200, 50);
+
                     // menambahkan semua attribut diatas ke panel
+                    panel.Controls.Add(labelUMKM);
                     panel.Controls.Add(label);
                     panel.Controls.Add(stoklabel);
                     panel.Controls.Add(button);
@@ -336,7 +364,7 @@ namespace GUI_APP
                         if (barang.stok > 0)
                         {
                             MessageBox.Show($"{label.Text} Berhasil dimasukan ke keranjang!");
-                            DataKeranjang.tambahkeKeranjang(barang.namabarang, barang.harga);
+                            DataKeranjang.tambahkeKeranjang(barang.namabarang, barang.harga, umkm.NamaUMKM);
                             barang.stok = barang.stok - 1;
                             stoklabel.Text = "Stok : " + barang.stok;
                         }

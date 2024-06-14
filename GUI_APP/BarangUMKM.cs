@@ -8,15 +8,16 @@ namespace GUI_APP
 {
     internal class BarangUMKM
     {
+        public String NamaUMKM;
         public string namabarang;
         public int stok;
         public int harga;
         public string kategoriBarang;
         public List<BarangUMKM> listBarang = new List<BarangUMKM>();
 
-        public BarangUMKM()
+        public BarangUMKM(String nama)
         { 
-        
+            this.NamaUMKM = nama;
         }
         public BarangUMKM(string namabarang, int stok, int harga, string kategoriBarang)
         {

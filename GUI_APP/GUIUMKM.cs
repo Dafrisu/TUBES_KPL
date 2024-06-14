@@ -15,6 +15,8 @@ namespace GUI_APP
         FlowLayoutPanel flowLayoutPanel;
         Panel phanel = new Panel();
         List<BarangUMKM> listUMKM = new List<BarangUMKM>();
+        BarangUMKM UMKM;
+
         public GUIUMKM()
         {
             InitializeComponent();
@@ -23,16 +25,27 @@ namespace GUI_APP
             flowLayoutPanel = new FlowLayoutPanel();
             flowLayoutPanel.Dock = DockStyle.Fill;
             flowLayoutPanel.AutoScroll = true;
-            flowLayoutPanel.AutoSize = true;
+            flowLayoutPanel.Size = new Size(this.Width, this.Height);
             this.Controls.Add(flowLayoutPanel);
             phanel.Size = new Size(this.Width,this.Height);
             phanel.AutoScroll = false;
             phanel.BackColor = Color.GreenYellow;
             phanel.Visible = true;
             flowLayoutPanel.Controls.Add(phanel);
-
             panelAtasUMKM();
             barangUMKM();
+            cekUMKM(GUILogin.username);
+        }
+
+        public void cekUMKM(String nama)
+        {
+            foreach (var UMKM in Program.listUMKM)
+            {
+                if (UMKM.NamaUMKM.Equals(nama))
+                {
+                    this.UMKM = UMKM;
+                }
+            }
         }
 
         private void GUIUMKM_Load(object sender, EventArgs e)
