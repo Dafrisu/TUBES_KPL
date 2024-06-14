@@ -96,14 +96,27 @@ namespace GUI_APP
         }
 
         public void EditBarang(string namaBarang, int stok, int harga, string kategoriBarang) {
-            for (int i = 0; i <= listBarang.Count; i++)
+            bool itemFound = false;
+
+            foreach (var barang in listBarang)
             {
-                if (namaBarang.Equals(listBarang[i].namabarang))
+                if (string.Equals(namaBarang, barang.namabarang, StringComparison.OrdinalIgnoreCase))
                 {
-                    listBarang[i].stok = stok;
-                    listBarang[i].harga = harga;
-                    listBarang[i].kategoriBarang = kategoriBarang;
+                    // Debugging output
+                    MessageBox.Show($"Found Barang: {barang.namabarang}, updating values...");
+
+                    barang.stok = stok;
+                    barang.harga = harga;
+                    barang.kategoriBarang = kategoriBarang;
+
+                    itemFound = true;
+                    break;
                 }
+            }
+
+            if (!itemFound)
+            {
+                MessageBox.Show($"Barang dengan nama {namaBarang} tidak ditemukan.");
             }
         }
 
