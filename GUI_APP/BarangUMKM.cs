@@ -18,7 +18,7 @@ namespace GUI_APP
         { 
         
         }
-            public BarangUMKM(string namabarang, int stok, int harga, string kategoriBarang)
+        public BarangUMKM(string namabarang, int stok, int harga, string kategoriBarang)
         {
             this.namabarang = namabarang;
             this.stok = stok;
