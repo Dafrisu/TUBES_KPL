@@ -25,13 +25,6 @@ namespace GUI_APP
         {
             InitializeComponent();
             // menggenerate barang (sementara, hanya untuk testing)
-            BarangUMKM Haikal = new BarangUMKM("Haikal");
-            Haikal.GenerateBarang1();
-
-            BarangUMKM Dafa = new BarangUMKM("Dafa");
-            Dafa.GenerateBarang2();
-
-            listUMKM.Add(Darryl);
 
             totalHargaLabel = new Label();
 

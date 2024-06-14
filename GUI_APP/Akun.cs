@@ -10,7 +10,8 @@ namespace GUI_APP
     {
         static Dictionary<string, Dictionary<String, String>> credentials = new Dictionary<string, Dictionary<String, String>>() {
             {"Haikal", new Dictionary<string, string>(){{ "Gantenk123", "Pembeli" }}},
-            {"Darryl", new Dictionary<string, string>(){{ "GantenkBanged", "UMKM" }}}
+            {"Darryl", new Dictionary<string, string>(){{ "GantenkBanged", "UMKM" }}},
+            {"Dafa", new Dictionary<string, string>(){{ "Kashep", "UMKM" }}}
         };
 
         public static bool CekLogin(String username, String password, String tipeUser)
