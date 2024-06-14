@@ -63,6 +63,16 @@ namespace GUI_APP.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditButton {
+            get {
+                object obj = ResourceManager.GetObject("EditButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Keranjangicon {
             get {
                 object obj = ResourceManager.GetObject("Keranjangicon", resourceCulture);
@@ -76,6 +86,16 @@ namespace GUI_APP.Properties {
         internal static System.Drawing.Bitmap MinusIcon {
             get {
                 object obj = ResourceManager.GetObject("MinusIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OrderIcon {
+            get {
+                object obj = ResourceManager.GetObject("OrderIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

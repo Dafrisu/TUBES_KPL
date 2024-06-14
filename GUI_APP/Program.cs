@@ -19,7 +19,7 @@ namespace GUI_APP
             listUMKM.Add(Haikal);
             listUMKM.Add(Dafa);
             ApplicationConfiguration.Initialize();
-            Application.Run(new GUILogin());
+            Application.Run(new GUIUMKM());
         }
     }
 }

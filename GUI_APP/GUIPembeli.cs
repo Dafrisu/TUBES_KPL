@@ -30,9 +30,8 @@ namespace GUI_APP
 
             BarangUMKM Dafa = new BarangUMKM("Dafa");
             Dafa.GenerateBarang2();
-            
-            listUMKM.Add(Haikal);
-            listUMKM.Add(Dafa);
+
+            listUMKM.Add(Darryl);
 
             totalHargaLabel = new Label();
 
