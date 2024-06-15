@@ -19,12 +19,10 @@ namespace GUI_APP
         Panel fixedpanel;
         Panel containerPanel;
         Label totalHargaLabel;
-        List<BarangUMKM> listUMKM = new List<BarangUMKM>();
 
         public GUIPembeli()
         {
             InitializeComponent();
-            // menggenerate barang (sementara, hanya untuk testing)
 
             totalHargaLabel = new Label();
 
@@ -177,7 +175,7 @@ namespace GUI_APP
                 plusitem.Location = new Point(435, 65);
                 plusitem.Click += (sender, e) =>
                 {
-                    foreach(var UMKM in listUMKM)
+                    foreach(var UMKM in Program.listUMKM)
                     {
                         foreach(var barangumkm in UMKM.listBarang)
                         {
@@ -211,7 +209,7 @@ namespace GUI_APP
                 minusitem.Location = new Point(365, 65);
                 minusitem.Click += (sender, e) =>
                 {
-                    foreach (var umkm in listUMKM)
+                    foreach (var umkm in Program.listUMKM)
                     {
                         foreach (var barangumkm in umkm.listBarang) {
                             if (barang.namabarang.Equals(barangumkm.namabarang))
@@ -296,7 +294,7 @@ namespace GUI_APP
             
             panelList = new List<Panel>();
             int i = 0;
-            foreach(var umkm in listUMKM)
+            foreach(var umkm in Program.listUMKM)
             {
                 foreach (var barang in umkm.listBarang) 
                 {
@@ -378,7 +376,7 @@ namespace GUI_APP
 
         private void deletefromKeranjang(DataKeranjang barang)
         {
-            foreach (var umkm in listUMKM)
+            foreach (var umkm in Program.listUMKM)
             {
                 foreach (var barangumkm in umkm.listBarang) {
                     if (barang.namabarang.Equals(barangumkm.namabarang))

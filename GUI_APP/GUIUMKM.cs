@@ -76,6 +76,8 @@ namespace GUI_APP
             }
         }
 
+        
+
         private void GUIUMKM_Load(object sender, EventArgs e)
         {
 
@@ -239,16 +241,10 @@ namespace GUI_APP
                 // Call EditBarang method
                 UMKM.EditBarang(namaBarang, stok, harga, kategoriBarang);
 
-                // Debugging output to verify the list
-                foreach (var barang in UMKM.listBarang)
-                {
-                    MessageBox.Show($"Barang: {barang.namabarang}, Stok: {barang.stok}, Harga: {barang.harga}, Kategori: {barang.kategoriBarang}");
-                }
-
                 MessageBox.Show("Produk Berhasil Diedit");
                 this.Controls.Remove(flowLayoutPanel);
-                ResetGUI();
                 PanelEditBarang.Visible = false;
+                ResetGUI();
                 flowLayoutPanel.Visible = true;
             };
             this.phanelEdit.Controls.Add(button);
@@ -257,22 +253,23 @@ namespace GUI_APP
         public void ResetGUI() 
         {
             this.Controls.Remove(flowLayoutPanel);
-            this.Controls.Remove(phanel);
+            
             flowLayoutPanel = new FlowLayoutPanel();
             flowLayoutPanel.Dock = DockStyle.Fill;
             flowLayoutPanel.AutoScroll = true;
             flowLayoutPanel.Size = new Size(this.Width, this.Height);
             this.Controls.Add(flowLayoutPanel);
+            flowLayoutPanel.Controls.Remove(phanel);
+            phanel = new Panel();
             phanel.Size = new Size(this.Width, this.Height);
             phanel.AutoScroll = true;
             phanel.BackColor = Color.GreenYellow;
             phanel.Visible = true;
             flowLayoutPanel.Controls.Add(phanel);
 
-            cekUMKM(GUILogin.username);
             panelAtasUMKM();
             barangUMKM();
-            EditButton();
+            
         }
     }
 }
