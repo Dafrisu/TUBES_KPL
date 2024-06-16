@@ -91,11 +91,11 @@ namespace GUI_APP
             phanelAdd.Controls.Add(textBoxAddKategori);
 
             cekUMKM(GUILogin.username);
-            EditButton();
-            HapusButton();
             panelAtasUMKM();
             barangUMKM();
             AddButton();
+            EditButton();
+            HapusButton();
         }
 
         public void cekUMKM(String nama)
@@ -294,7 +294,7 @@ namespace GUI_APP
         {
             Button button = new Button();
             button.Text = $"Hapus";
-            button.Size = new System.Drawing.Size(70, 25);
+            button.Size = new System.Drawing.Size(180, 25);
             button.Font = new Font("Arial", 7, FontStyle.Regular);
             button.Location = new System.Drawing.Point(250, 300);
             button.BackColor = Color.White;
