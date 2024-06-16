@@ -91,10 +91,11 @@ namespace GUI_APP
             phanelAdd.Controls.Add(textBoxAddKategori);
 
             cekUMKM(GUILogin.username);
-            panelAtasUMKM();
-            barangUMKM();
             EditButton();
             HapusButton();
+            panelAtasUMKM();
+            barangUMKM();
+            AddButton();
         }
 
         public void cekUMKM(String nama)
@@ -148,8 +149,7 @@ namespace GUI_APP
             {
                 MessageBox.Show("Menambahkan Produk");
                 flowLayoutPanel.Visible = false;
-                
-                //layoutKeranjang.Visible = true;
+                PanelAddBarang.Visible = true;
             };
         }
 
@@ -294,7 +294,7 @@ namespace GUI_APP
         {
             Button button = new Button();
             button.Text = $"Hapus";
-            button.Size = new System.Drawing.Size(100, 25);
+            button.Size = new System.Drawing.Size(70, 25);
             button.Font = new Font("Arial", 7, FontStyle.Regular);
             button.Location = new System.Drawing.Point(250, 300);
             button.BackColor = Color.White;
@@ -358,9 +358,9 @@ namespace GUI_APP
                 // Call EditBarang method
                 UMKM.deleteBarang(namaBarang);
 
-                MessageBox.Show("Produk Berhasil Dihapus");
+                MessageBox.Show("Produk Berhasil Ditambah");
                 this.Controls.Remove(flowLayoutPanel);
-                PanelEditBarang.Visible = false;
+                PanelAddBarang.Visible = false;
                 ResetGUI();
                 flowLayoutPanel.Visible = true;
             };
