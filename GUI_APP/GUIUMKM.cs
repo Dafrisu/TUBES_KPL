@@ -27,10 +27,7 @@ namespace GUI_APP
         TextBox textBoxEditKategori = new TextBox();
         FlowLayoutPanel PanelAddBarang;
         Panel phanelAdd = new Panel();
-        TextBox textBoxAddNamaBarang = new TextBox();
-        TextBox textBoxAddStok = new TextBox();
-        TextBox textBoxAddHarga = new TextBox();
-        TextBox textBoxAddKategori = new TextBox();
+        
         public GUIUMKM()
         {
             InitializeComponent();
@@ -42,7 +39,6 @@ namespace GUI_APP
             phanel.Size = new Size(this.Width,this.Height);
             phanel.AutoScroll = true;
             phanel.BackColor = Color.GreenYellow;
-            phanel.Visible = true;
             flowLayoutPanel.Controls.Add(phanel);
 
             PanelEditBarang = new FlowLayoutPanel();
@@ -55,7 +51,6 @@ namespace GUI_APP
             phanelEdit.Size = new Size(this.Width, this.Height);
             phanelEdit.AutoScroll = true;
             phanelEdit.BackColor = Color.GreenYellow;
-            phanelEdit.Visible = true;
             PanelEditBarang.Controls.Add(phanelEdit);
 
             textBoxEditStok = IsiPanelEdit("Masukkan Stok Barang");
@@ -65,6 +60,8 @@ namespace GUI_APP
             phanelEdit.Controls.Add(textBoxEditStok);
             phanelEdit.Controls.Add(textBoxEditHarga);
             phanelEdit.Controls.Add(textBoxEditKategori);
+            EditButton();
+            HapusButton();
 
             PanelAddBarang = new FlowLayoutPanel();
             PanelAddBarang.Dock = DockStyle.Fill;
@@ -80,16 +77,6 @@ namespace GUI_APP
             phanelAdd.Visible = true;
             PanelAddBarang.Controls.Add(phanelAdd);
 
-            TextBox textBoxAddNamaBarang = isiPanelAdd("Nama Barang");
-            TextBox textBoxAddStok = isiPanelAdd("Stok Barang");
-            TextBox textBoxAddHarga = isiPanelAdd("Harga Barang");
-            TextBox textBoxAddKategori = isiPanelAdd("Kategori Barang");
-
-            phanelAdd.Controls.Add(textBoxAddNamaBarang);
-            phanelAdd.Controls.Add(textBoxAddStok);
-            phanelAdd.Controls.Add(textBoxAddHarga);
-            phanelAdd.Controls.Add(textBoxAddKategori);
-
             cekUMKM(GUILogin.username);
             panelAtasUMKM();
             barangUMKM();
@@ -97,6 +84,7 @@ namespace GUI_APP
             EditButton();
             HapusButton();
         }
+
 
         public void cekUMKM(String nama)
         {
@@ -110,7 +98,78 @@ namespace GUI_APP
         }
 
         
+        public void addbarangUMKM()
+        {
+            Label nama = new Label();
+            Label harga = new Label();
+            Label stok = new Label();
+            Label kategori = new Label();
 
+            nama.Text = "Nama: ";
+            harga.Text = "Harga: ";
+            stok.Text = "Stok: ";
+            kategori.Text = "Kategori: ";
+
+            nama.Location = new Point(150, 70);
+            harga.Location = new Point(150, 120);
+            stok.Location = new Point(150, 170);
+            kategori.Location = new Point(150, 220);
+            
+            nama.Size = new System.Drawing.Size(100, 25);
+            harga.Size = new System.Drawing.Size(100, 25);
+            stok.Size = new System.Drawing.Size(100, 25);
+            kategori.Size = new System.Drawing.Size(100, 25);
+
+            TextBox textBoxAddNamaBarang = new TextBox();
+            TextBox textBoxAddStok = new TextBox();
+            TextBox textBoxAddHarga = new TextBox();
+            TextBox textBoxAddKategori = new TextBox();
+
+            textBoxAddNamaBarang.Width = 200;
+            textBoxAddStok.Width = 200;
+            textBoxAddHarga.Width = 200;
+            textBoxAddKategori.Width = 200;
+
+            textBoxAddNamaBarang.Location = new Point(250, 70);
+            textBoxAddStok.Location = new Point(250, 120);
+            textBoxAddHarga.Location = new Point(250, 170);
+            textBoxAddKategori.Location = new Point(250, 220);
+
+            phanelAdd.Controls.Add(textBoxAddNamaBarang);
+            phanelAdd.Controls.Add(textBoxAddStok);
+            phanelAdd.Controls.Add(textBoxAddHarga);
+            phanelAdd.Controls.Add(textBoxAddKategori);
+            phanelAdd.Controls.Add(nama);
+            phanelAdd.Controls.Add(harga);
+            phanelAdd.Controls.Add(stok);
+            phanelAdd.Controls.Add(kategori);
+
+            Button add = new Button();
+            add.Text = $"Tambah Produk";
+            add.Size = new System.Drawing.Size(100, 25);
+            add.Font = new Font("Arial", 7, FontStyle.Regular);
+            add.Location = new System.Drawing.Point(250, 300);
+            add.BackColor = Color.White;
+            add.Click += (sender, e) =>
+            {
+                // Debugging output
+                string namaBarang = textBoxAddNamaBarang.Text;
+                int stok = Convert.ToInt32(textBoxAddStok.Text);
+                int harga = Convert.ToInt32(textBoxAddHarga.Text);
+                string kategoriBarang = textBoxAddKategori.Text;
+                MessageBox.Show($"Adding Barang: {namaBarang}");
+
+                // Call EditBarang method
+                UMKM.TambahBarang(namaBarang, stok, harga, kategoriBarang);
+
+                MessageBox.Show("Produk Berhasil Ditambah");
+                this.Controls.Remove(flowLayoutPanel);
+                PanelAddBarang.Visible = false;
+                ResetGUI();
+                flowLayoutPanel.Visible = true;
+            };
+            this.phanelAdd.Controls.Add(add);
+        }
         private void GUIUMKM_Load(object sender, EventArgs e)
         {
 
@@ -149,6 +208,7 @@ namespace GUI_APP
             {
                 MessageBox.Show("Menambahkan Produk");
                 flowLayoutPanel.Visible = false;
+                PanelEditBarang.Visible = false;
                 PanelAddBarang.Visible = true;
             };
         }
@@ -296,7 +356,7 @@ namespace GUI_APP
             button.Text = $"Hapus";
             button.Size = new System.Drawing.Size(180, 25);
             button.Font = new Font("Arial", 7, FontStyle.Regular);
-            button.Location = new System.Drawing.Point(250, 300);
+            button.Location = new System.Drawing.Point(400, 300);
             button.BackColor = Color.White;
             button.Click += (sender, e) =>
             {
@@ -307,10 +367,12 @@ namespace GUI_APP
 
                 // Call EditBarang method
                 UMKM.deleteBarang(namaBarang);
+                
 
                 MessageBox.Show("Produk Berhasil Dihapus");
                 this.Controls.Remove(flowLayoutPanel);
                 PanelEditBarang.Visible = false;
+                PanelAddBarang.Visible = false;
                 ResetGUI();
                 flowLayoutPanel.Visible = true;
             };
@@ -340,33 +402,9 @@ namespace GUI_APP
         }
 
         public void AddButton() {
-            Button add = new Button();
-            add.Text = $"Tambah Produk";
-            add.Size = new System.Drawing.Size(100, 25);
-            add.Font = new Font("Arial", 7, FontStyle.Regular);
-            add.Location = new System.Drawing.Point(250, 300);
-            add.BackColor = Color.White;
-            add.Click += (sender, e) =>
-            {
-                // Debugging output
-                string namaBarang = textBoxAddNamaBarang.Text;
-                int stok = Convert.ToInt32(textBoxAddStok.Text);
-                int harga = Convert.ToInt32(textBoxAddHarga.Text);
-                string kategoriBarang = textBoxAddKategori.Text;
-                MessageBox.Show($"Adding Barang: {namaBarang}");
-
-                // Call EditBarang method
-                UMKM.deleteBarang(namaBarang);
-
-                MessageBox.Show("Produk Berhasil Ditambah");
-                this.Controls.Remove(flowLayoutPanel);
-                PanelAddBarang.Visible = false;
-                ResetGUI();
-                flowLayoutPanel.Visible = true;
-            };
-            this.phanelAdd.Controls.Add(add);
+            
         }
-
+        /*
         public TextBox isiPanelAdd(string placeholderText) {
             TextBox textBox = new TextBox();
             textBox.Width = 200;
@@ -414,5 +452,6 @@ namespace GUI_APP
 
             return textBox;
         }
+        */
     }
 }
