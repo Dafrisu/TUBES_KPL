@@ -15,16 +15,22 @@ namespace GUI_APP
     {
         FlowLayoutPanel flowLayoutPanel;
         Panel phanel = new Panel();
+        FlowLayoutPanel PanelEditBarang;
         Panel phanelEdit = new Panel();
         List<BarangUMKM> listUMKM = new List<BarangUMKM>();
         BarangUMKM UMKM;
-        FlowLayoutPanel PanelEditBarang;
         int TextFieldCount = 1;
+        int TextFieldCountAdd = 1;
         Label produkLabel = new Label();
-        TextBox textBox1 = new TextBox();
-        TextBox textBox2 = new TextBox();
-        TextBox textBox3 = new TextBox();
-
+        TextBox textBoxEditStok = new TextBox();
+        TextBox textBoxEditHarga = new TextBox();
+        TextBox textBoxEditKategori = new TextBox();
+        FlowLayoutPanel PanelAddBarang;
+        Panel phanelAdd = new Panel();
+        TextBox textBoxAddNamaBarang = new TextBox();
+        TextBox textBoxAddStok = new TextBox();
+        TextBox textBoxAddHarga = new TextBox();
+        TextBox textBoxAddKategori = new TextBox();
         public GUIUMKM()
         {
             InitializeComponent();
@@ -52,17 +58,43 @@ namespace GUI_APP
             phanelEdit.Visible = true;
             PanelEditBarang.Controls.Add(phanelEdit);
 
-            textBox1 = IsiPanelEdit("Masukkan Stok Barang");
-            textBox2 = IsiPanelEdit("Masukkan Harga Barang");
-            textBox3 = IsiPanelEdit("Masukkan Kategori Barang");
+            textBoxEditStok = IsiPanelEdit("Masukkan Stok Barang");
+            textBoxEditHarga = IsiPanelEdit("Masukkan Harga Barang");
+            textBoxEditKategori = IsiPanelEdit("Masukkan Kategori Barang");
 
-            phanelEdit.Controls.Add(textBox1);
-            phanelEdit.Controls.Add(textBox2);
-            phanelEdit.Controls.Add(textBox3);
+            phanelEdit.Controls.Add(textBoxEditStok);
+            phanelEdit.Controls.Add(textBoxEditHarga);
+            phanelEdit.Controls.Add(textBoxEditKategori);
+
+            PanelAddBarang = new FlowLayoutPanel();
+            PanelAddBarang.Dock = DockStyle.Fill;
+            PanelAddBarang.AutoScroll = true;
+            PanelAddBarang.Size = new Size(this.Width, this.Height);
+            PanelAddBarang.BackColor = Color.Yellow;
+            this.Controls.Add(PanelAddBarang);
+
+
+            phanelAdd.Size = new Size(this.Width, this.Height);
+            phanelAdd.AutoScroll = true;
+            phanelAdd.BackColor = Color.GreenYellow;
+            phanelAdd.Visible = true;
+            PanelAddBarang.Controls.Add(phanelAdd);
+
+            TextBox textBoxAddNamaBarang = isiPanelAdd("Nama Barang");
+            TextBox textBoxAddStok = isiPanelAdd("Stok Barang");
+            TextBox textBoxAddHarga = isiPanelAdd("Harga Barang");
+            TextBox textBoxAddKategori = isiPanelAdd("Kategori Barang");
+
+            phanelAdd.Controls.Add(textBoxAddNamaBarang);
+            phanelAdd.Controls.Add(textBoxAddStok);
+            phanelAdd.Controls.Add(textBoxAddHarga);
+            phanelAdd.Controls.Add(textBoxAddKategori);
+
             cekUMKM(GUILogin.username);
             panelAtasUMKM();
             barangUMKM();
             EditButton();
+            HapusButton();
         }
 
         public void cekUMKM(String nama)
@@ -101,16 +133,24 @@ namespace GUI_APP
             pictureBox.Image = Properties.Resources.profilePic; // Akses ikon dari resource
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            PictureBox OrderanMasuk = new PictureBox();
-            OrderanMasuk.Size = new Size(40, 40);
-            OrderanMasuk.Location = new Point(660, 20);
-            OrderanMasuk.Image = Properties.Resources.OrderIcon;
-            OrderanMasuk.SizeMode = PictureBoxSizeMode.StretchImage;
+            PictureBox TambahProduk = new PictureBox();
+            TambahProduk.Size = new Size(40, 40);
+            TambahProduk.Location = new Point(660, 20);
+            TambahProduk.Image = Properties.Resources.PlusIcon;
+            TambahProduk.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            panelAtas.Controls.Add(OrderanMasuk);
+            panelAtas.Controls.Add(TambahProduk);
             panelAtas.Controls.Add(pictureBox);
             panelAtas.Controls.Add(userLabel);
             phanel.Controls.Add(panelAtas);
+
+            TambahProduk.Click += (Sender, e) =>
+            {
+                MessageBox.Show("Menambahkan Produk");
+                flowLayoutPanel.Visible = false;
+                
+                //layoutKeranjang.Visible = true;
+            };
         }
 
         private void barangUMKM() 
@@ -232,9 +272,9 @@ namespace GUI_APP
             {
                 // Debugging output
                 string namaBarang = produkLabel.Text;
-                int stok = Convert.ToInt32(textBox1.Text);
-                int harga = Convert.ToInt32(textBox2.Text);
-                string kategoriBarang = textBox3.Text;
+                int stok = Convert.ToInt32(textBoxEditStok.Text);
+                int harga = Convert.ToInt32(textBoxEditHarga.Text);
+                string kategoriBarang = textBoxEditKategori.Text;
 
                 MessageBox.Show($"Editing Barang: {namaBarang}, Stok: {stok}, Harga: {harga}, Kategori: {kategoriBarang}");
 
@@ -242,6 +282,33 @@ namespace GUI_APP
                 UMKM.EditBarang(namaBarang, stok, harga, kategoriBarang);
 
                 MessageBox.Show("Produk Berhasil Diedit");
+                this.Controls.Remove(flowLayoutPanel);
+                PanelEditBarang.Visible = false;
+                ResetGUI();
+                flowLayoutPanel.Visible = true;
+            };
+            this.phanelEdit.Controls.Add(button);
+        }
+
+        public void HapusButton()
+        {
+            Button button = new Button();
+            button.Text = $"Hapus";
+            button.Size = new System.Drawing.Size(100, 25);
+            button.Font = new Font("Arial", 7, FontStyle.Regular);
+            button.Location = new System.Drawing.Point(250, 300);
+            button.BackColor = Color.White;
+            button.Click += (sender, e) =>
+            {
+                // Debugging output
+                string namaBarang = produkLabel.Text;
+
+                MessageBox.Show($"Deleting Barang: {namaBarang}");
+
+                // Call EditBarang method
+                UMKM.deleteBarang(namaBarang);
+
+                MessageBox.Show("Produk Berhasil Dihapus");
                 this.Controls.Remove(flowLayoutPanel);
                 PanelEditBarang.Visible = false;
                 ResetGUI();
@@ -270,6 +337,82 @@ namespace GUI_APP
             panelAtasUMKM();
             barangUMKM();
             
+        }
+
+        public void AddButton() {
+            Button add = new Button();
+            add.Text = $"Tambah Produk";
+            add.Size = new System.Drawing.Size(100, 25);
+            add.Font = new Font("Arial", 7, FontStyle.Regular);
+            add.Location = new System.Drawing.Point(250, 300);
+            add.BackColor = Color.White;
+            add.Click += (sender, e) =>
+            {
+                // Debugging output
+                string namaBarang = textBoxAddNamaBarang.Text;
+                int stok = Convert.ToInt32(textBoxAddStok.Text);
+                int harga = Convert.ToInt32(textBoxAddHarga.Text);
+                string kategoriBarang = textBoxAddKategori.Text;
+                MessageBox.Show($"Adding Barang: {namaBarang}");
+
+                // Call EditBarang method
+                UMKM.deleteBarang(namaBarang);
+
+                MessageBox.Show("Produk Berhasil Dihapus");
+                this.Controls.Remove(flowLayoutPanel);
+                PanelEditBarang.Visible = false;
+                ResetGUI();
+                flowLayoutPanel.Visible = true;
+            };
+            this.phanelAdd.Controls.Add(add);
+        }
+
+        public TextBox isiPanelAdd(string placeholderText) {
+            TextBox textBox = new TextBox();
+            textBox.Width = 200;
+            textBox.Text = placeholderText;
+
+            if (TextFieldCountAdd == 1)
+            {
+                textBox.Location = new Point(250, 70);
+                TextFieldCountAdd++;
+            }
+            else if (TextFieldCountAdd == 2)
+            {
+                textBox.Location = new Point(250, 120);
+                TextFieldCountAdd++;
+            }
+            else if (TextFieldCountAdd == 3)
+            {
+                textBox.Location = new Point(250, 170);
+                TextFieldCountAdd++;
+            }
+            else if (TextFieldCountAdd == 4)
+            {
+                textBox.Location = new Point(250, 220);
+                TextFieldCountAdd++;
+            }
+
+            textBox.GotFocus += (sender, e) =>
+            {
+                if (textBox.Text == placeholderText)
+                {
+                    textBox.Text = "";
+                    textBox.ForeColor = Color.Black;
+                }
+            };
+
+
+            textBox.LostFocus += (sender, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    textBox.Text = placeholderText;
+                    textBox.ForeColor = Color.Gray;
+                }
+            };
+
+            return textBox;
         }
     }
 }

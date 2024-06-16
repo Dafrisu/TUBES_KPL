@@ -122,10 +122,10 @@ namespace GUI_APP
 
         public void deleteBarang(string namaBarang) 
         { 
-            foreach (var item in listBarang)
+            foreach (var barang in listBarang)
             {
-                if (item.namabarang.Equals(namaBarang)) { 
-                    listBarang.Remove(item);
+                if (barang.namabarang.Equals(namaBarang)) { 
+                    listBarang.Remove(barang);
                 }
             }
         }
