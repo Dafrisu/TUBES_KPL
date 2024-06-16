@@ -78,19 +78,16 @@ namespace GUI_APP
         }
 
         public void TambahBarang(string namaBarang, int stok, int harga, string kategoriBarang) {
-            int i = 0 ;
-            while (i <= listBarang.Count) {
-                if (!namaBarang.Equals(listBarang[i].namabarang))
+            Boolean found = false;
+            foreach (var barang in listBarang) {
+                if (barang.namabarang.Equals(namabarang)) 
                 {
-                    i++;
-                }
-                else 
-                {
+                    found = true;
                     EditBarang(namaBarang, stok, harga, kategoriBarang);
                 }
             }
 
-            if (!listBarang[i].namabarang.Equals(namaBarang)) {
+            if (!found) {
                 listBarang.Add(new BarangUMKM(namaBarang, stok, harga, kategoriBarang));
             }
         }
@@ -120,13 +117,12 @@ namespace GUI_APP
             }
         }
 
-        public void deleteBarang(string namaBarang) 
-        { 
-            foreach (var barang in listBarang)
+        public void deleteBarang(String barang)
+        {
+            var itemsToRemove = listBarang.Where(b => b.namabarang.Equals(barang)).ToList();
+            foreach (var item in itemsToRemove)
             {
-                if (barang.namabarang.Equals(namaBarang)) { 
-                    listBarang.Remove(barang);
-                }
+                listBarang.Remove(item);
             }
         }
     }
