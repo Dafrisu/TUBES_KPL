@@ -29,6 +29,7 @@ namespace GUI_APP
         {
 
             // boolean untuk mengecek apakah akun ada atau tidak
+            bool loginSuccess = UserManager.Login(fieldUser.Text);
             bool cekCredentials = Akun.CekLogin(fieldUser.Text, FieldPass.Text, tipe);
             if (!cekCredentials)
             {
@@ -43,15 +44,17 @@ namespace GUI_APP
                     {
                         username = fieldUser.Text;
                         GUIPembeli guipembeli = new GUIPembeli();
-                        this.Visible = false;
                         guipembeli.Show();
+                        this.Hide();
+                        guipembeli.FormClosed += (s, args) => this.Close();
                     }
                     else if (tipe.Equals("UMKM"))
                     {
                         username = fieldUser.Text;
                         GUIUMKM guipembeli = new GUIUMKM();
-                        this.Visible = false;
+                        this.Hide();
                         guipembeli.Show();
+                        guipembeli.FormClosed += (s, args) => this.Close();
                     }
                     else
                     {
