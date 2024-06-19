@@ -5,8 +5,7 @@
         public string Dari { get; set; }
         public string Ke { get; set; }
         public double JarakDalamKM { get; set; }
-        public double HargaPerKM { get; set; }
-        public double TotalHarga { get; set; }
-        public DateTime CalculatedAt { get; set; }
+        public int HargaPerKM { get; set; }
+        public int TotalHarga { get; set; }
     }
 }

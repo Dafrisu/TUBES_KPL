@@ -1,57 +1,85 @@
-﻿using Tubes_KPL_Kelompok1;
-using static Tubes_KPL_Kelompok1.UMKM;
+﻿using System.Runtime.InteropServices.Marshalling;
+
 namespace Keranjang
 {
-    public class Keranjang()
+    public class KeranjangPembeli()
     {
-        public string namabarang { get; set; }
-        public double Price { get; set; }
-        public int qty { get; set; }
-        public string namaToko { get; set; }
-
-
-        public Dictionary<string, List<(string, int)>> keranjang = new Dictionary<string, List<(string, int)>>();
-        //Indomaret <Soda gembira, 10>
-        public void check(UMKM[] tit, string nama)
+        public bool KeranjangIsNull(Dictionary<String, int> keranjang)
+        {
+            bool kosong = true;
+            if (keranjang != null)
+            {
+                kosong = false;
+                return kosong;
+            }
+            else
+            {
+                return kosong;
+            }
+        }
+        public bool SearchKeranjang(Dictionary<String, int> keranjang, String nama_barang)
+        {
+            if (KeranjangIsNull(keranjang) == false)
+            {
+                return keranjang.ContainsKey(nama_barang);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void EditKeranjang(Dictionary<String, int> keranjang, String nama_barang, int Kurang)
         {
             try
             {
-                for (int i = 0; i < tit.Length; i++)
+                if (KeranjangIsNull(keranjang) == false && SearchKeranjang(keranjang, nama_barang))
+                { 
+                    keranjang[nama_barang] = Kurang;
+                } 
+                else
                 {
-                    if (tit[i].nama == nama)
-                    {
-                        tit[i].GetBarang();
-                        tit[i].KurangStock();
-                        tit[i].GetBarang();
-                    }
-                    else if (i == tit.Length)
-                    {
-                        throw new Exception("bang gaada nama yang kek gitu");
-                    }
+                    throw new Exception("Tidak ada" + nama_barang + "di keranjang");
                 }
+            } 
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
+        }
+        public void DeleteInKeranjang(Dictionary<String, int> keranjang, String nama_barang)
+        {
+            try 
+            {
+                if (KeranjangIsNull(keranjang) == false && SearchKeranjang(keranjang, nama_barang))
+                {
+                    keranjang.Remove(nama_barang);
+                }
+                else
+                {
+                    throw new Exception("Tidak ada" + nama_barang + "di keranjang");
+                }
+            } 
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
         }
-        public class Manage()
+        public void ClearKeranjang(Dictionary<String, int> keranjang)
         {
-            List<(string, int)> productList = new List<(string, int)>();
-            //SodaGembira, 10
-            public void AddProduct()
+            try
             {
-                Console.WriteLine("Masukan Nama Barang: ");
-                string namabarang = Console.ReadLine();
-
-                Console.WriteLine("Masukan jumlah pesanan Barang: ");
-                int qty = Convert.ToInt32(Console.ReadLine());
-
-                productList.Add((namabarang, qty));
-                foreach (var item in productList)
+                if (KeranjangIsNull(keranjang) == false)
                 {
-                    Console.WriteLine(item);
+                    keranjang.Clear();
                 }
+                else
+                {
+                    throw new Exception("Keranjang kosong");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
     }
