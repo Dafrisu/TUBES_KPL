@@ -27,7 +27,8 @@ namespace GUI_APP
         TextBox textBoxEditKategori = new TextBox();
         FlowLayoutPanel PanelAddBarang;
         Panel phanelAdd = new Panel();
-        
+        Panel overlayPanel = new Panel();
+
         public GUIUMKM()
         {
             InitializeComponent();
@@ -80,9 +81,14 @@ namespace GUI_APP
             cekUMKM(GUILogin.username);
             panelAtasUMKM();
             barangUMKM();
+<<<<<<< HEAD
             AddButton();
             EditButton();
             HapusButton();
+=======
+            addbarangUMKM();
+            initpanelLogout();
+>>>>>>> 8024581434b2bb213984ef1f456dfebea5a91270
         }
 
 
@@ -111,8 +117,8 @@ namespace GUI_APP
             kategori.Text = "Kategori: ";
 
             nama.Location = new Point(150, 70);
-            harga.Location = new Point(150, 120);
-            stok.Location = new Point(150, 170);
+            stok.Location = new Point(150, 120);
+            harga.Location = new Point(150, 170);
             kategori.Location = new Point(150, 220);
             
             nama.Size = new System.Drawing.Size(100, 25);
@@ -160,7 +166,7 @@ namespace GUI_APP
                 MessageBox.Show($"Adding Barang: {namaBarang}");
 
                 // Call EditBarang method
-                UMKM.TambahBarang(namaBarang, stok, harga, kategoriBarang);
+                UserManager.TambahBarangUntukCurrentUser(namaBarang, stok, harga, kategoriBarang);
 
                 MessageBox.Show("Produk Berhasil Ditambah");
                 this.Controls.Remove(flowLayoutPanel);
@@ -199,6 +205,17 @@ namespace GUI_APP
             TambahProduk.Image = Properties.Resources.PlusIcon;
             TambahProduk.SizeMode = PictureBoxSizeMode.StretchImage;
 
+            PictureBox logout = new PictureBox();
+            logout.Size = new Size(40, 40);
+            logout.Location = new Point(600, 20);
+            logout.Image = Properties.Resources.PowerIcon;
+            logout.SizeMode = PictureBoxSizeMode.StretchImage;
+            logout.Click += (Sender, e) =>
+            {
+                overlayPanel.Visible = true;
+            };
+
+            panelAtas.Controls.Add(logout);
             panelAtas.Controls.Add(TambahProduk);
             panelAtas.Controls.Add(pictureBox);
             panelAtas.Controls.Add(userLabel);
@@ -262,6 +279,7 @@ namespace GUI_APP
                 int buttonIndex = i + 1;
                 button.Click += (sender, e) =>
                 {
+                    PanelAddBarang.Visible = false;
                     flowLayoutPanel.Visible = false;
                     PanelEditBarang.Visible = true;
                     
@@ -339,7 +357,7 @@ namespace GUI_APP
                 MessageBox.Show($"Editing Barang: {namaBarang}, Stok: {stok}, Harga: {harga}, Kategori: {kategoriBarang}");
 
                 // Call EditBarang method
-                UMKM.EditBarang(namaBarang, stok, harga, kategoriBarang);
+                UserManager.EditBarangUntukCurrentUser(namaBarang, stok, harga, kategoriBarang);
 
                 MessageBox.Show("Produk Berhasil Diedit");
                 this.Controls.Remove(flowLayoutPanel);
@@ -399,6 +417,76 @@ namespace GUI_APP
             panelAtasUMKM();
             barangUMKM();
             
+        }
+        private void initpanelLogout()
+        {
+            
+            overlayPanel = new TransparentPanel();
+            overlayPanel.Size = this.ClientSize;
+            overlayPanel.Location = new Point(0, 0);
+            overlayPanel.Visible = false;
+            this.Controls.Add(overlayPanel);
+            this.Controls.SetChildIndex(overlayPanel, 0); // Pastikan overlay panel berada di paling atas
+            //menambahkan panel logout
+            Panel logoutpanel = new Panel();
+            logoutpanel.Size = new Size(300, 250);
+            CenterPanel(logoutpanel);
+            logoutpanel.BackColor = Color.White;
+
+
+            Label textLogout = new Label();
+            textLogout.Text = "Apakah Anda Yakin Ingin Logout?";
+            textLogout.Location = new Point(25, 75);
+            textLogout.Size = new Size(250, 25);
+            textLogout.Font = new Font("Arial", 8, FontStyle.Regular);
+
+
+            Button Nobutton = new Button();
+            Nobutton.Text = "Tidak";
+            Nobutton.Size = new Size(75, 40);
+            Nobutton.Location = new Point(165, 125);
+            Nobutton.Click += (Sender, e) => overlayPanel.Visible = false;
+
+            Button Yesbutton = new Button();
+            Yesbutton.Text = "Ya";
+            Yesbutton.Size = new Size(75, 40);
+            Yesbutton.Location = new Point(65, 125);
+            Yesbutton.Click += (Sender, e) =>
+            {
+                this.Dispose();
+                GUILogin login = new GUILogin();
+                login.Visible = true;
+            };
+
+            logoutpanel.Controls.Add(textLogout);
+            logoutpanel.Controls.Add(Yesbutton);
+            logoutpanel.Controls.Add(Nobutton);
+
+            overlayPanel.Controls.Add(logoutpanel);
+        }
+        private void CenterPanel(Panel panel)
+        {
+            int x = (this.ClientSize.Width - panel.Width) / 2;
+            int y = (this.ClientSize.Height - panel.Height) / 2;
+            panel.Location = new Point(x, y);
+        }
+
+        public class TransparentPanel : Panel
+        {
+            public TransparentPanel()
+            {
+                this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+                this.BackColor = Color.Transparent;
+            }
+
+            protected override void OnPaintBackground(PaintEventArgs e)
+            {
+                base.OnPaint(e);
+                using (SolidBrush brush = new SolidBrush(Color.FromArgb(128, 0, 0, 0))) // 50% transparan hitam
+                {
+                    e.Graphics.FillRectangle(brush, this.ClientRectangle);
+                }
+            }
         }
 
         public void AddButton() {

@@ -133,6 +133,9 @@
   <data name="PlusIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>117199341543238913-128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PowerIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\13040218151543238914-128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="profilePic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>8788070391647100444-128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

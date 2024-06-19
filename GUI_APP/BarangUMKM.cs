@@ -79,6 +79,7 @@ namespace GUI_APP
 
         public void TambahBarang(string namaBarang, int stok, int harga, string kategoriBarang) {
             Boolean found = false;
+            
             foreach (var barang in listBarang) {
                 if (barang.namabarang.Equals(namabarang)) 
                 {
