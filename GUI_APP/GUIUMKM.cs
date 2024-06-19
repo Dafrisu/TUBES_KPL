@@ -81,9 +81,10 @@ namespace GUI_APP
             cekUMKM(GUILogin.username);
             panelAtasUMKM();
             barangUMKM();
+            HapusButton();
             AddButton();
             EditButton();
-            HapusButton();
+            initpanelLogout();
         }
 
 
