@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,15 +7,33 @@ using System.Threading.Tasks;
 
 namespace GUI_APP
 {
-    internal class Akun
+    public class Akun
     {
-        static Dictionary<string, Dictionary<String, String>> credentials = new Dictionary<string, Dictionary<String, String>>() {
-            {"Haikal", new Dictionary<string, string>(){{ "Gantenk123", "Pembeli" }}},
-            {"Darryl", new Dictionary<string, string>(){{ "GantenkBanged", "UMKM" }}},
-            {"Dafa", new Dictionary<string, string>(){{ "Kashep", "UMKM" }}}
+        static TipeUser user1 = new TipeUser();
+        static TipeUser user2 = new TipeUser();
+        static TipeUser user3 = new TipeUser();
+        public static string tipeUser1;
+        public static string tipeUser2;
+        public static string tipeUser3;
+        static Akun() 
+        {
+            user1.Pembeli();
+            user2.UMKM();
+            user3.UMKM();
+            tipeUser1 = user1.getCurrentState().ToString();
+            tipeUser2 = user2.getCurrentState().ToString();
+            tipeUser3 = user3.getCurrentState().ToString();
+        }
+
+        
+
+        Dictionary<string, Dictionary<String, String>> credentials = new Dictionary<string, Dictionary<String, String>>() {
+            {"Haikal", new Dictionary<string, string>(){{ "Gantenk123", tipeUser1 }}},
+            {"Darryl", new Dictionary<string, string>(){{ "GantenkBanged", tipeUser2 }}},
+            {"Dafa", new Dictionary<string, string>(){{ "Kashep", tipeUser3 }}}
         };
 
-        public static bool CekLogin(String username, String password, String tipeUser)
+        public bool CekLogin(String username, String password, String tipeUser)
         {
             bool cek = false;
             foreach (var akun in credentials)

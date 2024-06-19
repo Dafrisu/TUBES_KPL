@@ -4,6 +4,7 @@ namespace GUI_APP
     {
         public static String tipe = "";
         public static String username = "";
+        public Akun akun = new Akun();
         public GUILogin()
         {
             InitializeComponent();
@@ -12,12 +13,12 @@ namespace GUI_APP
 
         private void radioUMKM_CheckedChanged(object sender, EventArgs e)
         {
-            tipe = radioUMKM.Text;
+            tipe = "UMKM";
         }
 
         private void radioPembeli_CheckedChanged(object sender, EventArgs e)
         {
-            tipe = radioPembeli.Text;
+            tipe = "Pembeli";
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -30,7 +31,7 @@ namespace GUI_APP
 
             // boolean untuk mengecek apakah akun ada atau tidak
             bool loginSuccess = UserManager.Login(fieldUser.Text);
-            bool cekCredentials = Akun.CekLogin(fieldUser.Text, FieldPass.Text, tipe);
+            bool cekCredentials = akun.CekLogin(fieldUser.Text, FieldPass.Text, tipe);
             if (!cekCredentials)
             {
                 MessageBox.Show("Gagal Masuk");

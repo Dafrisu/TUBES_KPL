@@ -61,7 +61,7 @@ namespace GUI_APP
             phanelEdit.Controls.Add(textBoxEditStok);
             phanelEdit.Controls.Add(textBoxEditHarga);
             phanelEdit.Controls.Add(textBoxEditKategori);
-            EditButton();
+            CreateEditButton();
             HapusButton();
 
             PanelAddBarang = new FlowLayoutPanel();
@@ -79,10 +79,9 @@ namespace GUI_APP
             PanelAddBarang.Controls.Add(phanelAdd);
 
             cekUMKM(GUILogin.username);
-           
+            addbarangUMKM();
             panelAtasUMKM();
             barangUMKM();
-            addbarangUMKM();
             initpanelLogout();
         }
 
@@ -334,7 +333,9 @@ namespace GUI_APP
 
             return textBox;
         }
-        public void EditButton() {
+
+        //Method dibawah digunakan untuk membuat Edit Button
+        public void CreateEditButton() {
             Button button = new Button();
             button.Text = $"Edit";
             button.Size = new System.Drawing.Size(70, 25);
@@ -357,6 +358,7 @@ namespace GUI_APP
                 MessageBox.Show("Produk Berhasil Diedit");
                 this.Controls.Remove(flowLayoutPanel);
                 PanelEditBarang.Visible = false;
+                PanelAddBarang.Visible = false;
                 ResetGUI();
                 flowLayoutPanel.Visible = true;
             };
@@ -367,7 +369,7 @@ namespace GUI_APP
         {
             Button button = new Button();
             button.Text = $"Hapus";
-            button.Size = new System.Drawing.Size(70, 25);
+            button.Size = new System.Drawing.Size(180, 25);
             button.Font = new Font("Arial", 7, FontStyle.Regular);
             button.Location = new System.Drawing.Point(400, 300);
             button.BackColor = Color.White;
@@ -487,54 +489,5 @@ namespace GUI_APP
         public void AddButton() {
             
         }
-        /*
-        public TextBox isiPanelAdd(string placeholderText) {
-            TextBox textBox = new TextBox();
-            textBox.Width = 200;
-            textBox.Text = placeholderText;
-
-            if (TextFieldCountAdd == 1)
-            {
-                textBox.Location = new Point(250, 70);
-                TextFieldCountAdd++;
-            }
-            else if (TextFieldCountAdd == 2)
-            {
-                textBox.Location = new Point(250, 120);
-                TextFieldCountAdd++;
-            }
-            else if (TextFieldCountAdd == 3)
-            {
-                textBox.Location = new Point(250, 170);
-                TextFieldCountAdd++;
-            }
-            else if (TextFieldCountAdd == 4)
-            {
-                textBox.Location = new Point(250, 220);
-                TextFieldCountAdd++;
-            }
-
-            textBox.GotFocus += (sender, e) =>
-            {
-                if (textBox.Text == placeholderText)
-                {
-                    textBox.Text = "";
-                    textBox.ForeColor = Color.Black;
-                }
-            };
-
-
-            textBox.LostFocus += (sender, e) =>
-            {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    textBox.Text = placeholderText;
-                    textBox.ForeColor = Color.Gray;
-                }
-            };
-
-            return textBox;
-        }
-        */
     }
 }
