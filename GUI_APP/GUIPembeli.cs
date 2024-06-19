@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace GUI_APP
 {
@@ -37,9 +38,10 @@ namespace GUI_APP
             overlayPanel.Size = this.ClientSize;
             overlayPanel.Location = new Point(0, 0);
             overlayPanel.Visible = false;
-            overlayPanel.Click += (sender, e) => overlayPanel.Visible = false;
             this.Controls.Add(overlayPanel);
             this.Controls.SetChildIndex(overlayPanel, 0); // Pastikan overlay panel berada di paling atas
+
+            initpanelLogout();
         }
 
         private void initpanelLayout()
@@ -56,6 +58,45 @@ namespace GUI_APP
 
             // Menambahkan panel yang berisi barang barang dari UMKM
             AddPanels();
+        }
+        private void initpanelLogout()
+        {
+            //menambahkan panel logout
+            Panel logoutpanel = new Panel();
+            logoutpanel.Size = new Size(300, 250);
+            CenterPanel(logoutpanel);
+            logoutpanel.BackColor = Color.White;
+            
+
+            Label textLogout = new Label();
+            textLogout.Text = "Apakah Anda Yakin Ingin Logout?";
+            textLogout.Location = new Point(25, 75) ;
+            textLogout.Size = new Size(250, 25);
+            textLogout.Font = new Font("Arial", 8, FontStyle.Regular);
+            
+
+            Button Nobutton = new Button();
+            Nobutton.Text = "Tidak";
+            Nobutton.Size = new Size(75, 40);
+            Nobutton.Location = new Point(165, 125);
+            Nobutton.Click += (Sender, e) => overlayPanel.Visible = false;
+
+            Button Yesbutton = new Button();
+            Yesbutton.Text = "Ya";
+            Yesbutton.Size = new Size(75, 40);
+            Yesbutton.Location = new Point(65, 125);
+            Yesbutton.Click += (Sender, e) =>
+            {
+                this.Dispose();
+                GUILogin login = new GUILogin();
+                login.Visible = true;
+            };
+
+            logoutpanel.Controls.Add(textLogout);
+            logoutpanel.Controls.Add(Yesbutton);
+            logoutpanel.Controls.Add(Nobutton);
+
+            overlayPanel.Controls.Add(logoutpanel);
         }
 
         private void panelMenu()
@@ -83,13 +124,23 @@ namespace GUI_APP
             keranjang.SizeMode = PictureBoxSizeMode.StretchImage;
             keranjang.Click += (Sender, e) =>
             {
-                MessageBox.Show("Keranjang di Klik");
                 panelContainer.Visible = false;
                 KeranjangPembeli();
                 interfaceKeranjang();
                 layoutKeranjang.Visible = true;
             };
 
+            PictureBox logout = new PictureBox();
+            logout.Size = new Size(40, 40);
+            logout.Location = new Point(600, 20);
+            logout.Image = Properties.Resources.PowerIcon;
+            logout.SizeMode = PictureBoxSizeMode.StretchImage;
+            logout.Click += (Sender, e) =>
+            {
+                overlayPanel.Visible = true;
+            };
+
+            panelAtas.Controls.Add(logout);
             panelAtas.Controls.Add(keranjang);
             panelAtas.Controls.Add(pictureBox);
             panelAtas.Controls.Add(userLabel);

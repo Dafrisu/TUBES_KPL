@@ -113,6 +113,16 @@ namespace GUI_APP.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap PowerIcon {
+            get {
+                object obj = ResourceManager.GetObject("PowerIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap profilePic {
             get {
                 object obj = ResourceManager.GetObject("profilePic", resourceCulture);
