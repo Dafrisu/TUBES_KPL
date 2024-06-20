@@ -76,6 +76,61 @@ namespace APITesting.Controllers
             });
         }
 
+        [HttpPut("{username}/products/{id}")]
+        public IActionResult UpdateProduct(string username, int id, [FromBody] Product updatedProduct)
+        {
+            var umkms = ReadUmkmsFromFile();
+            if (!umkms.ContainsKey(username))
+            {
+                return NotFound();
+            }
+
+            var products = umkms[username];
+            if (id < 0 || id >= products.Count)
+            {
+                return BadRequest("Invalid product ID");
+            }
+
+            products[id] = updatedProduct;
+            WriteUmkmsToFile(umkms);
+            return Ok(updatedProduct);
+        }
+
+        [HttpDelete("{username}/{id}")]
+        public IActionResult DeleteProduct(string username, int id)
+        {
+            var umkms = ReadUmkmsFromFile();
+            if (!umkms.ContainsKey(username))
+            {
+                return NotFound();
+            }
+
+            var products = umkms[username];
+            if (id < 0 || id >= products.Count)
+            {
+                return BadRequest("Invalid product ID");
+            }
+
+            var deletedProduct = products[id];
+            products.RemoveAt(id);
+            WriteUmkmsToFile(umkms);
+            return Ok(deletedProduct);
+        }
+
+        [HttpDelete("{username}")]
+        public IActionResult DeleteUmkm(string username)
+        {
+            var umkms = ReadUmkmsFromFile();
+            if (!umkms.ContainsKey(username))
+            {
+                return NotFound();
+            }
+
+            umkms.Remove(username);
+            WriteUmkmsToFile(umkms);
+            return NoContent();
+        }
+
         [HttpPost("{username}/products")]
         public IActionResult CreateProduct(string username, [FromBody] Product product)
         {

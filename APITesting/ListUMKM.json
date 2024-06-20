@@ -27,20 +27,12 @@
       "Kategori": "Makanan"
     }
   ],
-  "Mahesa": [
+  "Haikal": [
     {
       "Nama": "Apel",
-      "Stok": 25,
-      "Harga": 15000,
+      "Stok": 2,
+      "Harga": 15,
       "Kategori": "Buah"
-    }
-  ],
-  "Raphael": [
-    {
-      "Nama": "Bluefin",
-      "Stok": 1,
-      "Harga": 300000,
-      "Kategori": "Random"
     }
   ]
 }
