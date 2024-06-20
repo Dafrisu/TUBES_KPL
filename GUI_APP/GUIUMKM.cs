@@ -8,7 +8,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace GUI_APP
 {
     public partial class GUIUMKM : Form
@@ -32,6 +31,7 @@ namespace GUI_APP
         public GUIUMKM()
         {
             InitializeComponent();
+            
             flowLayoutPanel = new FlowLayoutPanel();
             flowLayoutPanel.Dock = DockStyle.Fill;
             flowLayoutPanel.AutoScroll = true;
@@ -79,7 +79,13 @@ namespace GUI_APP
             PanelAddBarang.Controls.Add(phanelAdd);
 
             cekUMKM(GUILogin.username);
-           
+            String user = GUILogin.username;
+            JsonProcessor processor = new JsonProcessor();
+            List<Barang> baranglist = processor.GetBarangForUser(user);
+            foreach (var barang in baranglist)
+            {
+                UMKM.TambahBarang(barang.Nama, barang.Stok, barang.Harga, barang.Kategori);
+            }
             panelAtasUMKM();
             barangUMKM();
             addbarangUMKM();
@@ -94,6 +100,7 @@ namespace GUI_APP
                 if (UMKM.NamaUMKM.Equals(nama))
                 {
                     this.UMKM = UMKM;
+                    
                 }
             }
         }
@@ -245,21 +252,21 @@ namespace GUI_APP
 
                 // bikin label namabarang
                 Label label = new Label();
-                label.Text = barang.namabarang;
+                label.Text = barang.Nama;
                 label.Size = new System.Drawing.Size(150, 25);
                 label.Font = new Font("Arial", 9, FontStyle.Regular);
                 label.Location = new System.Drawing.Point(40, 30);
 
                 // bikin stok label
                 Label stoklabel = new Label();
-                stoklabel.Text = "Stok : " + barang.stok;
+                stoklabel.Text = "Stok : " + barang.Stok;
                 stoklabel.Size = new System.Drawing.Size(150, 25);
                 stoklabel.Font = new Font("Arial", 8, FontStyle.Regular);
                 stoklabel.Location = new System.Drawing.Point(40, 60);
 
                 // label harga
                 Label hargalabel = new Label();
-                hargalabel.Text = "Harga : " + barang.harga;
+                hargalabel.Text = "Harga : " + barang.Harga;
                 hargalabel.Font = new Font("Arial", 8, FontStyle.Regular);
                 hargalabel.Size = new System.Drawing.Size(150, 25);
                 hargalabel.Location = new System.Drawing.Point(380, 40);
@@ -281,7 +288,7 @@ namespace GUI_APP
                     produkLabel.Font = new Font("Arial", 8, FontStyle.Regular);
                     produkLabel.Size = new System.Drawing.Size(250, 30);
                     produkLabel.Location = new System.Drawing.Point(50, 30);
-                    produkLabel.Text = barang.namabarang;
+                    produkLabel.Text = barang.Nama;
                     this.phanelEdit.Controls.Add(produkLabel);
                 };
                 i++;
