@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UMKMconfig\UMKMconfig.csproj" />
+    <ProjectReference Include="..\UMKMLib\UMKMLibrary.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="umkmconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -68,7 +68,7 @@ public class UMKM
             // Create a new instance of UMKMTesting and populate it with the correct data
             UMKMLib umkm = new UMKMLib
             {
-                nama = this.nama,
+                NamaProduk = this.nama,
                 Stock = this.InsertBarang.SelectMany(d => d.Value)
                                           .ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
                 JenisProduk = new Dictionary<string, string>()
