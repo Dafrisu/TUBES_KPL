@@ -79,13 +79,7 @@ namespace GUI_APP
             PanelAddBarang.Controls.Add(phanelAdd);
 
             cekUMKM(GUILogin.username);
-            String user = GUILogin.username;
-            JsonProcessor processor = new JsonProcessor();
-            List<Barang> baranglist = processor.GetBarangForUser(user);
-            foreach (var barang in baranglist)
-            {
-                UMKM.TambahBarang(barang.Nama, barang.Stok, barang.Harga, barang.Kategori);
-            }
+            
             panelAtasUMKM();
             barangUMKM();
             addbarangUMKM();
