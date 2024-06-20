@@ -44,6 +44,7 @@ namespace GUI_APP
             initpanelLogout();
         }
 
+        // method untuk menginisialisasi panelLayout yang menampung panel lainnya
         private void initpanelLayout()
         {
             // Buat FlowLayoutPanel sebagai kontainer untuk panel-panel
@@ -230,11 +231,11 @@ namespace GUI_APP
                     {
                         foreach(var barangumkm in UMKM.listBarang)
                         {
-                            if (barang.namabarang.Equals(barangumkm.namabarang))
+                            if (barang.namabarang.Equals(barangumkm.Nama))
                             {
-                                if (barangumkm.stok > 0)
+                                if (barangumkm.Stok > 0)
                                 {
-                                    barangumkm.stok--;
+                                    barangumkm.Stok--;
                                     barang.qty++;
                                     fixedpanel.Controls.Remove(totalHargaLabel);
                                     totalharga = updatetotalharga();
@@ -263,11 +264,11 @@ namespace GUI_APP
                     foreach (var umkm in Program.listUMKM)
                     {
                         foreach (var barangumkm in umkm.listBarang) {
-                            if (barang.namabarang.Equals(barangumkm.namabarang))
+                            if (barang.namabarang.Equals(barangumkm.Nama))
                             {
                                 if (barang.qty > 1)
                                 {
-                                    barangumkm.stok++;
+                                    barangumkm.Stok++;
                                     barang.qty--;
                                     fixedpanel.Controls.Remove(totalHargaLabel);
                                     totalharga = updatetotalharga();
@@ -364,21 +365,21 @@ namespace GUI_APP
 
                     // bikin label namabarang
                     Label label = new Label();
-                    label.Text = barang.namabarang;
+                    label.Text = barang.Nama;
                     label.Size = new System.Drawing.Size(150, 25);
                     label.Font = new Font("Arial", 9, FontStyle.Regular);
                     label.Location = new System.Drawing.Point(40, 30);
 
                     // bikin stok label
                     Label stoklabel = new Label();
-                    stoklabel.Text = "Stok : " + barang.stok;
+                    stoklabel.Text = "Stok : " + barang.Stok;
                     stoklabel.Size = new System.Drawing.Size(150, 25);
                     stoklabel.Font = new Font("Arial", 8, FontStyle.Regular);
                     stoklabel.Location = new System.Drawing.Point(40, 60);
 
                     // label harga
                     Label hargalabel = new Label();
-                    hargalabel.Text = "Harga : " + barang.harga;
+                    hargalabel.Text = "Harga : " + barang.Harga;
                     hargalabel.Font = new Font("Arial", 8, FontStyle.Regular);
                     hargalabel.Size = new System.Drawing.Size(150, 25);
                     hargalabel.Location = new System.Drawing.Point(380, 40);
@@ -403,12 +404,12 @@ namespace GUI_APP
                     int buttonIndex = i + 1;
                     button.Click += (sender, e) =>
                     {
-                        if (barang.stok > 0)
+                        if (barang.Stok > 0)
                         {
                             MessageBox.Show($"{label.Text} Berhasil dimasukan ke keranjang!");
-                            DataKeranjang.tambahkeKeranjang(barang.namabarang, barang.harga, umkm.NamaUMKM);
-                            barang.stok = barang.stok - 1;
-                            stoklabel.Text = "Stok : " + barang.stok;
+                            DataKeranjang.tambahkeKeranjang(barang.Nama, barang.Harga, umkm.NamaUMKM);
+                            barang.Stok = barang.Stok - 1;
+                            stoklabel.Text = "Stok : " + barang.Stok;
                         }
                         else
                         {
@@ -430,9 +431,9 @@ namespace GUI_APP
             foreach (var umkm in Program.listUMKM)
             {
                 foreach (var barangumkm in umkm.listBarang) {
-                    if (barang.namabarang.Equals(barangumkm.namabarang))
+                    if (barang.namabarang.Equals(barangumkm.Nama))
                     {
-                        barangumkm.stok = barangumkm.stok + barang.qty;
+                        barangumkm.Stok = barangumkm.Stok + barang.qty;
                         DataKeranjang.listKeranjang.Remove(barang);
                     }
                 }
