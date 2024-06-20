@@ -1,44 +1,202 @@
-[
-  {
-    "Username": "Dafa",
-    "Stock": {
-      "Product1": 10,
-      "Product2": 20,
-      "Product3": 15
-    },
-
-    "JenisProduk": {
-      "Jenis Product1": "Makanan",
-      "Jenis Product2": "Minuman",
-      "Jenis Product3": "Misc"
-    }
-  },
-  {
-    "Username": "Haikal",
-    "Stock": {
-      "Product4": 8,
-      "Product5": 12,
-      "Product6": 18
-    },
-
-    "JenisProduk": {
-      "Jenis Product4": "Makanan",
-      "Jenis Product5": "Minuman",
-      "Jenis Product6": "Misc"
-    }
-  },
-  {
-    "Username": "Darryl",
-    "Stock": {
-      "Product7": 6,
-      "Product8": 9,
-      "Product9": 14
-    },
-
-    "JenisProduk": {
-      "Jenis Product7": "Makanan",
-      "Jenis Product8": "Minuman",
-      "Jenis Product9": "Misc"
-    }
+{
+  "JenisProduk": {
+    "Misc": [
+      {
+        "NamaProduk": "Buku",
+        "Stock": 10,
+        "Harga": 10000,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Pensil",
+        "Stock": 15,
+        "Harga": 5000,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Pulpen",
+        "Stock": 20,
+        "Harga": 3000,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Kertas",
+        "Stock": 8,
+        "Harga": 15000,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Spidol",
+        "Stock": 12,
+        "Harga": 8000,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Stapler",
+        "Stock": 5,
+        "Harga": 20000,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Penghapus",
+        "Stock": 18,
+        "Harga": 4000,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Penggaris",
+        "Stock": 10,
+        "Harga": 7000,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Notebook",
+        "Stock": 10,
+        "Harga": 15000,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Marker",
+        "Stock": 20,
+        "Harga": 5000,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Whiteboard Eraser",
+        "Stock": 15,
+        "Harga": 2500,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Sticky Notes",
+        "Stock": 30,
+        "Harga": 3000,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Binder Clips",
+        "Stock": 50,
+        "Harga": 1000,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Paper Clips",
+        "Stock": 100,
+        "Harga": 500,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Scissors",
+        "Stock": 10,
+        "Harga": 12000,
+        "KategoriBarang": "Misc"
+      },
+      {
+        "NamaProduk": "Tape",
+        "Stock": 25,
+        "Harga": 8000,
+        "KategoriBarang": "Misc"
+      }
+    ],
+    "Makanan": [
+      {
+        "NamaProduk": "Makaroni",
+        "Stock": 5,
+        "Harga": 20000,
+        "KategoriBarang": "Makanan"
+      },
+      {
+        "NamaProduk": "Pizza",
+        "Stock": 18,
+        "Harga": 4000,
+        "KategoriBarang": "Makanan"
+      },
+      {
+        "NamaProduk": "Mie Baek",
+        "Stock": 10,
+        "Harga": 7000,
+        "KategoriBarang": "Makanan"
+      },
+      {
+        "NamaProduk": "Chips",
+        "Stock": 20,
+        "Harga": 10000,
+        "KategoriBarang": "Makanan"
+      },
+      {
+        "NamaProduk": "Chocolate Bar",
+        "Stock": 50,
+        "Harga": 5000,
+        "KategoriBarang": "Makanan"
+      },
+      {
+        "NamaProduk": "Cookies",
+        "Stock": 30,
+        "Harga": 15000,
+        "KategoriBarang": "Makanan"
+      },
+      {
+        "NamaProduk": "Instant Noodles",
+        "Stock": 40,
+        "Harga": 3000,
+        "KategoriBarang": "Makanan"
+      },
+      {
+        "NamaProduk": "Granola Bar",
+        "Stock": 25,
+        "Harga": 8000,
+        "KategoriBarang": "Makanan"
+      }
+    ],
+    "Minuman": [
+      {
+        "NamaProduk": "Golda",
+        "Stock": 5,
+        "Harga": 20000,
+        "KategoriBarang": "Minuman"
+      },
+      {
+        "NamaProduk": "Nipis Madu",
+        "Stock": 18,
+        "Harga": 4000,
+        "KategoriBarang": "Minuman"
+      },
+      {
+        "NamaProduk": "Tel-u Water",
+        "Stock": 10,
+        "Harga": 7000,
+        "KategoriBarang": "Minuman"
+      },
+      {
+        "NamaProduk": "Coke",
+        "Stock": 30,
+        "Harga": 7000,
+        "KategoriBarang": "Minuman"
+      },
+      {
+        "NamaProduk": "Pepsi",
+        "Stock": 25,
+        "Harga": 6500,
+        "KategoriBarang": "Minuman"
+      },
+      {
+        "NamaProduk": "Green Tea",
+        "Stock": 20,
+        "Harga": 8000,
+        "KategoriBarang": "Minuman"
+      },
+      {
+        "NamaProduk": "Coffee",
+        "Stock": 50,
+        "Harga": 5000,
+        "KategoriBarang": "Minuman"
+      },
+      {
+        "NamaProduk": "Juice",
+        "Stock": 40,
+        "Harga": 10000,
+        "KategoriBarang": "Minuman"
+      }
+    ]
   }
-]
+}
