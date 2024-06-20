@@ -10,7 +10,8 @@ namespace GUI_APP
 {
     internal class JsonProcessor
     {
-        string _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ListUMKM.json");
+
+        string _filePath = "ListUMKM.json";
 
         public List<Barang> GetBarangForUser(string userName)
         {

@@ -1,0 +1,30 @@
+{
+		"Dafa": [
+			{
+				"Nama": "Ikan",
+				"Stok": 10,
+				"Harga": 10000,
+				"Kategori": "Makanan"
+			},
+			{
+				"Nama": "Udang",
+				"Stok": 15,
+				"Harga": 20000,
+				"Kategori": "Makanan"
+			}
+		],
+		"Darryl": [
+			{
+				"Nama": "Telur",
+				"Stok": 30,
+				"Harga": 5000,
+				"Kategori": "Makanan"
+			},
+			{
+				"Nama": "Susu",
+				"Stok": 20,
+				"Harga": 15000,
+				"Kategori": "Makanan"
+			}
+		]
+}
