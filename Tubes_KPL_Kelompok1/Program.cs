@@ -5,8 +5,9 @@ using Tubes_KPL_Kelompok1;
 using Keranjang;
 using static Tubes_KPL_Kelompok1.UMKM;
 using static Tubes_KPL_Kelompok1.IdentifyUser;
+using UMKMLibrary;
 
-class programe
+class programe 
 {
     static void Main(string[] args)
     {
@@ -29,13 +30,30 @@ class programe
         Pembeli[] arrPembeli = new Pembeli[20];
         KeranjangPembeli keranjang = new KeranjangPembeli();
         stateAplikasi stateAplikasi = new stateAplikasi();
-
+        List<BarangUMKM> BarangUMKM = new List<BarangUMKM>();
         //Initial run
-        
-        
-        
-        
-        
+
+
+
+        //UMKMLib.ParseJson("umkmconfig.json", BarangUMKM);
+
+        // Display the parsed objects
+        foreach (var umkm in BarangUMKM)
+        {
+            Console.Write("Nama Barang:");
+            Console.WriteLine(umkm.NamaProduk);
+            Console.Write("Kategori:");
+            Console.WriteLine(umkm.KategoriBarang);
+            Console.Write("Harga:");
+            Console.WriteLine(umkm.Harga);
+            Console.Write("Stock:");
+            Console.WriteLine(umkm.Stock);
+        }
+
+        Console.WriteLine(BarangUMKM[0].NamaProduk);
+        Console.WriteLine(BarangUMKM[0].KategoriBarang);
+        Console.WriteLine(BarangUMKM[0].Harga);
+        Console.WriteLine(BarangUMKM[0].Stock);
 
         while (intCek != 15)
         {

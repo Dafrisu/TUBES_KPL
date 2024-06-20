@@ -19,6 +19,8 @@ namespace GUI_APP
 
         public void GenerateBarang1()
         {
+            
+            UMKMLibGUI.ParseJson("umkmconfig.json", listBarang);
             //List Barang Misc
             listBarang.Add(new Barang("Buku", 10, 10000,"Misc"));
             listBarang.Add(new Barang("Pensil", 15, 5000, "Misc"));
@@ -42,6 +44,7 @@ namespace GUI_APP
 
         public void GenerateBarang2()
         {
+            UMKMLibGUI.ParseJson("umkmconfig.json", listBarang);
             // List Barang Misc
             listBarang.Add(new Barang("Notebook", 10, 15000, "Misc"));
             listBarang.Add(new Barang("Marker", 20, 5000, "Misc"));

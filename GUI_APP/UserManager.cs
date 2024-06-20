@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 
 namespace GUI_APP
 {
-    internal static class UserManager
+    internal class UserManager
     {
+        private static readonly UserManager instance = new UserManager();
         public static BarangUMKM CurrentUser { get; private set; }
+        public static UserManager Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
 
-        public static bool Login(string username)
+        public bool Login(string username)
         {
             // Cari UMKM berdasarkan username yang diberikan
             var user = Program.listUMKM.FirstOrDefault(u => u.NamaUMKM.Equals(username, StringComparison.OrdinalIgnoreCase));
@@ -22,17 +30,17 @@ namespace GUI_APP
             return false;
         }
 
-        public static void Logout()
+        public void Logout()
         {
             CurrentUser = null;
         }
 
-        public static bool IsLoggedIn()
+        public bool IsLoggedIn()
         {
             return CurrentUser != null;
         }
 
-        public static void TambahBarangUntukCurrentUser(string namaBarang, int stok, int harga, string kategoriBarang)
+        public void TambahBarangUntukCurrentUser(string namaBarang, int stok, int harga, string kategoriBarang)
         {
             if (CurrentUser != null)
             {
@@ -44,7 +52,7 @@ namespace GUI_APP
             }
         }
 
-        public static void EditBarangUntukCurrentUser(string namaBarang, int stok, int harga, string kategoriBarang)
+        public void EditBarangUntukCurrentUser(string namaBarang, int stok, int harga, string kategoriBarang)
         {
             if (CurrentUser != null)
             {

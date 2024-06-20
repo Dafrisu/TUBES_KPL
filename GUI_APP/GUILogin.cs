@@ -5,6 +5,7 @@ namespace GUI_APP
         public static String tipe = "";
         public static String username = "";
         public Akun akun = new Akun();
+        Userstate fiturUser = new Userstate();
         public GUILogin()
         {
             InitializeComponent();
@@ -28,20 +29,41 @@ namespace GUI_APP
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-
             // boolean untuk mengecek apakah akun ada atau tidak
-            bool loginSuccess = UserManager.Login(fieldUser.Text);
+            fiturUser.cekUser(tipe);
+            String StateAplikasi = fiturUser.getCurrentState().ToString();
+            bool loginSuccess = UserManager.Instance.Login(fieldUser.Text);
             bool cekCredentials = akun.CekLogin(fieldUser.Text, FieldPass.Text, tipe);
+            bool cekKapitalUsername = true;
+            bool cekDigitPassword = true;
+            foreach (char karakter in fieldUser.Text) 
+            {
+                if (!char.IsUpper(karakter) && cekKapitalUsername != false) {
+                    cekKapitalUsername = false;
+                }
+            }
+            foreach (char karakter in FieldPass.Text) 
+            {
+                if (!char.IsDigit(karakter)) { 
+                    cekDigitPassword = false;
+                }
+            }
             if (!cekCredentials)
             {
                 MessageBox.Show("Gagal Masuk");
+                if (cekKapitalUsername == false) {
+                    MessageBox.Show("Inputan Username harus memiliki huruf Kapital");
+                }
+                if (cekDigitPassword == false) {
+                    MessageBox.Show("Inputan Password harus memiliki digit angka");
+                }
             }
             else
             {
                 MessageBox.Show("Berhasil Masuk");
                 try
                 {
-                    if (tipe.Equals("Pembeli"))
+                    if (tipe.Equals("Pembeli") && StateAplikasi.Equals(Userstate.AppsState.FiturPembeli.ToString()))
                     {
                         username = fieldUser.Text;
                         GUIPembeli guipembeli = new GUIPembeli();
@@ -49,7 +71,7 @@ namespace GUI_APP
                         this.Hide();
                         guipembeli.FormClosed += (s, args) => this.Close();
                     }
-                    else if (tipe.Equals("UMKM"))
+                    else if (tipe.Equals("UMKM") && StateAplikasi.Equals(Userstate.AppsState.FiturUMKM.ToString()))
                     {
                         username = fieldUser.Text;
                         GUIUMKM guipembeli = new GUIUMKM();

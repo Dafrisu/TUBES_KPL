@@ -34,10 +34,10 @@ namespace GUI_APP
             
             flowLayoutPanel = new FlowLayoutPanel();
             flowLayoutPanel.Dock = DockStyle.Fill;
-            flowLayoutPanel.AutoScroll = true;
-            flowLayoutPanel.Size = new Size(this.Width, this.Height);
+            flowLayoutPanel.AutoScroll = false;
+            flowLayoutPanel.Size = new Size(this.Width-20, this.Height-30);
             this.Controls.Add(flowLayoutPanel);
-            phanel.Size = new Size(this.Width,this.Height);
+            phanel.Size = new Size(flowLayoutPanel.Width,flowLayoutPanel.Height);
             phanel.AutoScroll = true;
             phanel.BackColor = Color.GreenYellow;
             flowLayoutPanel.Controls.Add(phanel);
@@ -194,8 +194,6 @@ namespace GUI_APP
                     MessageBox.Show("gagal menambahkan barang, Tidak boleh ada data yang NULL");
                 }
                 // Debugging output
-                
-                
             };
             this.phanelAdd.Controls.Add(add);
         }
@@ -382,7 +380,7 @@ namespace GUI_APP
                 MessageBox.Show($"Editing Barang: {namaBarang}, Stok: {stok}, Harga: {harga}, Kategori: {kategoriBarang}");
 
                 // Call EditBarang method
-                UserManager.EditBarangUntukCurrentUser(namaBarang, stok, harga, kategoriBarang);
+                UserManager.Instance.EditBarangUntukCurrentUser(namaBarang, stok, harga, kategoriBarang);
 
                 MessageBox.Show("Produk Berhasil Diedit");
                 this.Controls.Remove(flowLayoutPanel);

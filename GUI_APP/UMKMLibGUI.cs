@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
+using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
+using UMKMLibrary;
 
-namespace UMKMLibrary
+namespace GUI_APP
 {
-    public class UMKMLib
+    internal class UMKMLibGUI
     {
         public string KategoriBarang { get; set; }
         public string NamaProduk { get; set; }
@@ -17,16 +20,16 @@ namespace UMKMLibrary
         private const string logFileName = "umkmconfig.json";
         private readonly string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), logFileName);
 
-        public static void WriteJson(UMKMLib newData)
+        public static void WriteJson(UMKMLibGUI newData)
         {
             try
             {
-                List<UMKMLib> umkmList = new List<UMKMLib>();
+                List<UMKMLibGUI> umkmList = new List<UMKMLibGUI>();
 
                 if (File.Exists("umkmconfig.json"))
                 {
                     string jsonString = File.ReadAllText("umkmconfig.json");
-                    umkmList = JsonSerializer.Deserialize<List<UMKMLib>>(jsonString) ?? new List<UMKMLib>();
+                    umkmList = JsonSerializer.Deserialize<List<UMKMLibGUI>>(jsonString) ?? new List<UMKMLibGUI>();
                 }
 
                 // Check if the category already exists
@@ -53,7 +56,6 @@ namespace UMKMLibrary
                 Console.WriteLine($"Error writing JSON file: {ex.Message}");
             }
         }
-
         public static void ReadJson()
         {
             try
@@ -74,13 +76,12 @@ namespace UMKMLibrary
                 Console.WriteLine($"Error reading JSON file: {ex.Message}");
             }
         }
-        public static void ParseJson(string jsonFilePath, List<iBarang> listBarang)
+
+        public static void ParseJson(string jsonFilePath, List<Barang> listBarang)
         {
             try
             {
-                
-
-                if (File.Exists(jsonFilePath))
+                if (File.Exists("umkmconfig.json"))
                 {
                     string json = File.ReadAllText(jsonFilePath);
                     var parsedData = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, List<BarangUMKM>>>>(json);
@@ -93,13 +94,15 @@ namespace UMKMLibrary
                             {
                                 foreach (var item in product.Value)
                                 {
-                                    listBarang.Add(new BarangUMKM
-                                    {
-                                        NamaProduk = item.NamaProduk,
-                                        Stock = item.Stock,
-                                        Harga = item.Harga,
-                                        KategoriBarang = item.KategoriBarang
-                                    });
+                                    
+
+                                    listBarang.Add(new Barang
+                                    (
+                                        item.NamaProduk,
+                                        item.Stock,
+                                        item.Harga,
+                                        item.KategoriBarang
+                                    ));
                                 }
                             }
                         }
@@ -107,46 +110,21 @@ namespace UMKMLibrary
                 }
                 else
                 {
-                    Console.WriteLine("File umkmconfig.json not found.");
+                    MessageBox.Show("File umkmconfig.json not found.");
                 }
-
-                
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error parsing JSON file: {ex.Message}");
-                
+                MessageBox.Show($"Error parsing JSON file: {ex.Message}");
             }
         }
-    }
-    public class BarangUMKM : iBarang
-    {
-        public string NamaProduk { get; set; }
-        public int Stock { get; set; }
-        public int Harga { get; set; }
-        public string KategoriBarang { get; set; }
-
-        public BarangUMKM()
+        public class BarangUMKM
         {
-            // Constructor kosong untuk deserialization JSON
-        }
-
-        public BarangUMKM(string namaProduk, int jumlah, int harga, string kategori)
-        {
-            NamaProduk = namaProduk;
-            Stock = Stock;
-            Harga = harga;
-            KategoriBarang = kategori;
+            public string NamaProduk { get; set; }
+            public int Stock { get; set; }
+            public int Harga { get; set; }
+            public string KategoriBarang { get; set; }
         }
     }
-
-    public interface iBarang
-    {
-        
-        public string NamaProduk { get; set; }
-        public int Stock { get; set; }
-        public int Harga { get; set; }
-        public string KategoriBarang { get; set; }
-    }
-
 }
+
