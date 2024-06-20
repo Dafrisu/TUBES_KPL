@@ -9,73 +9,63 @@ namespace GUI_APP
     internal class BarangUMKM
     {
         public String NamaUMKM;
-        public string namabarang;
-        public int stok;
-        public int harga;
-        public string kategoriBarang;
-        public List<BarangUMKM> listBarang = new List<BarangUMKM>();
+        
+        public List<Barang> listBarang = new List<Barang>();
 
         public BarangUMKM(String nama)
         { 
             this.NamaUMKM = nama;
         }
-        public BarangUMKM(string namabarang, int stok, int harga, string kategoriBarang)
-        {
-            this.namabarang = namabarang;
-            this.stok = stok;
-            this.harga = harga;
-            this.kategoriBarang = kategoriBarang;
-        }
-        
+
         public void GenerateBarang1()
         {
             UMKMLibGUI.ParseJson("umkmconfig.json", listBarang);
             //List Barang Misc
-            listBarang.Add(new BarangUMKM("Buku", 10, 10000,"Misc"));
-            listBarang.Add(new BarangUMKM("Pensil", 15, 5000, "Misc"));
-            listBarang.Add(new BarangUMKM("Pulpen", 20, 3000, "Misc"));
-            listBarang.Add(new BarangUMKM("Kertas", 8, 15000, "Misc"));
-            listBarang.Add(new BarangUMKM("Spidol", 12, 8000, "Misc"));
-            listBarang.Add(new BarangUMKM("Stapler", 5, 20000, "Misc"));
-            listBarang.Add(new BarangUMKM("Penghapus", 18, 4000, "Misc"));
-            listBarang.Add(new BarangUMKM("Penggaris", 10, 7000, "Misc"));
+            listBarang.Add(new Barang("Buku", 10, 10000,"Misc"));
+            listBarang.Add(new Barang("Pensil", 15, 5000, "Misc"));
+            listBarang.Add(new Barang("Pulpen", 20, 3000, "Misc"));
+            listBarang.Add(new Barang("Kertas", 8, 15000, "Misc"));
+            listBarang.Add(new Barang("Spidol", 12, 8000, "Misc"));
+            listBarang.Add(new Barang("Stapler", 5, 20000, "Misc"));
+            listBarang.Add(new Barang("Penghapus", 18, 4000, "Misc"));
+            listBarang.Add(new Barang("Penggaris", 10, 7000, "Misc"));
 
             //List Barang Makanan
-            listBarang.Add(new BarangUMKM("Makaroni", 5, 20000, "Makanan"));
-            listBarang.Add(new BarangUMKM("Pizza", 18, 4000, "Makanan"));
-            listBarang.Add(new BarangUMKM("Mie Baek", 10, 7000, "Makanan"));
+            listBarang.Add(new Barang("Makaroni", 5, 20000, "Makanan"));
+            listBarang.Add(new Barang("Pizza", 18, 4000, "Makanan"));
+            listBarang.Add(new Barang("Mie Baek", 10, 7000, "Makanan"));
 
             //List Barang Minuman
-            listBarang.Add(new BarangUMKM("Golda", 5, 20000, "Minuman"));
-            listBarang.Add(new BarangUMKM("Nipis Madu", 18, 4000, "Minuman"));
-            listBarang.Add(new BarangUMKM("Tel-u Water", 10, 7000, "Minuman"));
+            listBarang.Add(new Barang("Golda", 5, 20000, "Minuman"));
+            listBarang.Add(new Barang("Nipis Madu", 18, 4000, "Minuman"));
+            listBarang.Add(new Barang("Tel-u Water", 10, 7000, "Minuman"));
         }
 
         public void GenerateBarang2()
         {
             // List Barang Misc
-            listBarang.Add(new BarangUMKM("Notebook", 10, 15000, "Misc"));
-            listBarang.Add(new BarangUMKM("Marker", 20, 5000, "Misc"));
-            listBarang.Add(new BarangUMKM("Whiteboard Eraser", 15, 2500, "Misc"));
-            listBarang.Add(new BarangUMKM("Sticky Notes", 30, 3000, "Misc"));
-            listBarang.Add(new BarangUMKM("Binder Clips", 50, 1000, "Misc"));
-            listBarang.Add(new BarangUMKM("Paper Clips", 100, 500, "Misc"));
-            listBarang.Add(new BarangUMKM("Scissors", 10, 12000, "Misc"));
-            listBarang.Add(new BarangUMKM("Tape", 25, 8000, "Misc"));
+            listBarang.Add(new Barang("Notebook", 10, 15000, "Misc"));
+            listBarang.Add(new Barang("Marker", 20, 5000, "Misc"));
+            listBarang.Add(new Barang("Whiteboard Eraser", 15, 2500, "Misc"));
+            listBarang.Add(new Barang("Sticky Notes", 30, 3000, "Misc"));
+            listBarang.Add(new Barang("Binder Clips", 50, 1000, "Misc"));
+            listBarang.Add(new Barang("Paper Clips", 100, 500, "Misc"));
+            listBarang.Add(new Barang("Scissors", 10, 12000, "Misc"));
+            listBarang.Add(new Barang("Tape", 25, 8000, "Misc"));
 
             // List Barang Makanan
-            listBarang.Add(new BarangUMKM("Chips", 20, 10000, "Makanan"));
-            listBarang.Add(new BarangUMKM("Chocolate Bar", 50, 5000, "Makanan"));
-            listBarang.Add(new BarangUMKM("Cookies", 30, 15000, "Makanan"));
-            listBarang.Add(new BarangUMKM("Instant Noodles", 40, 3000, "Makanan"));
-            listBarang.Add(new BarangUMKM("Granola Bar", 25, 8000, "Makanan"));
+            listBarang.Add(new Barang("Chips", 20, 10000, "Makanan"));
+            listBarang.Add(new Barang("Chocolate Bar", 50, 5000, "Makanan"));
+            listBarang.Add(new Barang("Cookies", 30, 15000, "Makanan"));
+            listBarang.Add(new Barang("Instant Noodles", 40, 3000, "Makanan"));
+            listBarang.Add(new Barang("Granola Bar", 25, 8000, "Makanan"));
 
             // List Barang Minuman
-            listBarang.Add(new BarangUMKM("Coke", 30, 7000, "Minuman"));
-            listBarang.Add(new BarangUMKM("Pepsi", 25, 6500, "Minuman"));
-            listBarang.Add(new BarangUMKM("Green Tea", 20, 8000, "Minuman"));
-            listBarang.Add(new BarangUMKM("Coffee", 50, 5000, "Minuman"));
-            listBarang.Add(new BarangUMKM("Juice", 40, 10000, "Minuman"));
+            listBarang.Add(new Barang("Coke", 30, 7000, "Minuman"));
+            listBarang.Add(new Barang("Pepsi", 25, 6500, "Minuman"));
+            listBarang.Add(new Barang("Green Tea", 20, 8000, "Minuman"));
+            listBarang.Add(new Barang("Coffee", 50, 5000, "Minuman"));
+            listBarang.Add(new Barang("Juice", 40, 10000, "Minuman"));
         }
 
         //Method untuk menambahkan Barang
@@ -84,7 +74,7 @@ namespace GUI_APP
             
             //melakukan searching yang akan mengupdate found
             foreach (var barang in listBarang) {
-                if (barang.namabarang.Equals(namabarang)) 
+                if (barang.Nama.Equals(namaBarang)) 
                 {
                     found = true;
                     EditBarang(namaBarang, stok, harga, kategoriBarang);
@@ -92,7 +82,7 @@ namespace GUI_APP
             }
 
             if (!found) {
-                listBarang.Add(new BarangUMKM(namaBarang, stok, harga, kategoriBarang));
+                listBarang.Add(new Barang(namaBarang, stok, harga, kategoriBarang));
             }
         }
 
@@ -103,14 +93,14 @@ namespace GUI_APP
             // Melakukan searching dengan menggunakan Foreach
             foreach (var barang in listBarang)
             {
-                if (string.Equals(namaBarang, barang.namabarang, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(namaBarang, barang.Nama, StringComparison.OrdinalIgnoreCase))
                 {
                     // Debugging output
-                    MessageBox.Show($"Found Barang: {barang.namabarang}, updating values...");
+                    MessageBox.Show($"Found Barang: {barang.Nama}, updating values...");
 
-                    barang.stok = stok;
-                    barang.harga = harga;
-                    barang.kategoriBarang = kategoriBarang;
+                    barang.Stok = stok;
+                    barang.Harga = harga;
+                    barang.Kategori = kategoriBarang;
 
                     itemFound = true;
                     break;
@@ -126,8 +116,7 @@ namespace GUI_APP
         //Method untuk menghapus barang pada Dictionary barang
         public void deleteBarang(String barang)
         {
-            // Membuat sebuah variable untuk memuat listBarang dengan kondisi
-            var itemsToRemove = listBarang.Where(b => b.namabarang.Equals(barang)).ToList();
+            var itemsToRemove = listBarang.Where(b => b.Nama.Equals(barang)).ToList();
             foreach (var item in itemsToRemove)
             {
                 listBarang.Remove(item);
