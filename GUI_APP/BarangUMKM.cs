@@ -19,9 +19,10 @@ namespace GUI_APP
 
         public void GenerateBarang1()
         {
-            UMKMLibGUI.ParseJson("E:\\TELKOM UNIVERSITY\\TUGAS KULIAH\\KONSTRUKSI PERANGKAT LUNAK (KPL)\\TUBEAST\\TUBES_KPL\\UMKMLib\\umkmconfig.json", listBarang);
+            
+            UMKMLibGUI.ParseJson("umkmconfig.json", listBarang);
             //List Barang Misc
-            /*listBarang.Add(new Barang("Buku", 10, 10000,"Misc"));
+            listBarang.Add(new Barang("Buku", 10, 10000,"Misc"));
             listBarang.Add(new Barang("Pensil", 15, 5000, "Misc"));
             listBarang.Add(new Barang("Pulpen", 20, 3000, "Misc"));
             listBarang.Add(new Barang("Kertas", 8, 15000, "Misc"));
@@ -38,11 +39,12 @@ namespace GUI_APP
             //List Barang Minuman
             listBarang.Add(new Barang("Golda", 5, 20000, "Minuman"));
             listBarang.Add(new Barang("Nipis Madu", 18, 4000, "Minuman"));
-            listBarang.Add(new Barang("Tel-u Water", 10, 7000, "Minuman"));*/
+            listBarang.Add(new Barang("Tel-u Water", 10, 7000, "Minuman"));
         }
 
         public void GenerateBarang2()
         {
+            UMKMLibGUI.ParseJson("umkmconfig.json", listBarang);
             // List Barang Misc
             listBarang.Add(new Barang("Notebook", 10, 15000, "Misc"));
             listBarang.Add(new Barang("Marker", 20, 5000, "Misc"));

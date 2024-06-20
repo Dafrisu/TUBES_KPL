@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks; 
+using System.Threading.Tasks;
+using UMKMLibrary;
 
 namespace GUI_APP
 {
@@ -83,7 +84,7 @@ namespace GUI_APP
                 if (File.Exists("umkmconfig.json"))
                 {
                     string json = File.ReadAllText(jsonFilePath);
-                    var parsedData = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, List<Dictionary<string, object>>>>>(json);
+                    var parsedData = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, List<BarangUMKM>>>>(json);
 
                     if (parsedData != null)
                     {
@@ -93,17 +94,14 @@ namespace GUI_APP
                             {
                                 foreach (var item in product.Value)
                                 {
-                                    string NamaProduk = item["NamaProduk"].ToString();
-                                    int Stock = Convert.ToInt32(item["Stock"]);
-                                    int Harga = Convert.ToInt32(item["Harga"]);
-                                    string KategoriBarang = item["KategoriBarang"].ToString();
+                                    
 
                                     listBarang.Add(new Barang
                                     (
-                                        NamaProduk,
-                                        Stock,
-                                        Harga,
-                                        KategoriBarang
+                                        item.NamaProduk,
+                                        item.Stock,
+                                        item.Harga,
+                                        item.KategoriBarang
                                     ));
                                 }
                             }
@@ -119,6 +117,13 @@ namespace GUI_APP
             {
                 MessageBox.Show($"Error parsing JSON file: {ex.Message}");
             }
+        }
+        public class BarangUMKM
+        {
+            public string NamaProduk { get; set; }
+            public int Stock { get; set; }
+            public int Harga { get; set; }
+            public string KategoriBarang { get; set; }
         }
     }
 }

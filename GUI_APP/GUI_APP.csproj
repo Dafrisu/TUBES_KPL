@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UMKMconfig\UMKMconfig.csproj" />
+    <ProjectReference Include="..\UMKMLib\UMKMLibrary.csproj" />
   </ItemGroup>
 
   <ItemGroup>
