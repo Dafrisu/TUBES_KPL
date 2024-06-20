@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 
 namespace APITesting.Controllers
@@ -9,93 +11,152 @@ namespace APITesting.Controllers
     [ApiController]
     public class UMKMController : ControllerBase
     {
-        private readonly string _filePath = Path.Combine(Directory.GetCurrentDirectory(), "umkms.json");
+        private readonly string _filePath = Path.Combine(Directory.GetCurrentDirectory(), "ListUMKM.json");
 
         public UMKMController()
         {
+            // Create the JSON file if it doesn't exist
             if (!System.IO.File.Exists(_filePath))
             {
-                System.IO.File.WriteAllText(_filePath, "[]");
+                System.IO.File.WriteAllText(_filePath, "{}");
             }
         }
 
-        private List<UMKM> ReadUmkmsFromFile()
+        private Dictionary<string, List<Product>> ReadUmkmsFromFile()
         {
             var jsonString = System.IO.File.ReadAllText(_filePath);
-            return JsonSerializer.Deserialize<List<UMKM>>(jsonString);
+            return JsonSerializer.Deserialize<Dictionary<string, List<Product>>>(jsonString);
         }
 
-        private void WriteUmkmsToFile(List<UMKM> umkms)
+        private void WriteUmkmsToFile(Dictionary<string, List<Product>> umkms)
         {
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
+            var options = new JsonSerializerOptions { WriteIndented = true };
             var jsonString = JsonSerializer.Serialize(umkms, options);
             System.IO.File.WriteAllText(_filePath, jsonString);
         }
 
         [HttpGet]
-        public IEnumerable<UMKM> GetAllUmkms()
+        public IActionResult GetAllUmkms()
         {
-            return ReadUmkmsFromFile();
+            var umkms = ReadUmkmsFromFile();
+            return Ok(umkms);
         }
 
         [HttpGet("{username}")]
-        public ActionResult<UMKM> GetUmkmByUsername(string username)
+        public IActionResult GetUmkmByUsername(string username)
         {
             var umkms = ReadUmkmsFromFile();
-            var umkm = umkms.FirstOrDefault(u => u.Username == username);
-            if (umkm == null)
+            if (umkms.TryGetValue(username, out var umkm))
             {
-                return NotFound();
+                return Ok(umkm);
             }
-            return umkm;
+            return NotFound();
         }
 
         [HttpPost]
-        public ActionResult<UMKM> CreateUmkm(UMKM umkm)
+        public IActionResult CreateUmkm([FromBody] CreateUmkmRequest request)
         {
             var umkms = ReadUmkmsFromFile();
-            if (umkms.Any(u => u.Username == umkm.Username))
+
+            // Check if the UMKM with the same username already exists
+            if (umkms.ContainsKey(request.Username))
             {
-                return Conflict();
+                return Conflict($"UMKM with username '{request.Username}' already exists.");
             }
 
-            umkms.Add(umkm);
+            // Create a new UMKM with the provided products
+            umkms[request.Username] = request.Products;
+
             WriteUmkmsToFile(umkms);
-            return CreatedAtAction(nameof(GetUmkmByUsername), new { username = umkm.Username }, umkm);
+
+            return CreatedAtAction(nameof(GetUmkmByUsername), new { username = request.Username }, new
+            {
+                Username = request.Username,
+                Products = umkms[request.Username]
+            });
         }
 
-        [HttpGet("generate-json")]
-        public IActionResult GenerateJsonFile()
+        [HttpPut("{username}/products/{id}")]
+        public IActionResult UpdateProduct(string username, int id, [FromBody] Product updatedProduct)
         {
             var umkms = ReadUmkmsFromFile();
-            var options = new JsonSerializerOptions
+            if (!umkms.ContainsKey(username))
             {
-                WriteIndented = true
-            };
-            var jsonString = JsonSerializer.Serialize(umkms, options);
+                return NotFound();
+            }
 
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "umkms.json");
+            var products = umkms[username];
+            if (id < 0 || id >= products.Count)
+            {
+                return BadRequest("Invalid product ID");
+            }
 
-            System.IO.File.WriteAllText(filePath, jsonString);
+            products[id] = updatedProduct;
+            WriteUmkmsToFile(umkms);
+            return Ok(updatedProduct);
+        }
 
-            return Ok(new { message = "JSON file created successfully", filePath });
+        [HttpDelete("{username}/{id}")]
+        public IActionResult DeleteProduct(string username, int id)
+        {
+            var umkms = ReadUmkmsFromFile();
+            if (!umkms.ContainsKey(username))
+            {
+                return NotFound();
+            }
+
+            var products = umkms[username];
+            if (id < 0 || id >= products.Count)
+            {
+                return BadRequest("Invalid product ID");
+            }
+
+            var deletedProduct = products[id];
+            products.RemoveAt(id);
+            WriteUmkmsToFile(umkms);
+            return Ok(deletedProduct);
+        }
+
+        [HttpDelete("{username}")]
+        public IActionResult DeleteUmkm(string username)
+        {
+            var umkms = ReadUmkmsFromFile();
+            if (!umkms.ContainsKey(username))
+            {
+                return NotFound();
+            }
+
+            umkms.Remove(username);
+            WriteUmkmsToFile(umkms);
+            return NoContent();
+        }
+
+        [HttpPost("{username}/products")]
+        public IActionResult CreateProduct(string username, [FromBody] Product product)
+        {
+            var umkms = ReadUmkmsFromFile();
+            if (!umkms.ContainsKey(username))
+            {
+                return NotFound();
+            }
+
+            umkms[username].Add(product);
+            WriteUmkmsToFile(umkms);
+            return CreatedAtAction(nameof(GetUmkmByUsername), new { username }, product);
         }
     }
 
-    public class UMKM
+    public class CreateUmkmRequest
     {
         public string Username { get; set; }
-        public string Name { get; set; }
         public List<Product> Products { get; set; }
     }
 
     public class Product
     {
-        public string ProductName { get; set; }
-        public int Stock { get; set; }
-        public decimal Price { get; set; }
+        public string Nama { get; set; }
+        public int Stok { get; set; }
+        public decimal Harga { get; set; }
+        public string Kategori { get; set; }
     }
 }
