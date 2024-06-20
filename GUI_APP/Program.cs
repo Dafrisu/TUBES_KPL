@@ -1,3 +1,6 @@
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Diagnostics;
+
 namespace GUI_APP
 {
     internal static class Program
@@ -18,6 +21,15 @@ namespace GUI_APP
             Dafa.GenerateBarang2();
             listUMKM.Add(Darryl);
             listUMKM.Add(Dafa);
+            JsonProcessor processor = new JsonProcessor();
+            foreach (var UMKM in listUMKM)
+            {
+                List<Barang> baranglist = processor.GetBarangForUser(UMKM.NamaUMKM);
+                foreach (var barang in baranglist)
+                {
+                    UMKM.TambahBarang(barang.Nama, barang.Stok, barang.Harga, barang.Kategori);
+                }
+            }
             ApplicationConfiguration.Initialize();
             Application.Run(new GUILogin());
         }

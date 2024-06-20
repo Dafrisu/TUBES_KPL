@@ -79,13 +79,6 @@ namespace GUI_APP
             PanelAddBarang.Controls.Add(phanelAdd);
 
             cekUMKM(GUILogin.username);
-            String user = GUILogin.username;
-            JsonProcessor processor = new JsonProcessor();
-            List<Barang> baranglist = processor.GetBarangForUser(user);
-            foreach (var barang in baranglist)
-            {
-                UMKM.TambahBarang(barang.Nama, barang.Stok, barang.Harga, barang.Kategori);
-            }
             addbarangUMKM();
             panelAtasUMKM();
             barangUMKM();
@@ -160,21 +153,50 @@ namespace GUI_APP
             add.BackColor = Color.White;
             add.Click += (sender, e) =>
             {
-                // Debugging output
-                string namaBarang = textBoxAddNamaBarang.Text;
-                int stok = Convert.ToInt32(textBoxAddStok.Text);
-                int harga = Convert.ToInt32(textBoxAddHarga.Text);
-                string kategoriBarang = textBoxAddKategori.Text;
-                MessageBox.Show($"Adding Barang: {namaBarang}");
+                if (!textBoxAddNamaBarang.Text.Equals("") && !textBoxAddStok.Text.Equals("")
+                && !textBoxAddHarga.Text.Equals("") && !textBoxAddKategori.Text.Equals(""))
+                {
+                    string namaBarang = textBoxAddNamaBarang.Text;
+                    int stok;
+                    int harga;
+                    string kategoriBarang = textBoxAddKategori.Text;
+                    MessageBox.Show($"Adding Barang: {namaBarang}");
 
-                // Call EditBarang method
-                UserManager.Instance.TambahBarangUntukCurrentUser(namaBarang, stok, harga, kategoriBarang);
+                    if (!int.TryParse(textBoxAddStok.Text, out stok))
+                    {
+                        MessageBox.Show("Stok harus berupa angka.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
-                MessageBox.Show("Produk Berhasil Ditambah");
-                this.Controls.Remove(flowLayoutPanel);
-                PanelAddBarang.Visible = false;
-                ResetGUI();
-                flowLayoutPanel.Visible = true;
+                    // Validasi harga
+                    if (!int.TryParse(textBoxAddHarga.Text, out harga))
+                    {
+                        MessageBox.Show("Harga harus berupa angka.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    try
+                    {
+                        UserManager.Instance.TambahBarangUntukCurrentUser(namaBarang, stok, harga, kategoriBarang);
+                        MessageBox.Show("Barang berhasil ditambahkan.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    // Call EditBarang method
+                    this.Controls.Remove(flowLayoutPanel);
+                    PanelAddBarang.Visible = false;
+                    ResetGUI();
+                    flowLayoutPanel.Visible = true;
+                    textBoxAddNamaBarang.Text = "";
+                    textBoxAddStok.Text = "";
+                    textBoxAddHarga.Text = "";
+                    textBoxAddKategori.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("gagal menambahkan barang, Tidak boleh ada data yang NULL");
+                }
             };
             this.phanelAdd.Controls.Add(add);
         }
