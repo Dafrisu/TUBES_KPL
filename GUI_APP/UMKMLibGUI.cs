@@ -76,16 +76,14 @@ namespace GUI_APP
             }
         }
 
-        public static void ParseJson(string jsonFilePath, List<BarangUMKM> listBarang)
+        public static void ParseJson(string jsonFilePath, List<Barang> listBarang)
         {
             try
             {
-
-
-                if (File.Exists(jsonFilePath))
+                if (File.Exists("umkmconfig.json"))
                 {
                     string json = File.ReadAllText(jsonFilePath);
-                    var parsedData = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, List<BarangUMKM>>>>(json);
+                    var parsedData = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, List<Dictionary<string, object>>>>>(json);
 
                     if (parsedData != null)
                     {
@@ -95,12 +93,17 @@ namespace GUI_APP
                             {
                                 foreach (var item in product.Value)
                                 {
-                                    listBarang.Add(new BarangUMKM
+                                    string NamaProduk = item["NamaProduk"].ToString();
+                                    int Stock = Convert.ToInt32(item["Stock"]);
+                                    int Harga = Convert.ToInt32(item["Harga"]);
+                                    string KategoriBarang = item["KategoriBarang"].ToString();
+
+                                    listBarang.Add(new Barang
                                     (
-                                        item.namabarang,
-                                        item.stok,
-                                        item.harga,
-                                        item.kategoriBarang
+                                        NamaProduk,
+                                        Stock,
+                                        Harga,
+                                        KategoriBarang
                                     ));
                                 }
                             }
@@ -109,18 +112,14 @@ namespace GUI_APP
                 }
                 else
                 {
-                    Console.WriteLine("File umkmconfig.json not found.");
+                    MessageBox.Show("File umkmconfig.json not found.");
                 }
-
-
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error parsing JSON file: {ex.Message}");
-
+                MessageBox.Show($"Error parsing JSON file: {ex.Message}");
             }
         }
     }
-    
 }
 
