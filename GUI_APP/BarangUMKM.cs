@@ -16,7 +16,6 @@ namespace GUI_APP
         { 
             this.NamaUMKM = nama;
         }
-        
 
         public void GenerateBarang1()
         {
@@ -68,9 +67,11 @@ namespace GUI_APP
             listBarang.Add(new Barang("Juice", 40, 10000, "Minuman"));
         }
 
+        //Method untuk menambahkan Barang
         public void TambahBarang(string namaBarang, int stok, int harga, string kategoriBarang) {
             Boolean found = false;
             
+            //melakukan searching yang akan mengupdate found
             foreach (var barang in listBarang) {
                 if (barang.Nama.Equals(namaBarang)) 
                 {
@@ -84,9 +85,11 @@ namespace GUI_APP
             }
         }
 
+        //Method untuk menambahkan barang kedalam Dictionary barang milik UMKM
         public void EditBarang(string namaBarang, int stok, int harga, string kategoriBarang) {
             bool itemFound = false;
 
+            // Melakukan searching dengan menggunakan Foreach
             foreach (var barang in listBarang)
             {
                 if (string.Equals(namaBarang, barang.Nama, StringComparison.OrdinalIgnoreCase))
@@ -109,6 +112,7 @@ namespace GUI_APP
             }
         }
 
+        //Method untuk menghapus barang pada Dictionary barang
         public void deleteBarang(String barang)
         {
             var itemsToRemove = listBarang.Where(b => b.Nama.Equals(barang)).ToList();

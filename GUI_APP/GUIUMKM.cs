@@ -61,7 +61,7 @@ namespace GUI_APP
             phanelEdit.Controls.Add(textBoxEditStok);
             phanelEdit.Controls.Add(textBoxEditHarga);
             phanelEdit.Controls.Add(textBoxEditKategori);
-            EditButton();
+            CreateEditButton();
             HapusButton();
 
             PanelAddBarang = new FlowLayoutPanel();
@@ -79,10 +79,9 @@ namespace GUI_APP
             PanelAddBarang.Controls.Add(phanelAdd);
 
             cekUMKM(GUILogin.username);
-            
+            addbarangUMKM();
             panelAtasUMKM();
             barangUMKM();
-            addbarangUMKM();
             initpanelLogout();
         }
 
@@ -154,21 +153,49 @@ namespace GUI_APP
             add.BackColor = Color.White;
             add.Click += (sender, e) =>
             {
+                if (!textBoxAddNamaBarang.Text.Equals("") && !textBoxAddStok.Text.Equals("")
+                && !textBoxAddHarga.Text.Equals("") && !textBoxAddKategori.Text.Equals(""))
+                {
+                    string namaBarang = textBoxAddNamaBarang.Text;
+                    int stok;
+                    int harga;
+                    string kategoriBarang = textBoxAddKategori.Text;
+                    MessageBox.Show($"Adding Barang: {namaBarang}");
+
+                    if (!int.TryParse(textBoxAddStok.Text, out stok))
+                    {
+                        MessageBox.Show("Stok harus berupa angka.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    // Validasi harga
+                    if (!int.TryParse(textBoxAddHarga.Text, out harga))
+                    {
+                        MessageBox.Show("Harga harus berupa angka.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    try
+                    {
+                        UserManager.TambahBarangUntukCurrentUser(namaBarang, stok, harga, kategoriBarang);
+                        MessageBox.Show("Barang berhasil ditambahkan.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    // Call EditBarang method
+                    this.Controls.Remove(flowLayoutPanel);
+                    PanelAddBarang.Visible = false;
+                    ResetGUI();
+                    flowLayoutPanel.Visible = true;
+                }
+                else
+                {
+                    MessageBox.Show("gagal menambahkan barang, Tidak boleh ada data yang NULL");
+                }
                 // Debugging output
-                string namaBarang = textBoxAddNamaBarang.Text;
-                int stok = Convert.ToInt32(textBoxAddStok.Text);
-                int harga = Convert.ToInt32(textBoxAddHarga.Text);
-                string kategoriBarang = textBoxAddKategori.Text;
-                MessageBox.Show($"Adding Barang: {namaBarang}");
-
-                // Call EditBarang method
-                UserManager.TambahBarangUntukCurrentUser(namaBarang, stok, harga, kategoriBarang);
-
-                MessageBox.Show("Produk Berhasil Ditambah");
-                this.Controls.Remove(flowLayoutPanel);
-                PanelAddBarang.Visible = false;
-                ResetGUI();
-                flowLayoutPanel.Visible = true;
+                
+                
             };
             this.phanelAdd.Controls.Add(add);
         }
@@ -335,7 +362,9 @@ namespace GUI_APP
 
             return textBox;
         }
-        public void EditButton() {
+
+        //Method dibawah digunakan untuk membuat Edit Button
+        public void CreateEditButton() {
             Button button = new Button();
             button.Text = $"Edit";
             button.Size = new System.Drawing.Size(70, 25);
@@ -358,6 +387,7 @@ namespace GUI_APP
                 MessageBox.Show("Produk Berhasil Diedit");
                 this.Controls.Remove(flowLayoutPanel);
                 PanelEditBarang.Visible = false;
+                PanelAddBarang.Visible = false;
                 ResetGUI();
                 flowLayoutPanel.Visible = true;
             };
@@ -368,7 +398,7 @@ namespace GUI_APP
         {
             Button button = new Button();
             button.Text = $"Hapus";
-            button.Size = new System.Drawing.Size(70, 25);
+            button.Size = new System.Drawing.Size(180, 25);
             button.Font = new Font("Arial", 7, FontStyle.Regular);
             button.Location = new System.Drawing.Point(400, 300);
             button.BackColor = Color.White;
@@ -488,54 +518,5 @@ namespace GUI_APP
         public void AddButton() {
             
         }
-        /*
-        public TextBox isiPanelAdd(string placeholderText) {
-            TextBox textBox = new TextBox();
-            textBox.Width = 200;
-            textBox.Text = placeholderText;
-
-            if (TextFieldCountAdd == 1)
-            {
-                textBox.Location = new Point(250, 70);
-                TextFieldCountAdd++;
-            }
-            else if (TextFieldCountAdd == 2)
-            {
-                textBox.Location = new Point(250, 120);
-                TextFieldCountAdd++;
-            }
-            else if (TextFieldCountAdd == 3)
-            {
-                textBox.Location = new Point(250, 170);
-                TextFieldCountAdd++;
-            }
-            else if (TextFieldCountAdd == 4)
-            {
-                textBox.Location = new Point(250, 220);
-                TextFieldCountAdd++;
-            }
-
-            textBox.GotFocus += (sender, e) =>
-            {
-                if (textBox.Text == placeholderText)
-                {
-                    textBox.Text = "";
-                    textBox.ForeColor = Color.Black;
-                }
-            };
-
-
-            textBox.LostFocus += (sender, e) =>
-            {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    textBox.Text = placeholderText;
-                    textBox.ForeColor = Color.Gray;
-                }
-            };
-
-            return textBox;
-        }
-        */
     }
 }

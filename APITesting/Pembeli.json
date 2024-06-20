@@ -1,0 +1,39 @@
+[
+  {
+    "Username": "Pembeli1",
+    "Cart": {
+      "UMKM1": {
+        "Product1": 3,
+        "Product2": 1
+      },
+      "UMKM2": {
+        "Product4": 2
+      }
+    }
+  },
+  {
+    "Username": "Pembeli2",
+    "Cart": {
+      "UMKM2": {
+        "Product5": 4,
+        "Product6": 2
+      },
+      "UMKM3": {
+        "Product7": 1,
+        "Product8": 2
+      }
+    }
+  },
+  {
+    "Username": "Pembeli3",
+    "Cart": {
+      "UMKM1": {
+        "Product2": 2,
+        "Product3": 1
+      },
+      "UMKM3": {
+        "Product9": 3
+      }
+    }
+  }
+]

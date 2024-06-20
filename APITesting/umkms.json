@@ -1,0 +1,29 @@
+[
+  {
+    "Username": "string",
+    "Name": "string",
+    "Products": [
+      {
+        "ProductName": "string",
+        "Stock": 0,
+        "Price": 0
+      }
+    ]
+  },
+  {
+    "Username": "String32",
+    "Name": "Astacala",
+    "Products": [
+      {
+        "ProductName": "string",
+        "Stock": 0,
+        "Price": 0
+      },
+      {
+        "ProductName": "string",
+        "Stock": 0,
+        "Price": 0
+      }
+    ]
+  }
+]
