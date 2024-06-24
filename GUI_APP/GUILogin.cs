@@ -34,27 +34,18 @@ namespace GUI_APP
             String StateAplikasi = fiturUser.getCurrentState().ToString();
             bool loginSuccess = UserManager.Instance.Login(fieldUser.Text);
             bool cekCredentials = akun.CekLogin(fieldUser.Text, FieldPass.Text, tipe);
-            bool cekKapitalUsername = true;
-            bool cekDigitPassword = true;
-            foreach (char karakter in fieldUser.Text) 
-            {
-                if (!char.IsUpper(karakter) && cekKapitalUsername != false) {
-                    cekKapitalUsername = false;
-                }
-            }
-            foreach (char karakter in FieldPass.Text) 
-            {
-                if (!char.IsDigit(karakter)) { 
-                    cekDigitPassword = false;
-                }
-            }
+            bool cekKapitalUsername = fieldUser.Text.Any(char.IsUpper);
+            bool cekDigitPassword = FieldPass.Text.Any(char.IsDigit);
             if (!cekCredentials)
             {
                 MessageBox.Show("Gagal Masuk");
-                if (cekKapitalUsername == false) {
+                if (!cekKapitalUsername)
+                {
                     MessageBox.Show("Inputan Username harus memiliki huruf Kapital");
                 }
-                if (cekDigitPassword == false) {
+
+                if (!cekDigitPassword)
+                {
                     MessageBox.Show("Inputan Password harus memiliki digit angka");
                 }
             }
